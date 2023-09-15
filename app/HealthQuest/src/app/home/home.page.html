@@ -12,45 +12,54 @@
       <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Steps</ion-card-title>
+          </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Steps</ion-card-title>
-    </ion-card-header>
+          <ion-card-content>
+            <ion-text>3500 <small>/5000</small></ion-text>
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Weight</ion-card-title>
+          </ion-card-header>
 
-    <ion-card-content>
-      <ion-text>3500 <small>/5000</small></ion-text>
-      <ion-progress-bar [value]="0.6"></ion-progress-bar>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-content>
+            80 <small>kg</small>
+          </ion-card-content>
+        </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Weight</ion-card-title>
-    </ion-card-header>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Food</ion-card-title>
+          </ion-card-header>
 
-    <ion-card-content>
-      80 <small>kg</small>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-content>
+            800 <small>cal</small>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="water-card" style="height:90.55%;">
+          <ion-card-header>
+            <ion-card-title>Water</ion-card-title>
+          </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Food</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      800 <small>cal</small>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Water</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      1.5 <small>liters</small>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-content>
+            1.5 <small>liters</small>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
