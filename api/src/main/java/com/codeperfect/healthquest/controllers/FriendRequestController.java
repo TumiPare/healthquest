@@ -2,6 +2,8 @@ package com.codeperfect.healthquest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,11 @@ public class FriendRequestController {
     @PostMapping("/decline")
     public String declineFriendRequest(@RequestBody FriendRequest friendRequest) {
         return friendRequestService.declineFriendRequest(friendRequest);
+    }
+
+    @GetMapping("/{username}")
+    public List<FriendRequest> findFriendRequests(@PathVariable(value = "username") String username) {
+        return friendRequestService.findFriendRequests(username);
     }
 
 }

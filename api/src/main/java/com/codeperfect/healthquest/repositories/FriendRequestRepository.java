@@ -1,5 +1,7 @@
 package com.codeperfect.healthquest.repositories;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -9,5 +11,8 @@ public interface FriendRequestRepository extends MongoRepository<FriendRequest, 
     
     @Query("{$or: [ {userA: '?0', userB: '?1'}, {userA: '?1', userB: '?0'} ] }")
     public FriendRequest findFriendRequest(String userA, String userB);
-    
+
+    @Query("{$or: [ {userA: '?0'}, {userB: '?0'} ] }")
+    public List<FriendRequest> findFriendRequestsByUsername(String username);
+
 }

@@ -19,6 +19,10 @@ public class FriendRequestService {
         return friendRequestRepository.findFriendRequest(userA, userB);
     }
 
+    public List<FriendRequest> findFriendRequests(String username) {
+        return friendRequestRepository.findFriendRequestsByUsername(username);
+    }
+
     public void removeFriendRequest(FriendRequest friendRequest) {
         friendRequestRepository.delete(friendRequest);
     }
