@@ -12,6 +12,10 @@ const routes: Routes = [
   },  {
     path: 'water-intake',
     loadChildren: () => import('./waterIntake/water-intake/water-intake.module').then( m => m.WaterIntakePageModule)
+  },
+  {
+    path: 'steps-tracking',
+    loadChildren: () => import('./waterIntake/steps-tracking/steps-tracking.module').then( m => m.StepsTrackingPageModule)
   }
 
 
