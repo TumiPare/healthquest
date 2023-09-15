@@ -1,6 +1,6 @@
 package com.codeperfect.healthquest.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

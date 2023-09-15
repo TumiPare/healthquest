@@ -12,6 +12,7 @@ import com.codeperfect.healthquest.interfaces.Challenge;
 import com.codeperfect.healthquest.interfaces.Change;
 import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.UserActionUpdates;
+import com.codeperfect.healthquest.models.Notification;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.models.UserAction;
 import com.codeperfect.healthquest.repositories.UserActionRepository;
@@ -24,6 +25,9 @@ public class UserActionService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    NotificationService notificationService;
 
     public List<UserAction> findUserActions(String username) {
         return userActionRepository.findAllByUsername(username);
@@ -50,9 +54,13 @@ public class UserActionService {
             challenge.setProgress(challenge.getProgress() + userAction.getValue());
 
             if (challenge.getGoal() >= challenge.getProgress() && challenge.getDateCompleted() == null) {
+                
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 challenge.setDateCompleted(formatter.format(new Date()));
+
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", 100));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge! Well done, keep it up!", "challengeComplete", new Date()));
+            
             }
         }
 
