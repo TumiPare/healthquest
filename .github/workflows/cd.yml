@@ -1,0 +1,13 @@
+name: Continous Deployment
+
+on:
+    push:
+        branches: [ dev, main ]
+
+permissions:
+    contents: read
+
+jobs:
+    ci-workflow:
+        uses: ./.github/workflows/ci.yml
+        secrets: inherit
