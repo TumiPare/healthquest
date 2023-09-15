@@ -5,9 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },  {
-    path: 'weight-entry-page',
-    loadChildren: () => import('./weightEntryPage/weight-entry-page/weight-entry-page.module').then( m => m.WeightEntryPagePageModule)
   },
   {
     path: 'weight-entry',
