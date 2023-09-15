@@ -13,6 +13,11 @@ export class HomePage {
 
   constructor(private navCtrl: NavController) {}
 
+  redirectToStepsTracking()
+  {
+    this.navCtrl.navigateForward('/steps-tracking'); 
+  }
+
   redirectToWeightEntry()
   {
     this.navCtrl.navigateForward('/weight-entry'); 
@@ -21,5 +26,10 @@ export class HomePage {
   redirectToFoodIntake()
   {
     this.navCtrl.navigateForward('/food-intake'); 
+  }
+
+  redirectToWaterIntake()
+  {
+    this.navCtrl.navigateForward('/water-intake'); 
   }
 }

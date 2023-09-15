@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'weight-entry',
     loadChildren: () => import('./weightEntry/weight-entry/weight-entry.module').then( m => m.WeightEntryPageModule)
+  },  {
+    path: 'water-intake',
+    loadChildren: () => import('./waterIntake/water-intake/water-intake.module').then( m => m.WaterIntakePageModule)
   }
+
 
 ];
 @NgModule({
