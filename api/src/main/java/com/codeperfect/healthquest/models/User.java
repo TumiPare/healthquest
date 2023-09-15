@@ -24,4 +24,29 @@ public class User {
     Challenge[] challenges;
     Creature[] creatures;
     Integer points;
+
+    public Challenge getChallengeByCategory(String category) {
+
+        for (Challenge challenge : challenges) {
+            if (challenge.getCategory().equals(category)) {
+                return challenge;
+            }
+        }
+
+        return null;
+
+    }
+
+    public Creature getCreatureByCategory(String category) {
+
+        for (Creature creature : creatures) {
+            if (creature.getCategory().equals(category)) {
+                return creature;
+            }
+        }
+
+        return null;
+        
+    }
+
 }
