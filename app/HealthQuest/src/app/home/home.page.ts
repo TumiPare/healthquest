@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-home',
@@ -8,5 +11,4 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   constructor() { }
-
 }

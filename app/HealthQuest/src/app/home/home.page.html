@@ -13,6 +13,36 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
+    <swiper-container
+    [centeredSlides] = "true"
+    [pagination] = "true">
+      <swiper-slide class="ion-padding-bottom">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Challenge #1</ion-card-title>
+            <ion-card-subtitle>Water</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text>1.5 <small>/2.7 liters</small></ion-text>
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Challenge #2</ion-card-title>
+            <ion-card-subtitle>Steps</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text>3500 <small>/10000</small></ion-text>
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+    </swiper-container>
     <ion-row>
       <ion-col>
         <ion-card>
@@ -27,6 +57,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col>
         <ion-card>
