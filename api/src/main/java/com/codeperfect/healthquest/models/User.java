@@ -19,6 +19,7 @@ public class User {
     String username;
 
     String name;
+    String profilePicUrl;
     Date dob;
     Float weight;
     Float height;
@@ -63,7 +64,7 @@ public class User {
                 return;
             }
         }
-        
+
     }
 
 }

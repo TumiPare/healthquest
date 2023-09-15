@@ -32,9 +32,5 @@ public class UserController {
     public User findUser(@PathVariable(value = "username") String username) {
         return userService.findUser(username);
     }
-
-    @PostMapping("{username}/friend")
-    public String friendUser(@PathVariable(value = "username") String username, @RequestParam(name = "username", required = true) String friendUsername) {
-        return userService.friendUser(username, friendUsername);
-    }
+    
 }
