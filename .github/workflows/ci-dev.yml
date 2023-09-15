@@ -1,0 +1,35 @@
+name: Continous Intergration (Dev)
+
+on:
+    push:
+        branches: [ hotfix/* ]
+    pull_request:
+        branches: [ dev ]
+    workflow_call:
+
+permissions:
+    contents: read
+
+jobs:
+    test_build_api:
+        name: Test & Build API
+        runs-on: windows-latest
+        defaults:
+            run:
+              working-directory: ./api
+        
+        steps:
+          - name: Checkout Repo
+            uses: actions/checkout@v3
+
+          - name: Setup JDK 17 and Cache
+            uses: actions/setup-java@v3
+            with:
+                java-version: '17'
+                distribution: 'temurin'
+
+          - name: Test API
+            run: ./gradlew.bat test
+            
+          - name: Build App
+            run: ./gradlew.bat build
