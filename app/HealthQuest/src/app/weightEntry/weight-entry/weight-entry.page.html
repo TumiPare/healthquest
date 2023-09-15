@@ -1,13 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>weightEntry</ion-title>
+    <ion-title>Weight Entry</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">weightEntry</ion-title>
+      <ion-title size="large">Weight Entry</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-grid>
+    <ion-row>
+<ion-col>    
+  <ion-input 
+      type="number" 
+      [(ngModel)]="weight" 
+      label="Weight" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="e.g., 70"
+      (ionChange)="onWeightChange()"
+      >
+    </ion-input>
+    <ion-text color="danger" *ngIf="weightError">
+      Invalid weight.
+    </ion-text>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+  <ion-button expand="full" (click)="submitWeight()" class="bottom-button">Submit</ion-button>
 </ion-content>
