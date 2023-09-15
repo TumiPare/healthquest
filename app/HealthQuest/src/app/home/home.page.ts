@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { NavController } from '@ionic/angular';
 
 register();
 
@@ -10,5 +11,10 @@ register();
 })
 export class HomePage {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) {}
+
+  redirectToWeightEntryPage()
+  {
+    this.navCtrl.navigateForward('../weightEntryPage/weight-entry-page'); 
+  }
 }
