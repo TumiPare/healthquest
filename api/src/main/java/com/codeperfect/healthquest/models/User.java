@@ -1,6 +1,7 @@
 package com.codeperfect.healthquest.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,8 +22,9 @@ public class User {
     Date dob;
     Float weight;
     Float height;
-    Challenge[] challenges;
-    Creature[] creatures;
+    List<String> friends;
+    List<Challenge> challenges;
+    List<Creature> creatures;
     Integer points;
 
     public Challenge getChallengeByCategory(String category) {
@@ -46,6 +48,21 @@ public class User {
         }
 
         return null;
+
+    }
+
+    public void addFriend(String username) {
+        friends.add(username);
+    }
+
+    public void removeFriend(String username) {
+        
+        for (int i = 0; i < friends.size(); i++) {
+            if (friends.get(i).equals(username)) {
+                friends.remove(i);
+                return;
+            }
+        }
         
     }
 

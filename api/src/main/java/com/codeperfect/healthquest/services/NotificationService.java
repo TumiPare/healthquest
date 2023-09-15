@@ -13,10 +13,8 @@ public class NotificationService {
     NotificationRepository notificationRepository;
 
     public Notification saveNotification(Notification notification) {
-
         notificationRepository.save(notification);
         return notification;
-
     }
 
     public List<Notification> findNotifications(String username) {

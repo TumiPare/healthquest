@@ -9,7 +9,7 @@ import com.codeperfect.healthquest.models.Notification;
 
 public interface NotificationRepository extends MongoRepository<Notification, String> {
     
-    @Query("{username:'?0'}")
+    @Query(value = "{username:'?0'}", sort = "{'timestamp': -1}")
     public List<Notification> findAllByUsername(String username);
     
 }

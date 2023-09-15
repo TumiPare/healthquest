@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeperfect.healthquest.models.User;
@@ -30,5 +31,10 @@ public class UserController {
     @GetMapping("/{username}")
     public User findUser(@PathVariable(value = "username") String username) {
         return userService.findUser(username);
+    }
+
+    @PostMapping("{username}/friend")
+    public String friendUser(@PathVariable(value = "username") String username, @RequestParam(name = "username", required = true) String friendUsername) {
+        return userService.friendUser(username, friendUsername);
     }
 }
