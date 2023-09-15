@@ -2,7 +2,7 @@ name: Continous Intergration
 
 on:
     push:
-        branches: [ hotfix/* ]
+        branches: [ hotfix/*, dev ]
     pull_request:
         branches: [ dev, main ]
     workflow_call:
