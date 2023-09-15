@@ -31,5 +31,28 @@ jobs:
           - name: Test API
             run: ./gradlew.bat test
             
-          - name: Build App
+          - name: Build API
             run: ./gradlew.bat build
+
+    test_build_app:
+      name: Test & Build App
+      runs-on: ubuntu-latest
+      defaults:
+          run:
+            working-directory: ./app/HealthQuest
+      
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
+        
+        - name: Setup NodeJS and Cache
+          uses: actions/setup-node@v3
+          with:
+            node-version: 16
+            cache: 'npm'
+
+        - name: Test App
+          run: npm run test
+          
+        - name: Build App
+          run: npm run build
