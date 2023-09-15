@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+import { NavController } from '@ionic/angular';
+
+register();
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,25 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) {}
 
+  redirectToStepsTracking()
+  {
+    this.navCtrl.navigateForward('/steps-tracking'); 
+  }
+
+  redirectToWeightEntry()
+  {
+    this.navCtrl.navigateForward('/weight-entry'); 
+  }
+
+  redirectToFoodIntake()
+  {
+    this.navCtrl.navigateForward('/food-intake'); 
+  }
+
+  redirectToWaterIntake()
+  {
+    this.navCtrl.navigateForward('/water-intake'); 
+  }
 }
