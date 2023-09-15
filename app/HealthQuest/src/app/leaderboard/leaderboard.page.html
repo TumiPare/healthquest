@@ -36,38 +36,43 @@
       <ion-col>
         <ion-card>
           <ion-card-header>
-            <ion-card-title color="primary">
-              Leaderboard <ion-icon name="trophy-outline"></ion-icon>
+            <ion-card-title color="primary" style="font-size: xx-large;">
+              <ion-icon size="large" name="trophy" [ngStyle]="{'color':'#FFD700'}"></ion-icon> Leaderboard 
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-list [inset]="true">
               <!-- Number 1 -->
               <ion-item>
-                
-                <ion-icon [ngStyle]="{'color':'#FFD700'}" name="trophy" slot="start" size="large" item-left></ion-icon>
+                <ion-chip slot="start" class="gold-chip">1</ion-chip>
                 <ion-label>Pokémon Yellow</ion-label>
+                <ion-badge slot="end" color="tertiary">1202</ion-badge>
               </ion-item>
               
               <!-- Number 2 -->
               <ion-item>
-                <ion-icon [ngStyle]="{'color':'#C0C0C0'}" name="trophy" slot="start" size="medium">1</ion-icon>
+                <ion-chip slot="start" class="silver-chip">2</ion-chip>
                 <ion-label>Mega Man X</ion-label>
+                <ion-badge slot="end" color="tertiary">850</ion-badge>
               </ion-item>
 
               <!-- Number 3 -->
               <ion-item>
-                <ion-icon [ngStyle]="{'color':'#CD7F32'}" name="trophy" slot="start" size="medium">1</ion-icon>
-                <ion-label>The Legend of Zelda</ion-label>
+                <ion-chip slot="start" class="bronze-chip">3</ion-chip>
+                <ion-label>Ryan Tricket</ion-label>
+                <ion-badge slot="end" color="tertiary">100</ion-badge>
               </ion-item>
               
               <!-- The rest -->
               <ion-item>
-
+                <ion-chip slot="start" color="primary">4</ion-chip>
                 <ion-label>Pac-Man</ion-label>
+                <ion-badge slot="end" color="tertiary">86</ion-badge>
               </ion-item>
               <ion-item>
-                <ion-label>Super Mario World</ion-label>
+                <ion-chip slot="start" color="primary">5</ion-chip>
+                <ion-label>Mario Visagie</ion-label>
+                <ion-badge slot="end" color="tertiary">32</ion-badge>
               </ion-item>
             </ion-list>
           </ion-card-content>
