@@ -16,7 +16,7 @@ export class WaterIntakePage implements OnInit {
 
   submitWater() {
     if (!isNaN(this.water) && this.water >= 1 && this.water <= 50) {
-      console.log('Valid weight:', this.water);
+      console.log('Valid amount:', this.water);
       this.waterError = false;
     } else {
       console.log('Invalid amount. Please enter a number between 1 and 50.');

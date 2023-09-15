@@ -1,13 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>stepsTracking</ion-title>
+    <ion-title>Steps</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">stepsTracking</ion-title>
+      <ion-title size="large">Steps</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>    
+        <ion-input 
+          type="number" 
+          [(ngModel)]="steps" 
+          label="Steps" 
+          label-placement="floating" 
+          fill="outline" 
+          placeholder="e.g., 3500"
+          (ionChange)="onStepsChange()"
+          >
+        </ion-input>
+      <ion-text color="danger" *ngIf="stepsError">
+        Invalid amount.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+  <ion-button expand="full" (click)="submitSteps()" class="bottom-button">Submit</ion-button>
 </ion-content>
