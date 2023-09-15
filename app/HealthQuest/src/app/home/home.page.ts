@@ -13,8 +13,13 @@ export class HomePage {
 
   constructor(private navCtrl: NavController) {}
 
-  redirectToWeightEntryPage()
+  redirectToWeightEntry()
   {
-    this.navCtrl.navigateForward('../weightEntryPage/weight-entry-page'); 
+    this.navCtrl.navigateForward('/weight-entry'); 
+  }
+
+  redirectToFoodIntake()
+  {
+    this.navCtrl.navigateForward('/food-intake'); 
   }
 }
