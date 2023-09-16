@@ -15,7 +15,7 @@ export class LocationService {
   constructor(private alertController: AlertController, 
     private http: HttpClient) { }
 
-  getUserCoord() {
+  getCoords() {
     return this.longitude+','+this.latitude;
   }
 
