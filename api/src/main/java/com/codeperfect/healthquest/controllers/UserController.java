@@ -40,4 +40,9 @@ public class UserController {
         return userService.retrieveLeaderboard(username);
     }
 
+    @GetMapping("/{username}/mayknow")
+    public List<User> retrieveMayknow(@PathVariable(value = "username") String username) {
+        return userService.retrieveMayknow(username);
+    }
+
 }

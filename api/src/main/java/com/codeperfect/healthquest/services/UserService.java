@@ -64,4 +64,33 @@ public class UserService {
 
         return new ArrayList<>();
     }
+
+    public List<User> retrieveMayknow(String username) {
+
+        List<User> userMayKnow = new ArrayList<>();
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+
+            List<String> addedUsers = new ArrayList<>();
+            for (String friend : user.getFriends()) {
+                
+                User friendUser = userRepository.findUserByUsername(friend);
+
+                if (friendUser != null) {
+                    for (String friendsFriend : friendUser.getFriends()) {
+
+                        if (!user.getUsername().equals(friendsFriend) && !addedUsers.contains(friendsFriend) && !user.containsFriend(friendsFriend)) {
+                            addedUsers.add(friendsFriend);
+                            userMayKnow.add(userRepository.findUserByUsername(friendsFriend));
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return userMayKnow;
+
+    }
 }

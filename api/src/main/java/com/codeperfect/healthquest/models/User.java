@@ -18,7 +18,6 @@ public class User {
     @Id
     String username;
 
-    String name;
     String profilePicUrl;
     Date dob;
     Float weight;
