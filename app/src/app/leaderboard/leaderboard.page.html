@@ -14,6 +14,7 @@
       <ion-col class="centre">
         <ion-avatar *ngIf="leaderboardItems.length > 2" class="left-avatar">
           <img alt="Silhouette of a person's head" src="{{leaderboardItems[2].profilePicUrl}}" />
+          <span *ngIf="leaderboardItems.length > 2">{{ leaderboardItems[1].username }}</span>
         </ion-avatar>
       </ion-col>
       
@@ -21,6 +22,7 @@
       <ion-col class="centre">
         <ion-avatar *ngIf="leaderboardItems.length > 0" class="middle-avatar">
           <img alt="Silhouette of a person's head" src="{{leaderboardItems[0].profilePicUrl}}" />
+          <ion-text *ngIf="leaderboardItems.length > 0">{{ leaderboardItems[0].username }}</ion-text>
         </ion-avatar>
       </ion-col>
 
@@ -28,6 +30,7 @@
       <ion-col class="centre">
           <ion-avatar *ngIf="leaderboardItems.length > 1" class="right-avatar">
             <img alt="Silhouette of a person's head" src="{{leaderboardItems[1].profilePicUrl}}" />
+            <span *ngIf="leaderboardItems.length > 1">{{ leaderboardItems[2].username }}</span>
           </ion-avatar>
       </ion-col>
     </ion-row>
