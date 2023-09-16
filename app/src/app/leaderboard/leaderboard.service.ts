@@ -6,7 +6,7 @@ import { ILeaderboardItem } from './leaderboard-item.interface';
   providedIn: 'root'
 })
 export class LeaderboardService {
-  apiUrl = 'http://localhost:8080/user/';
+  apiUrl = 'http://localhost:5000/user/';
 
   constructor(private http: HttpClient) { }
 

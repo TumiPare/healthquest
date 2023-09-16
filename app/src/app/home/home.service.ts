@@ -7,7 +7,7 @@ import { IChallenge } from '../profile/challenge.interface';
   providedIn: 'root'
 })
 export class HomeService {
-  apiUrl = 'http://localhost:8080/user/';
+  apiUrl = 'http://localhost:5000/user/';
 
   constructor(private http: HttpClient) { }
 
