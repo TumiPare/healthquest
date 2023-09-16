@@ -4,6 +4,7 @@ import { ProfileService } from 'src/app/profile/profile.service';
 import { ToastService } from 'src/app/toast/toast.service';
 import { IChallenge } from 'src/app/user/challenge.interface';
 import { UserStorage } from 'src/app/user/user.storage';
+import { ChallengeService } from '../challenge.service';
 
 @Component({
   selector: 'app-challenge-modal',
@@ -17,14 +18,14 @@ export class ChallengeModalComponent {
   goal: number = 1;
   type: string = 'daily';
 
-  constructor(private modalCtrl: ModalController, private userStorage: UserStorage, private profileService: ProfileService, private toastService: ToastService) {}
+  constructor(private modalCtrl: ModalController, private userStorage: UserStorage, private challengeService: ChallengeService, private toastService: ToastService) {}
 
   cancel() {
     this.modalCtrl.dismiss();
   }
 
   confirm() {
-    if (this.userStorage.user) {
+    if (this.userStorage.user && this.name.trim() !== "") {
       
       const newChallenge: IChallenge = {
         name: this.name,
@@ -35,21 +36,19 @@ export class ChallengeModalComponent {
         dateStarted: new Date().toJSON().slice(0, 10)
       }
 
-      if (this.userStorage.user.challenges.find((challenge: IChallenge) => { challenge.name === newChallenge.name })) {
-        this.toastService.presentError("Challenge with this name already exists");
-        return;
-      }
-
-      this.userStorage.user.challenges.push(newChallenge);
-
-      this.profileService.saveUser(this.userStorage.user).subscribe((user) => {
+      this.challengeService.addChallenge(newChallenge, this.userStorage.user.username).subscribe((message) => {
+        if (message.message == "typeCategoryError") {
+          this.toastService.presentError("You cannot have a challenge with the same category and type");
+          return;
+        } else if (message.message == "valueError") {
+          this.toastService.presentError("You cannot create a challenge that is easier than one already created");
+          return;
+        }
+        
         this.toastService.presentToast("Successfully added challenge");
-        this.userStorage.user = user;
+        this.modalCtrl.dismiss();
       });
-
     }
-
-    this.modalCtrl.dismiss();
   }
 
   numericOnly(event: any): boolean {

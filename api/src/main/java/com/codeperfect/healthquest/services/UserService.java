@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.codeperfect.healthquest.interfaces.Challenge;
 import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
+import com.codeperfect.healthquest.interfaces.Message;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.UserRepository;
 
@@ -118,5 +119,25 @@ public class UserService {
 
         return new ArrayList<>();
 
+    }
+
+    public Message addChallenge(String username, Challenge challenge) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null && !user.containsChallenge(challenge)) {
+
+            if (!user.containsHarderChallenge(challenge)) {
+                
+                user.addChallenge(challenge);
+                userRepository.save(user);            
+                return new Message("success");
+
+            }
+
+            return new Message("valueError");
+        }
+
+        return new Message("typeCategoryError");
     }
 }

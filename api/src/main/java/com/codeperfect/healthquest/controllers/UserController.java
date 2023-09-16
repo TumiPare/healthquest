@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codeperfect.healthquest.interfaces.Challenge;
 import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
+import com.codeperfect.healthquest.interfaces.Message;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.services.UserService;
 
@@ -55,6 +56,11 @@ public class UserController {
     @GetMapping("/{username}/creatures")
     public List<Creature> retrieveCreatures(@PathVariable(value = "username") String username) {
         return userService.retrieveCreatures(username);
+    }
+
+    @PostMapping("/{username}/challenge/add")
+    public Message addChallenge(@PathVariable(value = "username") String username, @RequestBody Challenge challenge) {
+        return userService.addChallenge(username, challenge);
     }
 
 }
