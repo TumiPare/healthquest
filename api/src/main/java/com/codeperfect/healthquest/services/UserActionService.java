@@ -40,23 +40,46 @@ public class UserActionService {
         User user = userService.findUser(userAction.getUsername());
         
         // Update user stats
-        user.setPoints(user.getPoints() + userAction.getValue());
+        int points;
+        if (userAction.getCategory().equals("hydration")) {
+            points = userAction.getValue() * 5;
+        } else if (userAction.getCategory().equals("steps")) {
+            points = (int) (userAction.getValue() * 0.10);
+        } else if (userAction.getCategory().equals("fruit&veg")) {
+            points = userAction.getValue() * 5;
+        } else if (userAction.getCategory().equals("healthyfood")) {
+            points = userAction.getValue() * 30;
+        } else if (userAction.getCategory().equals("sweets")) {
+            points = userAction.getValue() * -5;
+        } else {
+            points = userAction.getValue() * -20;
+        }
 
-        if (userAction.getValue() > 0) {
-            changes.add(new Change("Congratulations!", "Well done you got some points, keep it up!", userAction.getValue()));
-        } else if (userAction.getValue() < 0) {
-            changes.add(new Change("Unlucky", "Try hard to stay to your goals, you can do this!", userAction.getValue()));
+        user.setPoints(user.getPoints() + points);
+
+        if (points > 0) {
+            changes.add(new Change("Congratulations!", "Well done you got some points, keep it up!", points));
+        } else {
+            changes.add(new Change("Unlucky", "Try hard to stay to your goals, you can do this!", points));
         }
 
         // Update challenges
         Challenge challenge = user.getChallengeByCategory(userAction.getCategory());
         if (challenge != null) {
-            challenge.setProgress(challenge.getProgress() + userAction.getValue());
+            challenge.setProgress(challenge.getProgress() + points);
 
             if (challenge.getGoal() >= challenge.getProgress()) {
-                changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", 100));
+                int challengePoints;
+                if (challenge.getType().equals("daily")) {
+                    challengePoints = challenge.getGoal() * 10;
+                } else if (challenge.getType().equals("weekly")) {
+                    challengePoints = challenge.getGoal() * 50;
+                } else {
+                    challengePoints = challenge.getGoal() * 150;
+                }
+
+                changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", challengePoints));
                 notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge!", "challengeCompleted", new Date()));
-            
             }
         }
 
