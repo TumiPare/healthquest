@@ -21,8 +21,8 @@ public class User {
 
     String profilePicUrl;
     String dob;
-    Float weight;
-    Float height;
+    Double weight;
+    Double height;
     List<String> friends;
     List<Challenge> challenges;
     List<Creature> creatures;

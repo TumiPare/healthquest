@@ -1,6 +1,5 @@
 package com.codeperfect.healthquest.services;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +42,7 @@ public class UserActionService {
         int points;
         if (userAction.getCategory().equals("hydration")) {
 
-            points = userAction.getValue() * 5;
+            points = (int) (userAction.getValue() * 5);
             changes.add(new Change("Congratulations!", "Keep staying hydrated and healthy!", points));
 
         } else if (userAction.getCategory().equals("steps")) {
@@ -53,22 +52,22 @@ public class UserActionService {
 
         } else if (userAction.getCategory().equals("fruit&veg")) {
 
-            points = userAction.getValue() * 5;
+            points = (int) (userAction.getValue() * 5);
             changes.add(new Change("Congratulations!", "Eating fruit is a great way to get energy and stay healthy!", points));
 
         } else if (userAction.getCategory().equals("healthyfood")) {
 
-            points = userAction.getValue() * 30;
+            points = (int) (userAction.getValue() * 30);
             changes.add(new Change("Congratulations!", "Eating a balanced diet is a great way to eat food!", points));
 
         } else if (userAction.getCategory().equals("sweets")) {
 
-            points = userAction.getValue() * -5;
+            points = (int) (userAction.getValue() * -5);
             changes.add(new Change("Aw Damn Unlucky!", "Sweets and treats are okay in moderating, but try not to have them!", points));
             
         }  else if (userAction.getCategory().equals("sleep")) {
 
-            points = userAction.getValue() * 10;
+            points = (int) (userAction.getValue() * 10);
             changes.add(new Change("Congratulations!", "We all need sleep, so make sure you get an decent amount!", points));
 
         } else if (userAction.getCategory().equals("weight")) {
@@ -95,7 +94,7 @@ public class UserActionService {
 
         } else {
 
-            points = userAction.getValue() * -20;
+            points = (int) (userAction.getValue() * -20);
             changes.add(new Change("Aw Damn Unlucky!", "Try not to eat too much fast food!", points));
 
         }
@@ -108,6 +107,7 @@ public class UserActionService {
             challenge.setProgress(challenge.getProgress() + points);
 
             if (challenge.getGoal() >= challenge.getProgress()) {
+
                 int challengePoints;
                 if (challenge.getType().equals("daily")) {
                     challengePoints = challenge.getGoal() * 10;
@@ -118,7 +118,8 @@ public class UserActionService {
                 }
 
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", challengePoints));
-                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge!", "challengeCompleted", new Date()));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + "(" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
+            
             }
         }
 
@@ -128,9 +129,9 @@ public class UserActionService {
             creature.setHealth((int) (creature.getHealth() + userAction.getValue() * 0.2));
 
             if (userAction.getValue() > 0) {
-                changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", userAction.getValue()));
+                changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", 5));
             } else if (userAction.getValue() < 0) {
-                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", userAction.getValue()));
+                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", 5));
             }
         }
 
@@ -141,7 +142,7 @@ public class UserActionService {
         return new UserActionUpdates(user, changes);
     }
 
-    private double calcBMIDistance(float height, float weight) {
+    private double calcBMIDistance(double height, double weight) {
 
         double BMI = weight / (height * height);
         if (BMI >= 18.5 && BMI <= 24.9) {
