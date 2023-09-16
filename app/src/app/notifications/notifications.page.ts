@@ -11,6 +11,7 @@ import { IFriendRequest } from './friend-request.interface';
 })
 export class NotificationsPage {
   notificationsSubscription: Subscription = new Subscription();
+  friendRequestsSubscription: Subscription = new Subscription();
   username:string = 'testuser';
   notificiationItems: INotification[] = [];
   friendRequestItems: IFriendRequest[] = [];
@@ -20,12 +21,16 @@ export class NotificationsPage {
   ngOnInit() {
     this.notificationsSubscription = this.notificationsService.getNotifications('testuser').subscribe((notification) => {
       this.notificiationItems = notification;
-      console.log(this.notificiationItems)
+    });
+
+    this.friendRequestsSubscription = this.notificationsService.getFriendRequests('testuser').subscribe((friendRequest) => {
+      this.friendRequestItems = friendRequest;
     });
   }
 
   ngOnDestroy() {
     this.notificationsSubscription.unsubscribe();
+    this.friendRequestsSubscription.unsubscribe();
   }
 
 }
