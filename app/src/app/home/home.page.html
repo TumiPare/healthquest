@@ -25,7 +25,7 @@
 
           <ion-card-content>
              <ion-text class="big">{{ challenge.progress }}</ion-text> /{{ challenge.goal }}
-            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+            <ion-progress-bar [value]="challenge.progress / challenge.goal"></ion-progress-bar>
           </ion-card-content>
         </ion-card>
       </swiper-slide>
