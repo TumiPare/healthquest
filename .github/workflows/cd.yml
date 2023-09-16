@@ -25,4 +25,4 @@ jobs:
             username: admin
             password: ilovehealth
             server-dir: ./www/
-            local-dr: ./app/HealthQuest/www/
+            local-dir: ./app/HealthQuest/www/
