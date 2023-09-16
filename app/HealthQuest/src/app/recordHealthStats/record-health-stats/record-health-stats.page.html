@@ -8,26 +8,31 @@
   <div class="ion-padding">
     <form class="form" [formGroup]="healthForm" (ngSubmit)="submitHealthStats()">
       <ion-item>
-        <ion-label position="floating">Steps</ion-label>
-        <ion-input type="steps" formControlName="steps" aria-label="Input for Steps"></ion-input>
+        <ion-label position="stacked">Steps</ion-label>
+        <ion-input type="steps" formControlName="steps" placeholder="Steps for Today"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Weight</ion-label>
-        <ion-input type="weight" formControlName="weight" aria-label="Input for Weight"></ion-input>
+        <ion-label position="stacked">Weight (kg)</ion-label>
+        <ion-input type="weight" formControlName="weight" placeholder="Weight in kg"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Water</ion-label>
-        <ion-input type="water" formControlName="water" aria-label="Input for Water"></ion-input>
+        <ion-label position="stacked">Water (liters)</ion-label>
+        <ion-input type="water" formControlName="water" placeholder="Water in liters"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Food</ion-label>
-        <ion-input type="food" formControlName="food" aria-label="Input for Food"></ion-input>
-      </ion-item>
+        <ion-label position="stacked">Food</ion-label>
+        <ion-select formControlName="food" placeholder="Select Food">
+            <ion-select-option value="fruit">Fruit</ion-select-option>
+            <ion-select-option value="vegetable">Vegetable</ion-select-option>
+            <ion-select-option value="protein">Protein</ion-select-option>
+            <!-- Add more options as needed -->
+        </ion-select>
+      </ion-item>   
 
-      <ion-button expand="full" type="submit" style="text-transform: none" class="bottom-button">Record</ion-button>
+      <ion-button expand="block" type="submit" style="text-transform: none">Record</ion-button>
     </form>
   </div>
 </ion-content>

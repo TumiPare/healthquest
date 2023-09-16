@@ -11,7 +11,7 @@ export class RecordHealthStatsPage implements OnInit {
   healthForm: FormGroup = this.formBuilder.group({
     steps: ['', [Validators.required, Validators.min(0)]],
     weight: ['', [Validators.required, Validators.min(2), Validators.max(500)]],
-    water: ['', [Validators.required, Validators.email]],
+    water: ['', [Validators.required, Validators.min(0)]],
     food: ['', [Validators.required]],
   });
 
@@ -26,6 +26,11 @@ export class RecordHealthStatsPage implements OnInit {
   submitHealthStats() {
     if (this.healthForm.valid) {
       console.log("valid form");
+      console.log("Steps: ",this.healthForm.value.steps);
+      console.log("Weight: ",this.healthForm.value.weight);
+      console.log("Water: ",this.healthForm.value.water);
+      console.log("Food: ",this.healthForm.value.food);
+      this.healthForm.reset();
     }
     else {
     this.failToast('Please ensure all details are correct');
