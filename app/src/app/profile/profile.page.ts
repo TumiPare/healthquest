@@ -5,6 +5,7 @@ import { IUser } from './user.interface';
 import { Subscription } from 'rxjs';
 import { ToastService } from '../toast/toast.service';
 import { UserStorage } from '../user/user.storage';
+import { NearbyDoctorsService } from '../services/nearby-doctors.service';
 
 register();
 
@@ -17,10 +18,15 @@ export class ProfilePage {
   userInitialDataURL: string | null = "https://ionicframework.com/docs/img/demos/avatar.svg";
   userDataSubscription: Subscription = new Subscription();
   userMayKnowSubscription: Subscription = new Subscription();
+  nearbyDoctorsSubscription: Subscription = new Subscription();
   userData: IUser | null = null;
   userMayKnow: IUser[] = [];
+  nearbyDoctors: any[] = [];
 
-  constructor(private profileService: ProfileService, private toastService: ToastService, private userStorage: UserStorage) { }
+  constructor(private profileService: ProfileService, 
+    private toastService: ToastService, 
+    private userStorage: UserStorage,
+    private nearbyDoctorsService: NearbyDoctorsService) { }
 
   ionViewWillEnter() {           
     this.userDataSubscription = this.profileService.getUser(this.userStorage.user.username).subscribe((user) => {
@@ -38,6 +44,13 @@ export class ProfilePage {
 
     this.userMayKnowSubscription = this.profileService.getUserMayKnow(this.userStorage.user.username).subscribe((userMayKnow) => {
       this.userMayKnow = userMayKnow;
+    });
+  }
+
+  async ngOnInit() {
+    this.nearbyDoctorsSubscription = (await this.nearbyDoctorsService.getNearbyDoctors()).subscribe((doctors: any) => {
+      console.log(doctors.features[0]);
+      this.nearbyDoctors = doctors.features;
     });
   }
 
@@ -70,5 +83,9 @@ export class ProfilePage {
     this.profileService.friendRequest(this.userStorage.user.username, friendUsername).subscribe((message) => {
       this.toastService.presentToast(message.message);
     });
+  }
+
+  ngOnDestroy() {
+    this.nearbyDoctorsSubscription.unsubscribe();
   }
 }
