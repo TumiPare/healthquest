@@ -46,7 +46,7 @@ export class PeerComparePage implements OnInit {
         responsive: true,
         plugins: {
           legend: {
-            position: 'top',
+            position: 'bottom',
           },
         }
       }
