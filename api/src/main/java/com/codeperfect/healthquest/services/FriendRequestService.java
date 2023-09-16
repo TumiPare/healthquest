@@ -36,7 +36,7 @@ public class FriendRequestService {
 
     public String friendRequestUser(String username, String friendUsername) {
 
-        FriendRequest friendRequest = this.findFriendRequest(username, friendUsername);
+        FriendRequest friendRequest = this.findFriendRequest(friendUsername, username);
 
         // Friend request already sent by other user
         if (friendRequest != null) {

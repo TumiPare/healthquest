@@ -1,4 +1,4 @@
-export interface INotificationItem {
+export interface INotification {
     username: string;
     body: string;
     type: string;

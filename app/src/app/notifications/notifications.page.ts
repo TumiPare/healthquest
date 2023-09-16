@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NotificationsService } from './notifications.service';
 import { Subscription } from 'rxjs';
-import { INotificationItem } from './notification-item.interface';
+import { INotification } from './notification.interface';
+import { IFriendRequest } from './friend-request.interface';
 
 @Component({
   selector: 'app-notifications',
@@ -11,7 +12,8 @@ import { INotificationItem } from './notification-item.interface';
 export class NotificationsPage {
   notificationsSubscription: Subscription = new Subscription();
   username:string = 'testuser';
-  notificiationItems: INotificationItem[] = [];
+  notificiationItems: INotification[] = [];
+  friendRequestItems: IFriendRequest[] = [];
 
   constructor(private notificationsService: NotificationsService) { }
 

@@ -1,16 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { INotificationItem } from './notification-item.interface';
+import { INotification } from './notification.interface';
+import { IFriendRequest } from './friend-request.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
-  apiUrl = 'http://localhost:8080/notification/';
+  apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
   getNotifications(username: string) {
-    return this.http.get<INotificationItem[]>(this.apiUrl+username);
+    return this.http.get<INotification[]>(this.apiUrl + "notification/" + username);
+  }
+
+  getFriendRequests(username: string) {
+    return this.http.get<IFriendRequest[]>(this.apiUrl + "friend/" + username);
   }
 }

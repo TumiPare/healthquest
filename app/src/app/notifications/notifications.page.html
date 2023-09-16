@@ -15,16 +15,10 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list [inset]="true" lines="full">
-        <!-- Challenge Completed -->
-        <ion-item>
-          <ion-icon name="notifications" slot="start"></ion-icon>
-          <ion-text>Bogus challenge completed</ion-text>
-        </ion-item>
-
         <!-- New friend -->
-        <ion-item>
+        <ion-item *ngFor="let friendRequestItem of friendRequestItems">
           <ion-icon name="person-add" slot="start"></ion-icon>
-          <ion-text>DemonRunner99 wishes to befriend you</ion-text>
+          <ion-text>{{ friendRequestItem.userB }} wishes to befriend you</ion-text>
           
           <ion-button color="success">
             <ion-icon name="checkmark-outline"></ion-icon>
@@ -33,6 +27,12 @@
           <ion-button color="danger">
             <ion-icon name="close-outline"></ion-icon>
           </ion-button>  
+        </ion-item>
+
+        <!-- Challenge Completed -->
+        <ion-item *ngFor="let notificationItem of notificiationItems">
+          <ion-icon name="notifications" slot="start"></ion-icon>
+          <ion-text>{{ notificationItem.body }}</ion-text>
         </ion-item>
 
         <!-- Welcome -->
