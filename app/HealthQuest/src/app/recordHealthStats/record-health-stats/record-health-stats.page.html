@@ -15,26 +15,27 @@
     <form class="form" [formGroup]="healthForm" (ngSubmit)="submitHealthStats()">
       <ion-item>
         <ion-label position="stacked">Steps</ion-label>
-        <ion-input type="steps" formControlName="steps" placeholder="Steps for Today"></ion-input>
+        <ion-input type="steps" formControlName="steps" placeholder="Steps for Today" aria-label="Steps"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Weight (kg)</ion-label>
-        <ion-input type="weight" formControlName="weight" placeholder="Weight in kg"></ion-input>
+        <ion-input type="weight" formControlName="weight" placeholder="Weight in kg" aria-label="Weight"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Water (liters)</ion-label>
-        <ion-input type="water" formControlName="water" placeholder="Water in liters"></ion-input>
+        <ion-input type="water" formControlName="water" placeholder="Water in liters" aria-label="Water"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Food</ion-label>
-        <ion-select formControlName="food" placeholder="Select Food">
+        <ion-select formControlName="food" placeholder="Select Food"  aria-label="Food">
             <ion-select-option value="fruit">Fruit</ion-select-option>
             <ion-select-option value="vegetable">Vegetable</ion-select-option>
             <ion-select-option value="protein">Protein</ion-select-option>
-            <!-- Add more options as needed -->
+            <ion-select-option value="protein">Sweets</ion-select-option>
+            <ion-select-option value="protein">Fast Food</ion-select-option>
         </ion-select>
       </ion-item>   
 
