@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeperfect.healthquest.interfaces.Challenge;
+import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.UserRepository;
@@ -34,6 +36,7 @@ public class UserService {
         User user = userRepository.findUserByUsername(username);
         if (user != null && userRepository.findUserByUsername(friendUsername) != null) {
             user.addFriend(friendUsername);
+            userRepository.save(user);
         }
 
     }
@@ -45,6 +48,7 @@ public class UserService {
         if (user != null) {
 
             List<LeaderboardItem> leaderboard = new ArrayList<>();
+            leaderboard.add(new LeaderboardItem(username + " (You)", user.getProfilePicUrl(), user.getPoints()));
             for (String friendUsername : user.getFriends()) {
                 
                 User friend = userRepository.findUserByUsername(friendUsername);
@@ -61,5 +65,58 @@ public class UserService {
         }
 
         return new ArrayList<>();
+    }
+
+    public List<User> retrieveMayknow(String username) {
+
+        List<User> userMayKnow = new ArrayList<>();
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+
+            List<String> addedUsers = new ArrayList<>();
+            for (String friend : user.getFriends()) {
+                
+                User friendUser = userRepository.findUserByUsername(friend);
+
+                if (friendUser != null) {
+                    for (String friendsFriend : friendUser.getFriends()) {
+
+                        if (!user.getUsername().equals(friendsFriend) && !addedUsers.contains(friendsFriend) && !user.containsFriend(friendsFriend)) {
+                            addedUsers.add(friendsFriend);
+                            userMayKnow.add(userRepository.findUserByUsername(friendsFriend));
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return userMayKnow;
+
+    }
+
+    public List<Challenge> retrieveChallenges(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+            return user.getChallenges();
+        }
+
+        return new ArrayList<>();
+
+    }
+
+    public List<Creature> retrieveCreatures(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+            return user.getCreatures();
+        }
+
+        return new ArrayList<>();
+
     }
 }

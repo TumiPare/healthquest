@@ -18,9 +18,8 @@ public class User {
     @Id
     String username;
 
-    String name;
     String profilePicUrl;
-    Date dob;
+    String dob;
     Float weight;
     Float height;
     List<String> friends;
@@ -64,6 +63,18 @@ public class User {
                 return;
             }
         }
+
+    }
+
+    public boolean containsFriend(String username) {
+
+        for (String friend : friends) {
+            if (friend.equals(username)) {
+                return true;
+            }
+        }
+        
+        return false;
 
     }
 

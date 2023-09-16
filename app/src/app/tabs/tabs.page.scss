@@ -1,12 +1,1 @@
-/* Style for the floating button */
-.floating-button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 20px;
-  z-index: 1000;
-}
 
-div {
-  z-index: 1; /* Adjust this value if needed */
-}

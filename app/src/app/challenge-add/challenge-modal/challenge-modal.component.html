@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Create New Challenge</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input labelPlacement="stacked" label="Enter challenge name" [(ngModel)]="name" placeholder="eg. Stay Hydrated"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-select labelPlacement="stacked" label="Select challenge category" [(ngModel)]="category">
+      <ion-select-option value="hydration">Hydration</ion-select-option>
+      <ion-select-option value="fruit&veg">Fruit & Veg</ion-select-option>
+      <ion-select-option value="steps">Steps</ion-select-option>
+      <ion-select-option value="sleep">Sleep</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-input labelPlacement="stacked" label="Enter challenge goal" type="number" [(ngModel)]="goal" (keypress)="numericOnly($event)"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-select labelPlacement="stacked" label="Select challenge type" [(ngModel)]="type">
+      <ion-select-option value="daily">Daily</ion-select-option>
+      <ion-select-option value="weekly">Weekly</ion-select-option>
+      <ion-select-option value="monthly">Monthly</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>
