@@ -61,7 +61,7 @@
       </ion-item>
     </ion-list>
 
-    <h5 class="title">People you may know</h5>
+    <h5 class="title" *ngIf="userMayKnow.length> 0">People you may know</h5>
     <swiper-container
     [slidesPerView] = "2.5"
     >
@@ -80,5 +80,15 @@
         </ion-card>
       </swiper-slide>
     </swiper-container>
+
+    <h5 class="title">Doctors near you</h5>
+    <ion-list>
+      <ion-item *ngFor="let doctor of nearbyDoctors">
+        <ion-label class="ion-text-wrap">
+          <h2>{{ doctor.text }}</h2>
+          <p>{{ doctor.place_name }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ion-grid>
 </ion-content>
