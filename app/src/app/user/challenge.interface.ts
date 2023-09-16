@@ -4,5 +4,5 @@ export interface IChallenge {
     goal: number;
     progress: number;
     type: string;
-    dateCompleted: string;
+    dateStarted: string;
 }

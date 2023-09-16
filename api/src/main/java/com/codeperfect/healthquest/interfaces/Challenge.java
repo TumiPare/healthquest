@@ -10,6 +10,6 @@ public class Challenge {
     Integer goal;
     Integer progress;
     String type;
-    String date;
+    String dateStarted;
 
 }

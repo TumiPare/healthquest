@@ -1,5 +1,5 @@
-import { IChallenge } from "./challenge.interface";
-import { ICreature } from "./creature.interface";
+import { IChallenge } from "../user/challenge.interface";
+import { ICreature } from "../user/creature.interface";
 
 export interface IUser {
     username: string;

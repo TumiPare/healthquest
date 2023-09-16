@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICreature } from '../profile/creature.interface';
-import { IChallenge } from '../profile/challenge.interface';
+import { ICreature } from '../user/creature.interface';
+import { IChallenge } from '../user/challenge.interface';
 
 @Injectable({
   providedIn: 'root'

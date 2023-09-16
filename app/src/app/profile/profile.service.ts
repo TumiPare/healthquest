@@ -11,6 +11,10 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
+  saveUser(user: IUser) {
+    return this.http.post<IUser>(this.apiUrl + "user", user);
+  }
+
   getUser(username: string) {
     return this.http.get<IUser | null>(this.apiUrl + "user/" + username);
   }

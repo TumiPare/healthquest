@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LeaderboardService } from './leaderboard.service';
 import { Subscription } from 'rxjs';
 import { ILeaderboardItem } from './leaderboard-item.interface';
+import { UserStorage } from '../user/user.storage';
 
 @Component({
   selector: 'app-leaderboard',
@@ -9,15 +10,13 @@ import { ILeaderboardItem } from './leaderboard-item.interface';
   styleUrls: ['leaderboard.page.scss']
 })
 export class LeaderboardPage {
-
   leaderboardSubscription: Subscription = new Subscription();
-  username: string = 'testuser';
   leaderboardItems: ILeaderboardItem[] = [];
 
-  constructor(private leaderboardService: LeaderboardService) { }
+  constructor(private leaderboardService: LeaderboardService, private userStorage: UserStorage) { }
 
   ionViewWillEnter() {
-    this.leaderboardSubscription = this.leaderboardService.getLeaderboard(this.username).subscribe((leaders) => {
+    this.leaderboardSubscription = this.leaderboardService.getLeaderboard(this.userStorage.user.username).subscribe((leaders) => {
       this.leaderboardItems = leaders;
     });
   }

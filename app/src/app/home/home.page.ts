@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { IChallenge } from '../profile/challenge.interface';
+import { IChallenge } from '../user/challenge.interface';
 import { HomeService } from './home.service';
+import { UserStorage } from '../user/user.storage';
 
 register();
 
@@ -17,10 +18,10 @@ export class HomePage {
   username: string = 'testuser';
   challengeItems: IChallenge[] = [];
 
-  constructor(private navCtrl: NavController, private homeService: HomeService) {}
+  constructor(private navCtrl: NavController, private homeService: HomeService, private userStorage: UserStorage) {}
 
   ionViewWillEnter() {
-    this.challengeSubscription = this.homeService.getUserChallenges(this.username).subscribe((notification) => {
+    this.challengeSubscription = this.homeService.getUserChallenges(this.userStorage.user.username).subscribe((notification) => {
       this.challengeItems = notification;
     });
   }

@@ -48,7 +48,7 @@ public class UserService {
         if (user != null) {
 
             List<LeaderboardItem> leaderboard = new ArrayList<>();
-            leaderboard.add(new LeaderboardItem(username, user.getProfilePicUrl(), user.getPoints()));
+            leaderboard.add(new LeaderboardItem(username + " (You)", user.getProfilePicUrl(), user.getPoints()));
             for (String friendUsername : user.getFriends()) {
                 
                 User friend = userRepository.findUserByUsername(friendUsername);
