@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss']
 })
-export class ProfilePage {
-  userInitialDataURL: string = "https://ionicframework.com/docs/img/demos/avatar.svg";
+export class ProfilePage implements OnInit{
+  userInitialDataURL: string | null = "https://ionicframework.com/docs/img/demos/avatar.svg";
 
   constructor() { }
+
+  ngOnInit() {           
+    let firstName = "John";
+    this.userInitialDataURL = this.getInitialDataURL(firstName.charAt(0));
+  }
 
   getInitialDataURL(initial: string): string | null {
     const canvas = document.createElement('canvas');
