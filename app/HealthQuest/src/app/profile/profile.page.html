@@ -23,17 +23,23 @@
       <h1>username</h1>
     </ion-text>
   
-    <ion-row>
-      <ion-col class="ion-text-center">
+    <ion-row class="profile-head">
+      <ion-col class="ion-text-center" size="6">
         <div><strong><ion-text color="primary">15</ion-text></strong></div>
         <ion-text>Friends</ion-text>
       </ion-col>
-      <ion-col class="ion-text-center">
+      <ion-col class="ion-text-center" size="6">
         <div><strong><ion-text color="primary">1000</ion-text></strong></div>
         <ion-text>Points</ion-text>
       </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button expand="block" size="small" class="people-list" shape="round">Add friends</ion-button>
+      </ion-col>
     </ion-row>
-    <ion-list>
+
+    <!-- Settings Section-->
+    <h5 class="title">Settings</h5>
+    <ion-list style="padding-top: 0;" lines="inset">
       <ion-item button>
         <ion-icon name="moon-outline" class="ion-padding-end"></ion-icon>
         <ion-select #systemTheme
