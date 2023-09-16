@@ -12,7 +12,7 @@
       <ion-title size="large">Profile</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
+  <ion-grid class="ion-no-padding">
     <ion-row class="ion-padding-top">
       <ion-avatar class="avatar">
         <img [src]="userInitialDataURL" alt="User Initial" />
@@ -43,7 +43,7 @@
       </ion-item>
     </ion-list>
 
-    <h5 class="ion-padding-start">People you may know</h5>
+    <h5 class="title">People you may know</h5>
     <swiper-container
     [slidesPerView] = "2.5"
     >
