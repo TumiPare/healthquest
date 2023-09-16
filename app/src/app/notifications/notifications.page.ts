@@ -15,7 +15,7 @@ export class NotificationsPage {
 
   constructor(private notificationsService: NotificationsService) { }
 
-  ionWillEnter() {
+  ngOnInit() {
     this.notificationsSubscription = this.notificationsService.getNotifications('testuser').subscribe((notification) => {
       this.notificiationItems = notification;
       console.log(this.notificiationItems)
