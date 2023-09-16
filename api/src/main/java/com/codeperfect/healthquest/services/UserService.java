@@ -1,10 +1,15 @@
 package com.codeperfect.healthquest.services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeperfect.healthquest.interfaces.LeaderboardItem;
 import com.codeperfect.healthquest.models.FriendRequest;
 import com.codeperfect.healthquest.models.Notification;
 import com.codeperfect.healthquest.models.User;
@@ -38,5 +43,30 @@ public class UserService {
             user.addFriend(friendUsername);
         }
 
+    }
+
+    public List<LeaderboardItem> retrieveLeaderboard(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+
+            List<LeaderboardItem> leaderboard = new ArrayList<>();
+            for (String friendUsername : user.getFriends()) {
+                
+                User friend = userRepository.findUserByUsername(friendUsername);
+                if (friend != null) {
+                    LeaderboardItem friendStats = new LeaderboardItem(friendUsername, friend.getPoints());
+                    leaderboard.add(friendStats);
+                }
+
+            }
+
+            Collections.sort(leaderboard);
+            return leaderboard;
+              
+        }
+
+        return new ArrayList<>();
     }
 }
