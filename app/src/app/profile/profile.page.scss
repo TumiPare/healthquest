@@ -1,0 +1,33 @@
+.avatar {
+    margin: auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ff9800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24px;
+    font-family: Arial;
+  }
+
+  .people-list {
+    text-transform: none;
+    padding: 8px;
+  }
+
+  .person-pic
+  {
+    margin: auto;
+  }
+
+  .title
+  {
+    margin-left: 10px;
+  }
+
+  .profile-head
+  {
+    border-bottom: 1px solid #e0e0e0;
+  }
