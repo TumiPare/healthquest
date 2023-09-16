@@ -19,7 +19,7 @@ public class User {
     String username;
 
     String profilePicUrl;
-    Date dob;
+    String dob;
     Float weight;
     Float height;
     List<String> friends;

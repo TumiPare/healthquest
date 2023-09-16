@@ -53,11 +53,7 @@ public class UserActionService {
         if (challenge != null) {
             challenge.setProgress(challenge.getProgress() + userAction.getValue());
 
-            if (challenge.getGoal() >= challenge.getProgress() && challenge.getDateCompleted() == null) {
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                challenge.setDateCompleted(formatter.format(new Date()));
-
+            if (challenge.getGoal() >= challenge.getProgress()) {
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", 100));
                 notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge!", "challengeCompleted", new Date()));
             
