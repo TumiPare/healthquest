@@ -1,17 +1,13 @@
 package com.codeperfect.healthquest.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
-import com.codeperfect.healthquest.models.FriendRequest;
-import com.codeperfect.healthquest.models.Notification;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.UserRepository;
 
@@ -64,7 +60,7 @@ public class UserService {
 
             Collections.sort(leaderboard);
             return leaderboard;
-              
+
         }
 
         return new ArrayList<>();
