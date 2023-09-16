@@ -11,3 +11,18 @@ jobs:
     ci-workflow:
         uses: ./.github/workflows/ci.yml
         secrets: inherit
+    deploy:
+        name: 🎉 Deploy
+        runs-on: ubuntu-latest
+        steps:
+        - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+        - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+            server: 34.27.203.247
+            username: admin
+            password: ilovehealth
+            server-dir: ./www/
+            local-dr: ./app/HealthQuest/www/
