@@ -10,24 +10,24 @@
   <ion-grid>
     <!-- TOP 3 -->
     <ion-row class="center-row">
+      <!-- Left Avatar -->
       <ion-col class="centre">
-          <!-- Left Avatar -->
-        <ion-avatar class="left-avatar">
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        <ion-avatar *ngIf="leaderboardItems.length > 2" class="left-avatar">
+          <img alt="Silhouette of a person's head" src="{{leaderboardItems[2].profilePicUrl}}" />
         </ion-avatar>
-        </ion-col>
-        <ion-col class="centre">
-
-          <!-- Middle Avatar -->
-        <ion-avatar class="middle-avatar">
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-col>
+      
+      <!-- Middle Avatar -->
+      <ion-col class="centre">
+        <ion-avatar *ngIf="leaderboardItems.length > 0" class="middle-avatar">
+          <img alt="Silhouette of a person's head" src="{{leaderboardItems[0].profilePicUrl}}" />
         </ion-avatar>
-        </ion-col>
-        <ion-col class="centre">
+      </ion-col>
 
-          <!-- Right Avatar -->
-          <ion-avatar class="right-avatar">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <!-- Right Avatar -->
+      <ion-col class="centre">
+          <ion-avatar *ngIf="leaderboardItems.length > 1" class="right-avatar">
+            <img alt="Silhouette of a person's head" src="{{leaderboardItems[1].profilePicUrl}}" />
           </ion-avatar>
       </ion-col>
     </ion-row>
@@ -42,37 +42,13 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list [inset]="true">
-              <!-- Number 1 -->
-              <ion-item>
-                <ion-chip slot="start" class="gold-chip">1</ion-chip>
-                <ion-label>{{ leaderboardItems[0].username }}</ion-label>
-                <ion-badge slot="end" color="tertiary">1202</ion-badge>
-              </ion-item>
-              
-              <!-- Number 2 -->
-              <ion-item>
-                <ion-chip slot="start" class="silver-chip">2</ion-chip>
-                <ion-label>Mega Man X</ion-label>
-                <ion-badge slot="end" color="tertiary">850</ion-badge>
-              </ion-item>
-
-              <!-- Number 3 -->
-              <ion-item>
-                <ion-chip slot="start" class="bronze-chip">3</ion-chip>
-                <ion-label>Ryan Tricket</ion-label>
-                <ion-badge slot="end" color="tertiary">100</ion-badge>
-              </ion-item>
-              
-              <!-- The rest -->
-              <ion-item>
-                <ion-chip slot="start" color="primary">4</ion-chip>
-                <ion-label>Pac-Man</ion-label>
-                <ion-badge slot="end" color="tertiary">86</ion-badge>
-              </ion-item>
-              <ion-item>
-                <ion-chip slot="start" color="primary">5</ion-chip>
-                <ion-label>Mario Visagie</ion-label>
-                <ion-badge slot="end" color="tertiary">32</ion-badge>
+              <ion-item *ngFor="let leaderboardItem of leaderboardItems; let i = index">
+                <ion-chip *ngIf="i === 0" slot="start" class="gold-chip">1</ion-chip>
+                <ion-chip *ngIf="i === 1" slot="start" class="silver-chip">2</ion-chip>
+                <ion-chip *ngIf="i === 2" slot="start" class="bronze-chip">3</ion-chip>
+                <ion-chip *ngIf="i > 2" slot="start" color="primary">{{ i + 1 }}</ion-chip>
+                <ion-label>{{ leaderboardItem.username }}</ion-label>
+                <ion-badge slot="end" color="tertiary">{{ leaderboardItem.points }}</ion-badge>
               </ion-item>
             </ion-list>
           </ion-card-content>

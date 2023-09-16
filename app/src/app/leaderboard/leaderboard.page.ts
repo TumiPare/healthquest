@@ -16,7 +16,7 @@ export class LeaderboardPage {
 
   constructor(private leaderboardService: LeaderboardService) { }
 
-  ionWillEnter() {
+  ngOnInit() {
     this.leaderboardSubscription = this.leaderboardService.getLeaderboard('testuser').subscribe((leaders) => {
       this.leaderboardItems = leaders;
     });
