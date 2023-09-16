@@ -7,11 +7,41 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Notifications</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title color="primary" style="font-size: xx-large;">
+        <ion-icon size="large" name="notifications" [ngStyle]="{'color':'#FFD700'}"></ion-icon> Notifications
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list [inset]="true" lines="full">
+        <!-- Challenge Completed -->
+        <ion-item>
+          <ion-icon name="notifications" slot="start"></ion-icon>
+          <ion-text>Bogus challenge completed</ion-text>
+        </ion-item>
 
-  <app-explore-container name="Notifications page"></app-explore-container>
+        <!-- New friend -->
+        <ion-item>
+          <ion-icon name="person-add" slot="start"></ion-icon>
+          <ion-text>DemonRunner99 wishes to befriend you</ion-text>
+          
+          <ion-button color="success">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>  
+
+          <ion-button color="danger">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>  
+        </ion-item>
+
+        <!-- Welcome -->
+        <ion-item>
+          <ion-icon name="fitness" slot="start"></ion-icon>
+          <ion-text>Welcome to HealthQuest !</ion-text>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

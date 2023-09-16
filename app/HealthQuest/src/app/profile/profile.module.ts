@@ -6,6 +6,7 @@ import { ProfilePage } from './profile.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
     ExploreContainerComponentModule,
     ProfilePageRoutingModule
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProfilePageModule { }

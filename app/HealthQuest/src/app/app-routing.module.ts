@@ -5,7 +5,29 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'weight-entry',
+    loadChildren: () => import('./weightEntry/weight-entry/weight-entry.module').then( m => m.WeightEntryPageModule)
+  },
+  {
+    path: 'water-intake',
+    loadChildren: () => import('./waterIntake/water-intake/water-intake.module').then( m => m.WaterIntakePageModule)
+  },
+  {
+    path: 'steps-tracking',
+    loadChildren: () => import('./stepsTracking/steps-tracking/steps-tracking.module').then( m => m.StepsTrackingPageModule)
+  },
+  {
+    path: 'food-intake',
+    loadChildren: () => import('./foodIntake/food-intake/food-intake.module').then( m => m.FoodIntakePageModule)
+  },  {
+    path: 'peer-compare',
+    loadChildren: () => import('./peerCompare/peer-compare/peer-compare.module').then( m => m.PeerComparePageModule)
   }
+
+
+
 ];
 @NgModule({
   imports: [

@@ -1,0 +1,44 @@
+.center-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.centre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle-avatar {
+  margin-bottom: 20px;
+  width: 100px;
+  height: 100px;
+  border: 3px solid gold;
+}
+
+.left-avatar {
+  margin-top: 20px;
+  width: 75px;
+  height: 75px;
+  border: 3px solid silver;
+}
+
+.right-avatar {
+  margin-top: 20px;
+  width: 75px;
+  height: 75px;
+  border: 3px solid rgb(202, 114, 77);
+}
+
+.gold-chip {
+  --background: gold;
+}
+
+.silver-chip {
+  --background: silver;
+}
+
+.bronze-chip {
+  --background: rgb(202, 114, 77);
+}
