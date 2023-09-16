@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { IChallenge } from '../user/challenge.interface';
 import { HomeService } from './home.service';
 import { UserStorage } from '../user/user.storage';
+import { ChallengeModalComponent } from '../challenge-add/challenge-modal/challenge-modal.component';
 
 register();
 
@@ -18,7 +19,12 @@ export class HomePage {
   username: string = 'testuser';
   challengeItems: IChallenge[] = [];
 
-  constructor(private navCtrl: NavController, private homeService: HomeService, private userStorage: UserStorage) {}
+  constructor(
+    private navCtrl: NavController, 
+    private homeService: HomeService, 
+    private userStorage: UserStorage, 
+    private modalCtrl: ModalController
+  ) {}
 
   ionViewWillEnter() {
     this.challengeSubscription = this.homeService.getUserChallenges(this.userStorage.user.username).subscribe((notification) => {
@@ -26,8 +32,12 @@ export class HomePage {
     });
   }
 
-  redirectToChallenge() {
-    console.log("Adding Challenege");
+  async openChallengeModal() {
+    const modal = await this.modalCtrl.create({
+      component: ChallengeModalComponent,
+    });
+
+    modal.present();
   }
 
   redirectToStepsTracking()

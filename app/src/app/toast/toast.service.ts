@@ -18,4 +18,15 @@ export class ToastService {
 
     await toast.present();
   }
+
+  async presentError(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500,
+      position: 'bottom',
+      color: 'danger'
+    });
+
+    await toast.present();
+  }
 }
