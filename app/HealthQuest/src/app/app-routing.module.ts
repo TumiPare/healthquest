@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'food-intake',
     loadChildren: () => import('./foodIntake/food-intake/food-intake.module').then( m => m.FoodIntakePageModule)
+  },  {
+    path: 'peer-compare',
+    loadChildren: () => import('./peerCompare/peer-compare/peer-compare.module').then( m => m.PeerComparePageModule)
   }
+
 
 
 ];
