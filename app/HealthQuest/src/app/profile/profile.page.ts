@@ -37,6 +37,7 @@ export class ProfilePage implements OnInit{
   }
 
   toggleTheme(systemTheme: string) {
-    document.body.setAttribute('witp-color-theme', systemTheme);
+    console.log(systemTheme);
+    document.body.setAttribute('HealthQuest-color-theme', systemTheme);
   }
 }

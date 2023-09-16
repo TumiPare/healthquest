@@ -30,6 +30,7 @@
                   expandedIcon="remove"
                   aria-label="Theme"
                   placeholder="Select Theme"
+                  (ionChange)="toggleTheme(systemTheme.value)">
                   >
         <ion-select-option value="light">Light</ion-select-option>
         <ion-select-option value="dark" >Dark</ion-select-option>
