@@ -121,4 +121,14 @@ public class User {
 
     }
 
+    public void resetChallenges(String type) {
+
+        for (Challenge challengeItem : challenges) {
+            if (challengeItem.getType().equals(type)) {
+                challengeItem.setProgress(0);
+            }
+        }
+
+    }
+
 }

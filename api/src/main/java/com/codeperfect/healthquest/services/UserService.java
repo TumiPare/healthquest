@@ -1,10 +1,12 @@
 package com.codeperfect.healthquest.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.interfaces.Challenge;
@@ -139,5 +141,45 @@ public class UserService {
         }
 
         return new Message("typeCategoryError");
+    }
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void resetUsersDaily() {
+
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.resetChallenges("daily");
+        }
+
+        
+        userRepository.saveAll(users);
+
+    }
+
+    @Scheduled(cron = "5 0 0 * * 1")
+    public void resetUsersWeekly() {
+        
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.resetChallenges("weekly");
+        }
+
+        
+        userRepository.saveAll(users);
+
+    }
+
+    @Scheduled(cron = "10 0 0 1 * *")
+    public void resetUsersMonthly() {
+        
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.setPoints(0);
+            user.resetChallenges("monthly");
+        }
+
+        
+        userRepository.saveAll(users);
+
     }
 }
