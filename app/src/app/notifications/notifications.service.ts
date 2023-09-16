@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { INotification } from './notification.interface';
 import { IFriendRequest } from './friend-request.interface';
+import { IMessage } from '../message.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,10 @@ export class NotificationsService {
   }
 
   acceptFriendRequest(friendRequest: IFriendRequest) {
-    return this.http.post<string>(this.apiUrl + "friend/accept", friendRequest);
+    return this.http.post<IMessage>(this.apiUrl + "friend/accept", friendRequest);
   }
 
   declineFriendRequest(friendRequest: IFriendRequest) {
-    return this.http.post<string>(this.apiUrl + "friend/decline", friendRequest);
+    return this.http.post<IMessage>(this.apiUrl + "friend/decline", friendRequest);
   }
 }

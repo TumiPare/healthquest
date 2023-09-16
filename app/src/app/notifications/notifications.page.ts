@@ -3,6 +3,7 @@ import { NotificationsService } from './notifications.service';
 import { Subscription } from 'rxjs';
 import { INotification } from './notification.interface';
 import { IFriendRequest } from './friend-request.interface';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-notifications',
@@ -16,7 +17,7 @@ export class NotificationsPage {
   notificiationItems: INotification[] = [];
   friendRequestItems: IFriendRequest[] = [];
 
-  constructor(private notificationsService: NotificationsService) { }
+  constructor(private notificationsService: NotificationsService, private toastService: ToastService) { }
 
   ionViewWillEnter() {
     this.notificationsSubscription = this.notificationsService.getNotifications(this.username).subscribe((notification) => {
@@ -30,7 +31,7 @@ export class NotificationsPage {
 
   acceptFriendRequest(friendRequest: IFriendRequest) {
     this.notificationsService.acceptFriendRequest(friendRequest).subscribe((message) => {
-      console.log(message);
+      this.toastService.presentToast(message.message);
     });
     this.friendRequestItems = this.friendRequestItems.filter((friendRequestItem) => {
       friendRequest != friendRequestItem
@@ -39,7 +40,7 @@ export class NotificationsPage {
 
   declineFriendRequest(friendRequest: IFriendRequest) {
     this.notificationsService.declineFriendRequest(friendRequest).subscribe((message) => {
-      console.log(message);
+      this.toastService.presentToast(message.message);
     });
     this.friendRequestItems = this.friendRequestItems.filter((friendRequestItem) => {
       friendRequest != friendRequestItem

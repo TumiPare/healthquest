@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { ProfileService } from './profile.service';
+import { IUser } from './user.interface';
+import { Subscription } from 'rxjs';
+import { ToastService } from '../toast.service';
 
 register();
 
@@ -8,14 +12,32 @@ register();
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss']
 })
-export class ProfilePage implements OnInit{
+export class ProfilePage {
   userInitialDataURL: string | null = "https://ionicframework.com/docs/img/demos/avatar.svg";
+  userDataSubscription: Subscription = new Subscription();
+  userMayKnowSubscription: Subscription = new Subscription();
+  username: string = 'amber';
+  userData: IUser | null = null;
+  userMayKnow: IUser[] = [];
 
-  constructor() { }
+  constructor(private profileService: ProfileService, private toastService: ToastService) { }
 
-  ngOnInit() {           
-    let firstName = "John";
-    this.userInitialDataURL = this.getInitialDataURL(firstName.charAt(0));
+  ionViewWillEnter() {           
+    this.userDataSubscription = this.profileService.getUser(this.username).subscribe((user) => {
+      this.userData = user;
+
+      if (user) {
+        if (user.profilePicUrl === "") {
+          this.userInitialDataURL = this.getInitialDataURL(user.username.charAt(0));
+        } else {
+          this.userInitialDataURL = user?.profilePicUrl;
+        }
+      }
+    });
+
+    this.userMayKnowSubscription = this.profileService.getUserMayKnow(this.username).subscribe((userMayKnow) => {
+      this.userMayKnow = userMayKnow;
+    });
   }
 
   getInitialDataURL(initial: string): string | null {
@@ -40,7 +62,12 @@ export class ProfilePage implements OnInit{
   }
 
   toggleTheme(systemTheme: string) {
-    console.log(systemTheme);
     document.body.setAttribute('HealthQuest-color-theme', systemTheme);
+  }
+
+  friendRequest(friendUsername: string) {
+    this.profileService.friendRequest(this.username, friendUsername).subscribe((message) => {
+      this.toastService.presentToast(message.message);
+    });
   }
 }

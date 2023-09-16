@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeperfect.healthquest.interfaces.Message;
 import com.codeperfect.healthquest.models.FriendRequest;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.FriendRequestRepository;
@@ -35,20 +36,20 @@ public class FriendRequestService {
         return friendRequest;
     }
 
-    public String friendRequestUser(String username, String friendUsername) {
+    public Message friendRequestUser(String username, String friendUsername) {
 
         User user = userService.findUser(username);
 
         // Friend already exists on user
         if (user.containsFriend(friendUsername)) {
-            return "Already friends with " + friendUsername;
+            return new Message("Already friends with " + friendUsername);
         }
 
         FriendRequest friendRequest = this.findFriendRequest(username, friendUsername);
 
         // Friend request already sent by user
         if (friendRequest != null) {
-            return "Already sent friend request to " + friendUsername;
+            return new Message("Already sent friend request to " + friendUsername);
         }
         
         friendRequest = this.findFriendRequest(friendUsername, username);
@@ -57,7 +58,7 @@ public class FriendRequestService {
         if (friendRequest != null) {
 
             this.acceptFriendRequest(friendRequest);
-            return "Successfully added " + friendUsername + "as a friend";
+            return new Message("Successfully added " + friendUsername + "as a friend");
 
         }
 
@@ -66,23 +67,23 @@ public class FriendRequestService {
         friendRequest.setUserB(friendUsername);
         this.saveFriendRequest(friendRequest);
 
-        return "Sent friend request to " + friendUsername;
+        return new Message("Sent friend request to " + friendUsername);
 
     }
 
-    public String acceptFriendRequest(FriendRequest friendRequest) {
+    public Message acceptFriendRequest(FriendRequest friendRequest) {
 
         this.removeFriendRequest(friendRequest);
         userService.addFriendToUser(friendRequest.getUserA(), friendRequest.getUserB());
         userService.addFriendToUser(friendRequest.getUserB(), friendRequest.getUserA());
 
-        return "Successfully accepted friend request";
+        return new Message("Successfully accepted friend request");
 
     }
 
-    public String declineFriendRequest(FriendRequest friendRequest) {
+    public Message declineFriendRequest(FriendRequest friendRequest) {
         this.removeFriendRequest(friendRequest);
-        return "Successfully declined friend request";
+        return new Message("Successfully declined friend request");
     }
 
 }
