@@ -42,30 +42,69 @@ public class UserActionService {
         // Update user stats
         int points;
         if (userAction.getCategory().equals("hydration")) {
+
             points = userAction.getValue() * 5;
+            changes.add(new Change("Congratulations!", "Keep staying hydrated and healthy!", points));
+
         } else if (userAction.getCategory().equals("steps")) {
+
             points = (int) (userAction.getValue() * 0.10);
+            changes.add(new Change("Congratulations!", "Getting those steps in is amazing!", points));
+
         } else if (userAction.getCategory().equals("fruit&veg")) {
+
             points = userAction.getValue() * 5;
+            changes.add(new Change("Congratulations!", "Eating fruit is a great way to get energy and stay healthy!", points));
+
         } else if (userAction.getCategory().equals("healthyfood")) {
+
             points = userAction.getValue() * 30;
+            changes.add(new Change("Congratulations!", "Eating a balanced diet is a great way to eat food!", points));
+
         } else if (userAction.getCategory().equals("sweets")) {
+
             points = userAction.getValue() * -5;
+            changes.add(new Change("Aw Damn Unlucky!", "Sweets and treats are okay in moderating, but try not to have them!", points));
+            
+        }  else if (userAction.getCategory().equals("sleep")) {
+
+            points = userAction.getValue() * 10;
+            changes.add(new Change("Congratulations!", "We all need sleep, so make sure you get an decent amount!", points));
+
+        } else if (userAction.getCategory().equals("weight")) {
+
+            double newDist = this.calcBMIDistance(user.getHeight(), userAction.getValue());
+            if (newDist == 0) {
+
+                points = 25;
+                changes.add(new Change("Congratulations!", "Well done on staying healthy!", points));
+
+            } else if (this.calcBMIDistance(user.getHeight(), user.getWeight()) - 0.1 > newDist) {
+
+                points = (int) (65 * newDist);
+                changes.add(new Change("Congratulations!", "Keep pushing towards your goals, you've got this!", points));
+
+            } else if (this.calcBMIDistance(user.getHeight(), user.getWeight()) + 0.1 < newDist) {
+
+                points = (int) (-40 * newDist);
+                changes.add(new Change("Unlucky!", "Your BMI worsened. Try to stick to your goals, better luck next time!", points));
+
+            } else {
+                points = 0;
+            }
+
         } else {
+
             points = userAction.getValue() * -20;
+            changes.add(new Change("Aw Damn Unlucky!", "Try not to eat too much fast food!", points));
+
         }
 
         user.setPoints(user.getPoints() + points);
 
-        if (points > 0) {
-            changes.add(new Change("Congratulations!", "Well done you got some points, keep it up!", points));
-        } else {
-            changes.add(new Change("Unlucky", "Try hard to stay to your goals, you can do this!", points));
-        }
-
         // Update challenges
-        Challenge challenge = user.getChallengeByCategory(userAction.getCategory());
-        if (challenge != null) {
+        List<Challenge> challenges = user.getChallengesByCategory(userAction.getCategory());
+        for (Challenge challenge : challenges) {
             challenge.setProgress(challenge.getProgress() + points);
 
             if (challenge.getGoal() >= challenge.getProgress()) {
@@ -100,6 +139,19 @@ public class UserActionService {
         userActionRepository.save(userAction);
 
         return new UserActionUpdates(user, changes);
+    }
+
+    private double calcBMIDistance(float height, float weight) {
+
+        double BMI = weight / (height * height);
+        if (BMI >= 18.5 && BMI <= 24.9) {
+            return 0;
+        } else if (BMI > 24.9) {
+            return BMI - 24.9;
+        } else {
+            return 18.5 - BMI;
+        }
+
     }
     
 }

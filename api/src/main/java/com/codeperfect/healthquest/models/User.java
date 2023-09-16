@@ -1,5 +1,6 @@
 package com.codeperfect.healthquest.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,15 +28,16 @@ public class User {
     List<Creature> creatures;
     Integer points;
 
-    public Challenge getChallengeByCategory(String category) {
+    public List<Challenge> getChallengesByCategory(String category) {
 
+        List<Challenge> challenges = new ArrayList<>();
         for (Challenge challenge : challenges) {
             if (challenge.getCategory().equals(category)) {
-                return challenge;
+                challenges.add(challenge);
             }
         }
 
-        return null;
+        return challenges;
 
     }
 
