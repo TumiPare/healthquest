@@ -117,7 +117,7 @@ public class UserActionService {
 
                 points += challengePoints;
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", challengePoints));
-                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + "(" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " (" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
             
             }
         }
