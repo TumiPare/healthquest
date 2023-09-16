@@ -8,6 +8,7 @@ import lombok.Data;
 public class LeaderboardItem implements Comparable<Object> {
     
     public String username;
+    public String profilePicUrl;
     public Integer points;
 
     @Override 

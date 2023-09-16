@@ -18,9 +18,6 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
-    FriendRequestService friendRequestService;
-
-    @Autowired
     NotificationService notificationService;
 
     public User findUser(String username) {
@@ -52,7 +49,7 @@ public class UserService {
                 
                 User friend = userRepository.findUserByUsername(friendUsername);
                 if (friend != null) {
-                    LeaderboardItem friendStats = new LeaderboardItem(friendUsername, friend.getPoints());
+                    LeaderboardItem friendStats = new LeaderboardItem(friendUsername, friend.getProfilePicUrl(), friend.getPoints());
                     leaderboard.add(friendStats);
                 }
 

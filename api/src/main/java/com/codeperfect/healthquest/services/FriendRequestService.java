@@ -3,10 +3,12 @@ package com.codeperfect.healthquest.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.models.FriendRequest;
 import com.codeperfect.healthquest.repositories.FriendRequestRepository;
 
+@Service
 public class FriendRequestService {
     
     @Autowired
@@ -54,7 +56,7 @@ public class FriendRequestService {
 
         this.removeFriendRequest(friendRequest);
         userService.addFriendToUser(friendRequest.getUserA(), friendRequest.getUserB());
-        userService.addFriendToUser(friendRequest.getUserA(), friendRequest.getUserB());
+        userService.addFriendToUser(friendRequest.getUserB(), friendRequest.getUserA());
 
         return "Successfully accepted friend request";
 
