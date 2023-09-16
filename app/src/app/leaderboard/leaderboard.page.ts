@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LeaderboardService } from './leaderboard.service';
 import { Subscription } from 'rxjs';
+import { ILeaderboardItem } from './leaderboard-item.interface';
 
 @Component({
   selector: 'app-leaderboard',
@@ -10,13 +11,14 @@ import { Subscription } from 'rxjs';
 export class LeaderboardPage {
 
   leaderboardSubscription: Subscription = new Subscription();
-  username: string = '';
-  
+  username: string = 'testuser';
+  leaderboardItems: ILeaderboardItem[] = [];
+
   constructor(private leaderboardService: LeaderboardService) { }
 
-  ngOnInit() {
-    this.leaderboardSubscription = this.leaderboardService.getLeaderboard(this.username).subscribe((leaders) => {
-
+  ionWillEnter() {
+    this.leaderboardSubscription = this.leaderboardService.getLeaderboard('testuser').subscribe((leaders) => {
+      this.leaderboardItems = leaders;
     });
   }
 
