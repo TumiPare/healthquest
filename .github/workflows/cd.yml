@@ -18,6 +18,13 @@ jobs:
         - name: 🚚 Get latest code
           uses: actions/checkout@v3
     
+        - name: 🛠️ Build Ionic app
+          run: |
+            npm install -g @ionic/cli
+            npm install
+            ionic build --prod
+          working-directory: ./app/HealthQuest
+    
         - name: FTP Deploy
           uses: SamKirkland/FTP-Deploy-Action@v4.3.4
           with:
