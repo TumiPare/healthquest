@@ -18,4 +18,12 @@ export class NotificationsService {
   getFriendRequests(username: string) {
     return this.http.get<IFriendRequest[]>(this.apiUrl + "friend/" + username);
   }
+
+  acceptFriendRequest(friendRequest: IFriendRequest) {
+    return this.http.post<string>(this.apiUrl + "friend/accept", friendRequest);
+  }
+
+  declineFriendRequest(friendRequest: IFriendRequest) {
+    return this.http.post<string>(this.apiUrl + "friend/decline", friendRequest);
+  }
 }

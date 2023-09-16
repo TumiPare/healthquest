@@ -34,6 +34,7 @@ public class UserService {
         User user = userRepository.findUserByUsername(username);
         if (user != null && userRepository.findUserByUsername(friendUsername) != null) {
             user.addFriend(friendUsername);
+            userRepository.save(user);
         }
 
     }

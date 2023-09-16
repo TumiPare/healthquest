@@ -67,4 +67,16 @@ public class User {
 
     }
 
+    public boolean containsFriend(String username) {
+
+        for (String friend : friends) {
+            if (friend.equals(username)) {
+                return true;
+            }
+        }
+        
+        return false;
+
+    }
+
 }

@@ -18,13 +18,31 @@ export class NotificationsPage {
 
   constructor(private notificationsService: NotificationsService) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.notificationsSubscription = this.notificationsService.getNotifications('testuser').subscribe((notification) => {
       this.notificiationItems = notification;
     });
 
     this.friendRequestsSubscription = this.notificationsService.getFriendRequests('testuser').subscribe((friendRequest) => {
       this.friendRequestItems = friendRequest;
+    });
+  }
+
+  acceptFriendRequest(friendRequest: IFriendRequest) {
+    this.notificationsService.acceptFriendRequest(friendRequest).subscribe((message) => {
+      console.log(message);
+    });
+    this.friendRequestItems = this.friendRequestItems.filter((friendRequestItem) => {
+      friendRequest != friendRequestItem
+    });
+  }
+
+  declineFriendRequest(friendRequest: IFriendRequest) {
+    this.notificationsService.declineFriendRequest(friendRequest).subscribe((message) => {
+      console.log(message);
+    });
+    this.friendRequestItems = this.friendRequestItems.filter((friendRequestItem) => {
+      friendRequest != friendRequestItem
     });
   }
 

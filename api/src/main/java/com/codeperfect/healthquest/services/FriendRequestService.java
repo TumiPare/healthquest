@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.models.FriendRequest;
+import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.FriendRequestRepository;
 
 @Service
@@ -36,7 +37,21 @@ public class FriendRequestService {
 
     public String friendRequestUser(String username, String friendUsername) {
 
-        FriendRequest friendRequest = this.findFriendRequest(friendUsername, username);
+        User user = userService.findUser(username);
+
+        // Friend already exists on user
+        if (user.containsFriend(friendUsername)) {
+            return "Already friends with " + friendUsername;
+        }
+
+        FriendRequest friendRequest = this.findFriendRequest(username, friendUsername);
+
+        // Friend request already sent by user
+        if (friendRequest != null) {
+            return "Already sent friend request to " + friendUsername;
+        }
+        
+        friendRequest = this.findFriendRequest(friendUsername, username);
 
         // Friend request already sent by other user
         if (friendRequest != null) {
@@ -46,7 +61,10 @@ public class FriendRequestService {
 
         }
 
-        this.saveFriendRequest(new FriendRequest(username, friendUsername));
+        friendRequest = new FriendRequest();
+        friendRequest.setUserA(username);
+        friendRequest.setUserB(friendUsername);
+        this.saveFriendRequest(friendRequest);
 
         return "Sent friend request to " + friendUsername;
 

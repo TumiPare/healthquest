@@ -18,13 +18,13 @@
         <!-- New friend -->
         <ion-item *ngFor="let friendRequestItem of friendRequestItems">
           <ion-icon name="person-add" slot="start"></ion-icon>
-          <ion-text>{{ friendRequestItem.userB }} wishes to befriend you</ion-text>
+          <ion-text>{{ friendRequestItem.userA }} wishes to befriend you</ion-text>
           
-          <ion-button color="success">
+          <ion-button color="success" (click)="acceptFriendRequest(friendRequestItem)">
             <ion-icon name="checkmark-outline"></ion-icon>
           </ion-button>  
 
-          <ion-button color="danger">
+          <ion-button color="danger" (click)="declineFriendRequest(friendRequestItem)">
             <ion-icon name="close-outline"></ion-icon>
           </ion-button>  
         </ion-item>

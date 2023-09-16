@@ -59,7 +59,7 @@ public class UserActionService {
                 challenge.setDateCompleted(formatter.format(new Date()));
 
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", 100));
-                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge! Well done, keep it up!", "challengeCompleted", new Date()));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge!", "challengeCompleted", new Date()));
             
             }
         }
