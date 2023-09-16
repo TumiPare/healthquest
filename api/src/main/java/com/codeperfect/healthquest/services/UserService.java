@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeperfect.healthquest.interfaces.Challenge;
+import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.repositories.UserRepository;
@@ -91,6 +93,30 @@ public class UserService {
         }
 
         return userMayKnow;
+
+    }
+
+    public List<Challenge> retrieveChallenges(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+            return user.getChallenges();
+        }
+
+        return new ArrayList<>();
+
+    }
+
+    public List<Creature> retrieveCreatures(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+
+        if (user != null) {
+            return user.getCreatures();
+        }
+
+        return new ArrayList<>();
 
     }
 }

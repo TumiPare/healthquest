@@ -17,7 +17,7 @@ export class LeaderboardPage {
   constructor(private leaderboardService: LeaderboardService) { }
 
   ionViewWillEnter() {
-    this.leaderboardSubscription = this.leaderboardService.getLeaderboard('testuser').subscribe((leaders) => {
+    this.leaderboardSubscription = this.leaderboardService.getLeaderboard(this.username).subscribe((leaders) => {
       this.leaderboardItems = leaders;
     });
   }

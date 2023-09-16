@@ -16,29 +16,25 @@
     <swiper-container
     [centeredSlides] = "true"
     [pagination] = "true">
-      <swiper-slide class="ion-padding-bottom">
+      <swiper-slide *ngFor="let challenge of challengeItems" class="ion-padding-bottom">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Challenge #1</ion-card-title>
-            <ion-card-subtitle>Water</ion-card-subtitle>
+            <ion-card-title>{{ challenge.name }}</ion-card-title>
+            <ion-card-subtitle>{{ challenge.category }} ({{ challenge.type }})</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-             <ion-text class="big">1.5</ion-text> /2.7 liters
+             <ion-text class="big">{{ challenge.progress }}</ion-text> /{{ challenge.goal }}
             <ion-progress-bar [value]="0.6"></ion-progress-bar>
           </ion-card-content>
         </ion-card>
       </swiper-slide>
-      <swiper-slide>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Challenge #2</ion-card-title>
-            <ion-card-subtitle>Steps</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-             <ion-text class="big">3500</ion-text> /10000
-            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+      <swiper-slide class="ion-padding-bottom">
+        <ion-card (click)="redirectToChallenge()">
+          <ion-card-content id="challengeAdd" class="ion-text-center">
+            <ion-text class="bigger"><ion-icon name="add-circle-outline"></ion-icon></ion-text>
+            <br/>
+            <ion-text class="big">Add Challenge</ion-text>
           </ion-card-content>
         </ion-card>
       </swiper-slide>

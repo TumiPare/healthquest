@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { IChallenge } from '../profile/challenge.interface';
+import { HomeService } from './home.service';
 
 register();
 
@@ -10,8 +13,21 @@ register();
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
+  challengeSubscription: Subscription = new Subscription();
+  username: string = 'testuser';
+  challengeItems: IChallenge[] = [];
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private homeService: HomeService) {}
+
+  ionViewWillEnter() {
+    this.challengeSubscription = this.homeService.getUserChallenges(this.username).subscribe((notification) => {
+      this.challengeItems = notification;
+    });
+  }
+
+  redirectToChallenge() {
+    console.log("Adding Challenege");
+  }
 
   redirectToStepsTracking()
   {

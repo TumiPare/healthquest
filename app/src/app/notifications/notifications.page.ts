@@ -19,11 +19,11 @@ export class NotificationsPage {
   constructor(private notificationsService: NotificationsService) { }
 
   ionViewWillEnter() {
-    this.notificationsSubscription = this.notificationsService.getNotifications('testuser').subscribe((notification) => {
+    this.notificationsSubscription = this.notificationsService.getNotifications(this.username).subscribe((notification) => {
       this.notificiationItems = notification;
     });
 
-    this.friendRequestsSubscription = this.notificationsService.getFriendRequests('testuser').subscribe((friendRequest) => {
+    this.friendRequestsSubscription = this.notificationsService.getFriendRequests(this.username).subscribe((friendRequest) => {
       this.friendRequestItems = friendRequest;
     });
   }

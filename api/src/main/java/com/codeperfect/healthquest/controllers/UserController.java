@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codeperfect.healthquest.interfaces.Challenge;
+import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.services.UserService;
@@ -43,6 +45,16 @@ public class UserController {
     @GetMapping("/{username}/mayknow")
     public List<User> retrieveMayknow(@PathVariable(value = "username") String username) {
         return userService.retrieveMayknow(username);
+    }
+
+    @GetMapping("/{username}/challenges")
+    public List<Challenge> retrieveChallenges(@PathVariable(value = "username") String username) {
+        return userService.retrieveChallenges(username);
+    }
+
+    @GetMapping("/{username}/creatures")
+    public List<Creature> retrieveCreatures(@PathVariable(value = "username") String username) {
+        return userService.retrieveCreatures(username);
     }
 
 }
