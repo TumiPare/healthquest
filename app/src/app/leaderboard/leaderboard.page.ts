@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LeaderboardService } from './leaderboard.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,6 +9,19 @@ import { Component } from '@angular/core';
 })
 export class LeaderboardPage {
 
-  constructor() { }
+  leaderboardSubscription: Subscription = new Subscription();
+  username: string = '';
+  
+  constructor(private leaderboardService: LeaderboardService) { }
+
+  ngOnInit() {
+    this.leaderboardSubscription = this.leaderboardService.getLeaderboard(this.username).subscribe((leaders) => {
+
+    });
+  }
+
+  ngOnDestroy() {
+    this.leaderboardSubscription.unsubscribe();
+  }
 
 }
