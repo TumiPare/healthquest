@@ -61,7 +61,7 @@
       </ion-item>
     </ion-list>
 
-    <h5 class="title">People you may know</h5>
+    <h5 class="title" *ngIf="userMayKnow.length> 0">People you may know</h5>
     <swiper-container
     [slidesPerView] = "2.5"
     >
