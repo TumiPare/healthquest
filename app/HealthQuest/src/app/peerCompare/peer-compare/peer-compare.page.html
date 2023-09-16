@@ -1,5 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Close button -->
+      <ion-button routerLink="/tabs/profile" routerLinkActive="active">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Peer Comparison</ion-title>
   </ion-toolbar>
 </ion-header>
