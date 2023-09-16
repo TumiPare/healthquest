@@ -12,6 +12,32 @@
       <ion-title size="large">Profile</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Profile page"></app-explore-container>
+  <ion-row class="ion-padding-top">
+    <ion-avatar class="avatar">
+      <img [src]="userInitialDataURL" alt="User Initial" />
+    </ion-avatar>
+  </ion-row>
+  <ion-text class="ion-text-center">
+    <h1 data-cy="Welcome-text"> Welcome username !</h1>
+  </ion-text>
+  <ion-list>
+    <ion-item button>
+      <ion-icon name="moon-outline" class="ion-padding-end"></ion-icon>
+      <ion-select #systemTheme
+                  label="Theme" 
+                  interface="popover"
+                  toggleIcon="add"
+                  expandedIcon="remove"
+                  aria-label="Theme"
+                  placeholder="Select Theme"
+                  >
+        <ion-select-option value="light">Light</ion-select-option>
+        <ion-select-option value="dark" >Dark</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item button data-cy="logout-button">
+      <ion-icon name="log-out-outline" class="ion-padding-end"></ion-icon>
+      <ion-label>Logout</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
