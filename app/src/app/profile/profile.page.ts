@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ToastService } from '../toast/toast.service';
 import { UserStorage } from '../user/user.storage';
 import { NearbyDoctorsService } from '../services/nearby-doctors.service';
+import { AuthService } from '../services/auth.service';
 
 register();
 
@@ -26,7 +27,8 @@ export class ProfilePage {
   constructor(private profileService: ProfileService, 
     private toastService: ToastService, 
     private userStorage: UserStorage,
-    private nearbyDoctorsService: NearbyDoctorsService) { }
+    private nearbyDoctorsService: NearbyDoctorsService,
+    private authService: AuthService) { }
 
   ionViewWillEnter() {           
     this.userDataSubscription = this.profileService.getUser(this.userStorage.user.username).subscribe((user) => {
@@ -83,6 +85,10 @@ export class ProfilePage {
     this.profileService.friendRequest(this.userStorage.user.username, friendUsername).subscribe((message) => {
       this.toastService.presentToast(message.message);
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {
