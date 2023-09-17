@@ -25,7 +25,7 @@ jobs:
           npm install -g @ionic/cli
           npm install
           ionic build --prod
-        working-directory: ./app/HealthQuest
+        working-directory: ./app
   
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -34,7 +34,7 @@ jobs:
           username: admin
           password: ilovehealth
           server-dir: ./home/tothemoontogether1/healthquest/www/
-          local-dir: ./app/HealthQuest/www/
+          local-dir: ./app/www
       - name: SSH into server and reload nginx server
         run: |
           sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "sudo systemctl reload nginx"
@@ -42,7 +42,7 @@ jobs:
           
   deploy-back-end:
     name: Test & Build API
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     defaults:
         run:
           working-directory: ./api
@@ -57,11 +57,8 @@ jobs:
             java-version: '17'
             distribution: 'temurin'
 
-      - name: Test API
-        run: ./gradlew.bat test
-        
       - name: Build API
-        run: ./gradlew.bat build
+        run: ./gradle1 build
 
       - name: Upload JAR to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -71,6 +68,10 @@ jobs:
           password: ilovehealth
           server-dir: /home/tothemoontogether1/healthquest/  # Ensure you use the correct absolute path on the server
           local-dir: ./api/build/libs/  # Adjust the path to your built JAR file
+      
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: SSH into server and reload nginx server
         run: |
           sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "cd /home/tothemoontogether1/healthquest/ &&  nohup java -jar healthquest-0.0.1-SNAPSHOT.jar &"
