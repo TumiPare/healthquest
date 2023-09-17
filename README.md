@@ -7,6 +7,7 @@
 2. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
+    - [Running an Ionic-Angular Project](#running)
 3. [Project Structure](#project-structure)
 4. [Usage](#usage)
     - [Home Page](#home-page)
@@ -28,7 +29,7 @@ Before you begin, ensure you have met the following requirements:
 - Ionic CLI installed globally.
 - Basic knowledge of Angular and Ionic.
 
-### Installation
+### Installation <a name="installation"></a>
 
 1. Clone this repository to your local machine:
 ```bash
@@ -45,7 +46,7 @@ cd 2023-hackathon-codeperfect
 npm install
 ```
 
-### Running an Ionic-Angular Project
+### Running an Ionic-Angular Project <a name="running"></a>
 1. Install Ionic CLI
 ```bash
 npm install -g @ionic/cli
