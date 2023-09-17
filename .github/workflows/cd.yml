@@ -25,7 +25,7 @@ jobs:
           npm install -g @ionic/cli
           npm install
           ionic build --prod
-        working-directory: ./app/HealthQuest
+        working-directory: ./app
   
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
