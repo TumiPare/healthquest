@@ -16,14 +16,10 @@
 
           <ion-card-content>
             <ion-item>
-              <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" placeholder="Username">
-                {{ username }}
-              </ion-input>
+              <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" placeholder="Username"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input [(ngModel)]="password" label="Password" labelPlacement="floating" placeholder="Username">
-                {{ password }}
-              </ion-input>
+              <ion-input [(ngModel)]="password" label="Password" labelPlacement="floating" placeholder="Password"></ion-input>
             </ion-item>
             <ion-button (click)="login()" color="primary"> Sign in </ion-button>
             <ion-button (click)="signup()" color="secondary"> Register </ion-button>
