@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <ion-card-title> Welcome to HealthQuest ! </ion-card-title>
+            <ion-card-subtitle>Sign up</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-item>
+              <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" placeholder="Username">
+                {{ username }}
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="password" label="Password" labelPlacement="floating" placeholder="Password" value="password">
+                {{ password }}
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="weight" label="Weight (kg)" labelPlacement="floating" placeholder="Weight">
+                {{ weight }}
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="height" label="Height (cm)" labelPlacement="floating" placeholder="Height">
+                {{ height }}
+              </ion-input>
+            </ion-item>
+            <label>Date of birth</label>
+            <ion-item>
+              
+              <ion-datetime [(ngModel)]="dob">
+
+              </ion-datetime>
+            </ion-item>
+            <ion-button (click)="signup()" color="primary"> Register </ion-button>
+            <ion-button (click)="login()" color="secondary"> Login </ion-button>
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-content>
