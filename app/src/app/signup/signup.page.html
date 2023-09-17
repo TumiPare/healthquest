@@ -26,13 +26,9 @@
             </ion-item>
             <ion-item>
               <ion-input [(ngModel)]="height" label="Height (cm)" labelPlacement="floating" placeholder="Height"></ion-input>
-              <ion-item>
-                <ion-input [(ngModel)]="dob" label="Date of Birth (dd/mm/yyyy)" labelPlacement="floating" placeholder="dd/mm/yyyy"></ion-input>
-              </ion-item>
-              
-              <ion-datetime [(ngModel)]="dob">
-
-              </ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="dob" label="Date of Birth (dd/mm/yyyy)" labelPlacement="floating" placeholder="dd/mm/yyyy"></ion-input>
             </ion-item>
             <ion-button (click)="signup()" color="primary"> Register </ion-button>
             <ion-button (click)="login()" color="secondary"> Login </ion-button>

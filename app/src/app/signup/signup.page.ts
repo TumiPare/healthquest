@@ -24,6 +24,9 @@ export class SignupPage implements OnInit {
 
   signup() {
 
+
+    // After Auth
+    this.router.navigateByUrl('/home/tabs/home')
   }
 
 }
