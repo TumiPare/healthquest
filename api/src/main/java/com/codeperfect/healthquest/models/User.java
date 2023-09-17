@@ -30,14 +30,14 @@ public class User {
 
     public List<Challenge> getChallengesByCategory(String category) {
 
-        List<Challenge> challenges = new ArrayList<>();
+        List<Challenge> challengesByCategory = new ArrayList<>();
         for (Challenge challenge : challenges) {
             if (challenge.getCategory().equals(category)) {
-                challenges.add(challenge);
+                challengesByCategory.add(challenge);
             }
         }
 
-        return challenges;
+        return challengesByCategory;
 
     }
 

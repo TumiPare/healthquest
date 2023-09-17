@@ -99,26 +99,25 @@ public class UserActionService {
 
         }
 
-        user.setPoints(user.getPoints() + points);
-
         // Update challenges
         List<Challenge> challenges = user.getChallengesByCategory(userAction.getCategory());
         for (Challenge challenge : challenges) {
-            challenge.setProgress(challenge.getProgress() + points);
+            challenge.setProgress(challenge.getProgress() + (int) Math.round(userAction.getValue()));
 
-            if (challenge.getGoal() >= challenge.getProgress()) {
+            if (challenge.getGoal() <= challenge.getProgress()) {
 
                 int challengePoints;
                 if (challenge.getType().equals("daily")) {
-                    challengePoints = challenge.getGoal() * 10;
+                    challengePoints = challenge.getGoal() * 2;
                 } else if (challenge.getType().equals("weekly")) {
-                    challengePoints = challenge.getGoal() * 50;
+                    challengePoints = challenge.getGoal() * 10;
                 } else {
-                    challengePoints = challenge.getGoal() * 150;
+                    challengePoints = challenge.getGoal() * 50;
                 }
 
+                points += challengePoints;
                 changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", challengePoints));
-                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + "(" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " (" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
             
             }
         }
@@ -135,6 +134,7 @@ public class UserActionService {
             }
         }
 
+        user.setPoints(user.getPoints() + points);
         userService.saveUser(user);
 
         userActionRepository.save(userAction);
