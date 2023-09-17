@@ -46,10 +46,12 @@ npm install
 ```
 
 ### Running an Ionic-Angular Project
+1. Install Ionic CLI
 ```bash
 npm install -g @ionic/cli
 ```
 
+2. Serve the Application:
 ```bash
 ionic serve
 ```
