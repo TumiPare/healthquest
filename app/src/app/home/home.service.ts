@@ -7,7 +7,7 @@ import { IChallenge } from '../user/challenge.interface';
   providedIn: 'root'
 })
 export class HomeService {
-  apiUrl = 'http://localhost:5000/user/';
+  apiUrl = 'http://healthquest.ddns.net:5000/user/';
 
   constructor(private http: HttpClient) { }
 

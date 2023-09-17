@@ -7,7 +7,7 @@ import { IMessage } from '../message.interface';
   providedIn: 'root'
 })
 export class ChallengeService {
-  apiUrl = "http://localhost:5000/user/"
+  apiUrl = "http://healthquest.ddns.net:5000/user/"
 
   constructor(private http: HttpClient) { }
 

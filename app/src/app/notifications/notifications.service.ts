@@ -8,7 +8,7 @@ import { IMessage } from '../message.interface';
   providedIn: 'root'
 })
 export class NotificationsService {
-  apiUrl = 'http://localhost:5000/';
+  apiUrl = 'http://healthquest.ddns.net:5000/';
 
   constructor(private http: HttpClient) { }
 

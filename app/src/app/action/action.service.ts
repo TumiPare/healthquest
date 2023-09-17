@@ -7,7 +7,7 @@ import { IActionUpdates } from './action-updates.interface';
   providedIn: 'root'
 })
 export class ActionService {
-  apiUrl = "http://localhost:5000/action"
+  apiUrl = "http://healthquest.ddns.net:5000/action"
 
   constructor(private http: HttpClient) { }
 
