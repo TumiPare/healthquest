@@ -18,12 +18,33 @@ export class AuthService {
     const newUser: IUser = {
       username: username,
       password: password,
-      profilePicUrl: '',
+      profilePicUrl: 'https://ionicframework.com/docs/img/demos/avatar.svg',
       dob: dob,
       weight: weight,
       height: height,
       challenges: [],
-      creatures: [],
+      creatures: [
+        {
+          name: "Tom",
+          category: "hydration",
+          health: 100
+        },
+        {
+          name: "Sandy",
+          category: "food",
+          health: 100
+        },
+        {
+          name: "Andi",
+          category: "sleep",
+          health: 100
+        },
+        {
+          name: "Stevan",
+          category: "steps",
+          health: 100
+        }
+      ],
       friends: [],
       points: 0
     };
