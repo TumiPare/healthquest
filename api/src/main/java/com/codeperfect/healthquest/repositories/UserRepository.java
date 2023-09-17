@@ -12,7 +12,7 @@ public interface UserRepository extends MongoRepository<User, String> {
     @Query("{username:'?0'}")
     User findUserByUsername(String username);
 
-    @Query("{username:'?0', password'?1'}")
+    @Query("{username:'?0', password:'?1'}")
     User findByDetails(String username, String password);
 
 }
