@@ -45,7 +45,7 @@ cd 2023-hackathon-codeperfect
 npm install
 ```
   
-## 3. Project Structure  <a name="project-structure"></a>
+## 3. Project Structure <a name="project-structure"></a>
 ### The project follows the following directory structure:
 
 - src/: Contains the source code for the application.
@@ -53,7 +53,7 @@ npm install
 - assets/: Stores static assets such as images and icons.
 - pages/: Contains the different pages of the application.
 
-## 4. Usage  <a name="usage"></a>
+## 4. Usage <a name="usage"></a>
 
 ### Home Page
 
