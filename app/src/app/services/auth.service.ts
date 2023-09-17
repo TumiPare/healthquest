@@ -27,7 +27,7 @@ export class AuthService {
       points: 0
     };
     
-    this.http.post(this.apiUrl+'signup', newUser);
+    return this.http.post(this.apiUrl+'signup', newUser);
   }
 
   login(username: string, password: string) {
@@ -36,7 +36,7 @@ export class AuthService {
       password: password
     }
 
-    this.http.post(this.apiUrl+'login', loginUser)
+    return this.http.post(this.apiUrl+'login', loginUser)
   }
 
 }
