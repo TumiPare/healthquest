@@ -34,7 +34,7 @@ jobs:
           username: admin
           password: ilovehealth
           server-dir: ./home/tothemoontogether1/healthquest/www/
-          local-dir: ./app/HealthQuest/www/
+          local-dir: ./app/www
       - name: SSH into server and reload nginx server
         run: |
           sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "sudo systemctl reload nginx"
