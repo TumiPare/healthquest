@@ -31,9 +31,9 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/MnR-Hackathon-Pool-D/2023-hackathon-codeperfect.git
-   ```
+```bash
+git clone https://github.com/MnR-Hackathon-Pool-D/2023-hackathon-codeperfect.git
+```
    
 2. Change to the project directory:
 ```bash
@@ -45,7 +45,7 @@ cd 2023-hackathon-codeperfect
 npm install
 ```
   
-## 3. Project Structure
+## 3. Project Structure  <a name="project-structure"></a>
 ### The project follows the following directory structure:
 
 - src/: Contains the source code for the application.
@@ -53,7 +53,7 @@ npm install
 - assets/: Stores static assets such as images and icons.
 - pages/: Contains the different pages of the application.
 
-## 4. Usage
+## 4. Usage  <a name="usage"></a>
 
 ### Home Page
 
