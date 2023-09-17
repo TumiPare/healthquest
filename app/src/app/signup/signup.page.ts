@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 export class SignupPage implements OnInit {
   username: string = '';
   password: string = '';
-  weight: number | undefined;
-  height: number | undefined;
-  dob: Date | undefined;
+  weight: number = 0;
+  height: number = 0;
+  dob: string = '';
 
   constructor(private router: Router) { }
 
