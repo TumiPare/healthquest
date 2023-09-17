@@ -1,7 +1,6 @@
 package com.codeperfect.healthquest.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -19,6 +18,7 @@ public class User {
     @Id
     String username;
 
+    String password;
     String profilePicUrl;
     String dob;
     Double weight;
