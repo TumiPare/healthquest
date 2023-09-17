@@ -125,12 +125,29 @@ public class UserActionService {
         // Update creatures
         Creature creature = user.getCreatureByCategory(userAction.getCategory());
         if (creature != null) {
-            creature.setHealth((int) (creature.getHealth() + userAction.getValue() * 0.2));
+            int increase;
+            if (creature.getCategory().equals("hydration")) {
+                increase = (int) (10 * userAction.getValue());
+            } else if (creature.getCategory().equals("food")) {
+                increase = (int) (25 * userAction.getValue());
+            } else if (creature.getCategory().equals("sleep")) {
+                increase = (int) (10 * userAction.getValue());
+            } else {
+                increase = (int) (0.01 * userAction.getValue());
+            }
+
+            creature.setHealth((int) (creature.getHealth() + increase));
+
+            if (creature.getHealth() > 100) {
+                creature.setHealth(100);
+            }
 
             if (userAction.getValue() > 0) {
+                points += 5;
                 changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", 5));
             } else if (userAction.getValue() < 0) {
-                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", 5));
+                points += -5;
+                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", -5));
             }
         }
 

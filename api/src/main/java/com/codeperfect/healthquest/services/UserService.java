@@ -150,7 +150,6 @@ public class UserService {
         for (User user : users) {
             user.resetChallenges("daily");
         }
-
         
         userRepository.saveAll(users);
 
@@ -163,7 +162,6 @@ public class UserService {
         for (User user : users) {
             user.resetChallenges("weekly");
         }
-
         
         userRepository.saveAll(users);
 
@@ -177,7 +175,18 @@ public class UserService {
             user.setPoints(0);
             user.resetChallenges("monthly");
         }
+        
+        userRepository.saveAll(users);
 
+    }
+
+    @Scheduled(cron = "10 0 0 1 * *")
+    public void lowerCreatureHealth() {
+        
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.lowerCreatureHealth();
+        }
         
         userRepository.saveAll(users);
 
