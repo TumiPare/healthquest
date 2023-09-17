@@ -134,6 +134,7 @@ public class UserActionService {
                 increase = (int) (10 * userAction.getValue());
             } else {
                 increase = (int) (0.01 * userAction.getValue());
+            }
 
             creature.setHealth((int) (creature.getHealth() + increase));
 
