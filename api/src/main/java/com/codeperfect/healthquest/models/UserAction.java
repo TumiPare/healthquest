@@ -12,7 +12,7 @@ public class UserAction {
     
     String username;
     String category;
-    Integer value;
+    Double value;
     Date timestamp;
 
 }

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Close button -->
+      <ion-button routerLink="/tabs/home" routerLinkActive="active">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Record Health</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-item (click)="openActionModal('Hydration Action', 'hydration', 'Enter how much water you\'ve drunk (litres)')">
+      <ion-icon name="water-outline"></ion-icon> Water Intake
+    </ion-item>
+    <ion-item (click)="openActionModal('Weigh In Action', 'weight', 'Enter how much you weigh (kg)')">
+      <ion-icon name="water-outline"></ion-icon> Weigh In
+    </ion-item>
+    <ion-item (click)="openActionModal('Sleep Action', 'sleep', 'Enter how much you slept (hours)')">
+      <ion-icon name="water-outline"></ion-icon> Sleep
+    </ion-item>
+    <ion-item (click)="openActionModal('Fruit or Veg Action', 'fruit&veg', 'Enter how many portions of fruit or vegetables you ate')">
+      <ion-icon name="water-outline"></ion-icon> Portion of Fruit or Vegetables
+    </ion-item>
+    <ion-item (click)="openActionModal('Hydration Action', 'healthyfood', 'Enter number of balanced meals consumed')">
+      <ion-icon name="water-outline"></ion-icon> Ate Balanced Meal
+    </ion-item>
+    <ion-item (click)="openActionModal('Hydration Action', 'sweets', 'Enter number of packets of sweets consumed')">
+      <ion-icon name="water-outline"></ion-icon> Ate Sweets
+    </ion-item>
+    <ion-item (click)="openActionModal('Hydration Action', 'fastfood', 'Enter number of fast food meals consumed')">
+      <ion-icon name="fast-food-outline"></ion-icon> Ate Fast Food
+    </ion-item>
+  </div>
+</ion-content>

@@ -81,3 +81,69 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Leaderboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <!-- TOP 3 -->
+    <ion-row class="center-row">
+      <!-- Left Avatar -->
+      <ion-col class="centre">
+        <ion-avatar *ngIf="leaderboardItems.length > 2" class="left-avatar">
+          <img alt="Silhouette of a person's head" src="{{leaderboardItems[2].profilePicUrl}}" />
+          <span *ngIf="leaderboardItems.length > 2">{{ leaderboardItems[1].username }}</span>
+        </ion-avatar>
+      </ion-col>
+      
+      <!-- Middle Avatar -->
+      <ion-col class="centre">
+        <ion-avatar *ngIf="leaderboardItems.length > 0" class="middle-avatar">
+          <img alt="Silhouette of a person's head" src="{{leaderboardItems[0].profilePicUrl}}" />
+          <ion-text *ngIf="leaderboardItems.length > 0">{{ leaderboardItems[0].username }}</ion-text>
+        </ion-avatar>
+      </ion-col>
+
+      <!-- Right Avatar -->
+      <ion-col class="centre">
+          <ion-avatar *ngIf="leaderboardItems.length > 1" class="right-avatar">
+            <img alt="Silhouette of a person's head" src="{{leaderboardItems[1].profilePicUrl}}" />
+            <span *ngIf="leaderboardItems.length > 1">{{ leaderboardItems[2].username }}</span>
+          </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <!-- Leaderboard LIST -->
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary" style="font-size: xx-large;">
+              <ion-icon size="large" name="trophy" [ngStyle]="{'color':'#FFD700'}"></ion-icon> Leaderboard 
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list [inset]="true">
+              <ion-item *ngFor="let leaderboardItem of leaderboardItems; let i = index">
+                <ion-chip *ngIf="i === 0" slot="start" class="gold-chip">1</ion-chip>
+                <ion-chip *ngIf="i === 1" slot="start" class="silver-chip">2</ion-chip>
+                <ion-chip *ngIf="i === 2" slot="start" class="bronze-chip">3</ion-chip>
+                <ion-chip *ngIf="i > 2" slot="start" color="primary">{{ i + 1 }}</ion-chip>
+                <ion-label>{{ leaderboardItem.username }}</ion-label>
+                <ion-badge slot="end" color="tertiary">{{ leaderboardItem.points }}</ion-badge>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+        <ion-text class="ion-text-center" color="tertiary">
+          <h3>Add friends to see them on the leaderboard and be healthy together!</h3>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

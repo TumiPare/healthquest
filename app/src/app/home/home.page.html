@@ -95,3 +95,50 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <swiper-container
+    [centeredSlides] = "true"
+    [pagination] = "true">
+      <swiper-slide *ngFor="let challenge of challengeItems" class="ion-padding-bottom">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ challenge.name }}</ion-card-title>
+            <ion-card-subtitle>{{ challenge.category }} ({{ challenge.type }})</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+             <ion-text class="big">{{ challenge.progress }}</ion-text> /{{ challenge.goal }}
+            <ion-progress-bar [value]="challenge.progress / challenge.goal"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide class="ion-padding-bottom">
+        <ion-card (click)="openChallengeModal()">
+          <ion-card-content id="challengeAdd" class="ion-text-center">
+            <ion-text class="bigger"><ion-icon name="add-circle-outline"></ion-icon></ion-text>
+            <br/>
+            <ion-text class="big">Add Challenge</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+    </swiper-container>
+    <ion-row>
+      ADD CREATURES HERE
+    </ion-row>
+  </ion-grid>
+</ion-content>

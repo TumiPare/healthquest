@@ -1,6 +1,5 @@
 package com.codeperfect.healthquest.services;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,26 +39,85 @@ public class UserActionService {
         User user = userService.findUser(userAction.getUsername());
         
         // Update user stats
-        user.setPoints(user.getPoints() + userAction.getValue());
+        int points;
+        if (userAction.getCategory().equals("hydration")) {
 
-        if (userAction.getValue() > 0) {
-            changes.add(new Change("Congratulations!", "Well done you got some points, keep it up!", userAction.getValue()));
-        } else if (userAction.getValue() < 0) {
-            changes.add(new Change("Unlucky", "Try hard to stay to your goals, you can do this!", userAction.getValue()));
+            points = (int) (userAction.getValue() * 5);
+            changes.add(new Change("Congratulations!", "Keep staying hydrated and healthy!", points));
+
+        } else if (userAction.getCategory().equals("steps")) {
+
+            points = (int) (userAction.getValue() * 0.10);
+            changes.add(new Change("Congratulations!", "Getting those steps in is amazing!", points));
+
+        } else if (userAction.getCategory().equals("fruit&veg")) {
+
+            points = (int) (userAction.getValue() * 5);
+            changes.add(new Change("Congratulations!", "Eating fruit is a great way to get energy and stay healthy!", points));
+
+        } else if (userAction.getCategory().equals("healthyfood")) {
+
+            points = (int) (userAction.getValue() * 30);
+            changes.add(new Change("Congratulations!", "Eating a balanced diet is a great way to eat food!", points));
+
+        } else if (userAction.getCategory().equals("sweets")) {
+
+            points = (int) (userAction.getValue() * -5);
+            changes.add(new Change("Aw Damn Unlucky!", "Sweets and treats are okay in moderating, but try not to have them!", points));
+            
+        }  else if (userAction.getCategory().equals("sleep")) {
+
+            points = (int) (userAction.getValue() * 10);
+            changes.add(new Change("Congratulations!", "We all need sleep, so make sure you get an decent amount!", points));
+
+        } else if (userAction.getCategory().equals("weight")) {
+
+            double newDist = this.calcBMIDistance(user.getHeight(), userAction.getValue());
+            if (newDist == 0) {
+
+                points = 25;
+                changes.add(new Change("Congratulations!", "Well done on staying healthy!", points));
+
+            } else if (this.calcBMIDistance(user.getHeight(), user.getWeight()) - 0.1 > newDist) {
+
+                points = (int) (65 * newDist);
+                changes.add(new Change("Congratulations!", "Keep pushing towards your goals, you've got this!", points));
+
+            } else if (this.calcBMIDistance(user.getHeight(), user.getWeight()) + 0.1 < newDist) {
+
+                points = (int) (-40 * newDist);
+                changes.add(new Change("Unlucky!", "Your BMI worsened. Try to stick to your goals, better luck next time!", points));
+
+            } else {
+                points = 0;
+            }
+
+        } else {
+
+            points = (int) (userAction.getValue() * -20);
+            changes.add(new Change("Aw Damn Unlucky!", "Try not to eat too much fast food!", points));
+
         }
 
         // Update challenges
-        Challenge challenge = user.getChallengeByCategory(userAction.getCategory());
-        if (challenge != null) {
-            challenge.setProgress(challenge.getProgress() + userAction.getValue());
+        List<Challenge> challenges = user.getChallengesByCategory(userAction.getCategory());
+        for (Challenge challenge : challenges) {
+            challenge.setProgress(challenge.getProgress() + (int) Math.round(userAction.getValue()));
 
-            if (challenge.getGoal() >= challenge.getProgress() && challenge.getDateCompleted() == null) {
-                
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                challenge.setDateCompleted(formatter.format(new Date()));
+            if (challenge.getGoal() <= challenge.getProgress()) {
 
-                changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", 100));
-                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " Challenge! Well done, keep it up!", "challengeCompleted", new Date()));
+                int challengePoints;
+                if (challenge.getType().equals("daily")) {
+                    challengePoints = challenge.getGoal() * 2;
+                } else if (challenge.getType().equals("weekly")) {
+                    challengePoints = challenge.getGoal() * 10;
+                } else {
+                    challengePoints = challenge.getGoal() * 50;
+                }
+
+                points += challengePoints;
+                changes.add(new Change("Completed " + challenge.getName() + " Challenge!", "Well done, keep it up!", challengePoints));
+                notificationService.saveNotification(new Notification(user.getUsername(), "Completed " + challenge.getName() + " (" + challenge.getType() + ") Challenge!", "challengeCompleted", new Date()));
             
             }
         }
@@ -70,17 +128,31 @@ public class UserActionService {
             creature.setHealth((int) (creature.getHealth() + userAction.getValue() * 0.2));
 
             if (userAction.getValue() > 0) {
-                changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", userAction.getValue()));
+                changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", 5));
             } else if (userAction.getValue() < 0) {
-                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", userAction.getValue()));
+                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", 5));
             }
         }
 
+        user.setPoints(user.getPoints() + points);
         userService.saveUser(user);
 
         userActionRepository.save(userAction);
 
         return new UserActionUpdates(user, changes);
+    }
+
+    private double calcBMIDistance(double height, double weight) {
+
+        double BMI = weight / (height * height);
+        if (BMI >= 18.5 && BMI <= 24.9) {
+            return 0;
+        } else if (BMI > 24.9) {
+            return BMI - 24.9;
+        } else {
+            return 18.5 - BMI;
+        }
+
     }
     
 }

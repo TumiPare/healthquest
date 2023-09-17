@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Close button -->
+      <ion-button routerLink="/tabs/profile" routerLinkActive="active">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Peer Comparison</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h3 class="title">Health Stats</h3>
+  <ion-grid>
+    <ion-row class="ion-padding-bottom ion-padding-top">
+      <ion-col size="3" offset="2" class="ion-text-center ion-no-padding ion-align">
+        <ion-avatar class="person-pic">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <p class="username">You</p>
+      </ion-col>
+
+      <ion-col class="ion-text-center center-vertically" size="2">
+        <ion-text color = "primary" style="width:100%; padding-bottom: 48px;"><h3><em>vs</em></h3></ion-text>
+      </ion-col>
+
+      <ion-col size="3" class="ion-text-center ion-no-padding ion-align">
+        <ion-avatar class="person-pic ">
+            <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <p class="username">John</p>
+        </ion-col>
+    </ion-row>
+
+
+    <div class="doughnutChart-container ion-justify-content-center">
+      <canvas #doughnutChartRef id="doughnutChart"></canvas>
+    </div>
+  </ion-grid>
+</ion-content>

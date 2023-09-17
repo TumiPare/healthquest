@@ -20,16 +20,16 @@
     </ion-row>
 
     <ion-text class="ion-text-center">
-      <h1>username</h1>
+      <h1>{{ userData?.username  ?? '' }}</h1>
     </ion-text>
   
     <ion-row class="profile-head">
       <ion-col class="ion-text-center" size="6">
-        <div><strong><ion-text color="primary">15</ion-text></strong></div>
+        <div><strong><ion-text color="primary">{{ userData?.friends?.length ?? 0 }}</ion-text></strong></div>
         <ion-text>Friends</ion-text>
       </ion-col>
       <ion-col class="ion-text-center" size="6">
-        <div><strong><ion-text color="primary">1000</ion-text></strong></div>
+        <div><strong><ion-text color="primary">{{ userData?.points ?? 0 }}</ion-text></strong></div>
         <ion-text>Points</ion-text>
       </ion-col>
       <ion-col class="ion-text-center">
@@ -61,52 +61,34 @@
       </ion-item>
     </ion-list>
 
-    <h5 class="title">People you may know</h5>
+    <h5 class="title" *ngIf="userMayKnow.length > 0">People you may know</h5>
     <swiper-container
     [slidesPerView] = "2.5"
     >
-      <swiper-slide class="ion-padding-bottom">
+      <swiper-slide *ngFor="let user of userMayKnow" class="ion-padding-bottom">
         <ion-card class="ion-text-center">
           <ion-card-header style="padding-bottom: 8px">
             <ion-avatar class="person-pic">
-              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <img src="{{ user.profilePicUrl }}" />
             </ion-avatar>
           </ion-card-header>
 
           <ion-card-content class="ion-no-padding">
-            <ion-text>Username</ion-text>
-            <ion-button expand="block" size="small" class="people-list">Request</ion-button>
-          </ion-card-content>
-        </ion-card>
-      </swiper-slide>
-      <swiper-slide class="ion-padding-bottom">
-        <ion-card class="ion-text-center">
-          <ion-card-header style="padding-bottom: 8px">
-            <ion-avatar class="person-pic">
-              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-          </ion-card-header>
-
-          <ion-card-content class="ion-no-padding">
-            <ion-text>Username</ion-text>
-            <ion-button expand="block" size="small" class="people-list">Request</ion-button>
-          </ion-card-content>
-        </ion-card>
-      </swiper-slide>
-      <swiper-slide class="ion-padding-bottom">
-        <ion-card class="ion-text-center">
-          <ion-card-header style="padding-bottom: 8px">
-            <ion-avatar class="person-pic">
-              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-          </ion-card-header>
-
-          <ion-card-content class="ion-no-padding">
-            <ion-text>Username</ion-text>
-            <ion-button expand="block" size="small" class="people-list">Request</ion-button>
+            <ion-text>{{ user.username }}</ion-text>
+            <ion-button expand="block" size="small" class="people-list" (click)="friendRequest(user.username)">Request</ion-button>
           </ion-card-content>
         </ion-card>
       </swiper-slide>
     </swiper-container>
+
+    <h5 class="title">Doctors near you</h5>
+    <ion-list>
+      <ion-item *ngFor="let doctor of nearbyDoctors">
+        <ion-label class="ion-text-wrap">
+          <h2>{{ doctor.text }}</h2>
+          <p>{{ doctor.place_name }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ion-grid>
 </ion-content>

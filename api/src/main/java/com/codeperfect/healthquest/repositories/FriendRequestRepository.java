@@ -9,10 +9,10 @@ import com.codeperfect.healthquest.models.FriendRequest;
 
 public interface FriendRequestRepository extends MongoRepository<FriendRequest, String> {
     
-    @Query("{$or: [ {userA: '?0', userB: '?1'}, {userA: '?1', userB: '?0'} ] }")
+    @Query("{userA: '?0', userB: '?1'}")
     public FriendRequest findFriendRequest(String userA, String userB);
 
-    @Query("{$or: [ {userA: '?0'}, {userB: '?0'} ] }")
+    @Query("{userB: '?0'}")
     public List<FriendRequest> findFriendRequestsByUsername(String username);
 
 }
