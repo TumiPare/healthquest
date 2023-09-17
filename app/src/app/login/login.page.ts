@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { UserStorage } from '../user/user.storage';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +14,15 @@ export class LoginPage implements OnInit {
   password: string = '';
   loginSubscription: Subscription = new Subscription();
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private userStorage: UserStorage) { }
 
   ngOnInit() {
   }
 
   login() {
     this.loginSubscription = this.authService.login(this.username, this.password).subscribe((resp) => {
+      this.userStorage.user = resp;
       this.router.navigateByUrl('/home/tabs/home');
-
     });
   }
 

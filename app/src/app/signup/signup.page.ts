@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
+import { UserStorage } from '../user/user.storage';
 
 @Component({
   selector: 'app-signup',
@@ -12,8 +15,9 @@ export class SignupPage implements OnInit {
   weight: number = 0;
   height: number = 0;
   dob: string = '';
+  signupSubscription: Subscription = new Subscription();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService, private userStorage: UserStorage) { }
 
   ngOnInit() {
   }
@@ -23,10 +27,10 @@ export class SignupPage implements OnInit {
   }
 
   signup() {
-
-
-    // After Auth
-    this.router.navigateByUrl('/home/tabs/home')
+    this.signupSubscription = this.authService.signup(this.username, this.password, this.weight, this.height, this.dob).subscribe((resp) => {
+      this.userStorage.user = resp;
+      this.router.navigateByUrl('/home/tabs/home')
+    });
   }
 
 }
