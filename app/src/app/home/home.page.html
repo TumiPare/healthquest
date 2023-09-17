@@ -16,6 +16,104 @@
     <swiper-container
     [centeredSlides] = "true"
     [pagination] = "true">
+      <swiper-slide class="ion-padding-bottom">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Challenge #1</ion-card-title>
+            <ion-card-subtitle>Water</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+             <ion-text class="big">1.5</ion-text> /2.7 liters
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Challenge #2</ion-card-title>
+            <ion-card-subtitle>Steps</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+             <ion-text class="big">3500</ion-text> /10000
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+    </swiper-container>
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="redirectToStepsTracking()">
+          <ion-card-header>
+            <ion-card-title>Steps</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+             <ion-text class="big">3500</ion-text> /5000
+            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="redirectToWeightEntry()">
+          <ion-card-header>
+            <ion-card-title>Weight</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+           <ion-text class="big">80</ion-text> kg
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card (click)="redirectToFoodIntake()">
+          <ion-card-header>
+            <ion-card-title>Food</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+          <ion-text class="big">800</ion-text> cal
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="water-card" style="height:90.55%;" (click)="redirectToWaterIntake()">
+          <ion-card-header>
+            <ion-card-title>Water</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="water-icon ion-padding-bottom"><ion-icon src="assets/icon/waterDrop.svg" style="font-size:64px;"></ion-icon></div>
+            <ion-text class="ion-padding-top big">1.5</ion-text> liters
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <swiper-container
+    [centeredSlides] = "true"
+    [pagination] = "true">
       <swiper-slide *ngFor="let challenge of challengeItems" class="ion-padding-bottom">
         <ion-card>
           <ion-card-header>
