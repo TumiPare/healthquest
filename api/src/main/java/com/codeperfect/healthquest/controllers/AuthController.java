@@ -27,7 +27,7 @@ public class AuthController {
         return authService.signup(user);
     }
 
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     public User signin(@RequestBody LoginObject loginObject) {
         return authService.signin(loginObject);
     }

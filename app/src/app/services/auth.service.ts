@@ -58,7 +58,7 @@ export class AuthService {
       password: password
     }
 
-    return this.http.post(this.apiUrl+'login', loginUser)
+    return this.http.post(this.apiUrl+'signin', loginUser);
   }
 
   logout() {
