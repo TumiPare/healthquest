@@ -44,7 +44,16 @@ cd 2023-hackathon-codeperfect
 ```bash
 npm install
 ```
-  
+
+### Running an Ionic-Angular Project
+```bash
+npm install -g @ionic/cli
+```
+
+```bash
+ionic serve
+```
+
 ## 3. Project Structure <a name="project-structure"></a>
 ### The project follows the following directory structure:
 
