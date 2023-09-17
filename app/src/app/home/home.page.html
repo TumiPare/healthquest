@@ -39,8 +39,33 @@
         </ion-card>
       </swiper-slide>
     </swiper-container>
-    <ion-row>
-      ADD CREATURES HERE
+    <ion-row *ngFor="let creature of creatureItems" class="ion-padding-bottom">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ creature.name }}</ion-card-title>
+          <ion-card-subtitle *ngIf="creature.health > 65">{{ creature.category }} (Happy)</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="creature.health > 35">{{ creature.category }} (Normal)</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="creature.health <= 35">{{ creature.category }} (Sad)</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-img *ngIf="creature.health > 65 && creature.category === 'food'" src="../../assets/creatures/foodhappy.jpg"></ion-img>
+          <ion-img *ngIf="creature.health > 35 && creature.health <= 65 && creature.category === 'food'" src="../../assets/creatures/foodnormal.jpg"></ion-img>
+          <ion-img *ngIf="creature.health <= 35 && creature.category === 'food'" src="../../assets/creatures/foodsad.jpg"></ion-img>
+          
+          <ion-img *ngIf="creature.health > 65 && creature.category === 'hydration'" src="../../assets/creatures/waterhappy.jpg"></ion-img>
+          <ion-img *ngIf="creature.health > 35 && creature.health <= 65 && creature.category === 'hydration'" src="../../assets/creatures/waternormal.jpg"></ion-img>
+          <ion-img *ngIf="creature.health <= 35 && creature.category === 'hydration'" src="../../assets/creatures/watersad.jpg"></ion-img>
+          
+          <ion-img *ngIf="creature.health > 65 && creature.category === 'sleep'" src="../../assets/creatures/sleephappy.jpg"></ion-img>
+          <ion-img *ngIf="creature.health > 35 && creature.health <= 65 && creature.category === 'sleep'" src="../../assets/creatures/sleepnormal.jpg"></ion-img>
+          <ion-img *ngIf="creature.health <= 35 && creature.category === 'sleep'" src="../../assets/creatures/sleepsad.jpg"></ion-img>
+          
+          <ion-img *ngIf="creature.health > 65 && creature.category === 'steps'" src="../../assets/creatures/stepshappy.jpg"></ion-img>
+          <ion-img *ngIf="creature.health > 35 && creature.health <= 65 && creature.category === 'steps'" src="../../assets/creatures/stepsnormal.jpg"></ion-img>
+          <ion-img *ngIf="creature.health <= 35 && creature.category === 'steps'" src="../../assets/creatures/stepssad.jpg"></ion-img>
+        </ion-card-content>
+      </ion-card>
     </ion-row>
   </ion-grid>
 </ion-content>
