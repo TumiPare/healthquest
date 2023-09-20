@@ -94,21 +94,40 @@
     <ion-row>
       <ion-col>
         <ion-card>
-          <ion-card-header>
-            <ion-card-title>Sleep</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-             <ion-text class="big">8</ion-text> hours
-            <ion-progress-bar [value]="0.6"></ion-progress-bar>
+          <ion-card-content class="sleep-card">
+            <ion-row>
+              <ion-col size="6">
+                <ion-card-title class="ion-padding-bottom">Sleep</ion-card-title>
+                <ion-text class="big">5</ion-text> /9 hours
+              </ion-col>
+    
+              <ion-col size="6" class="ion-text-center">
+                <circle-progress
+                  [percent]="(5 / 9) * 100"
+                  [radius]="50"
+                  [outerStrokeWidth]="8"
+                  [innerStrokeWidth]="4"
+                  [outerStrokeColor]="'#4854e0'"
+                  [innerStrokeColor]="'#73a6ff'"
+                  [unitsColor]="'#3880ff'"
+                  [titleColor]="'#4854e0'"
+                  [animation]="true"
+                  [animationDuration]="300"
+                  [showSubtitle]="false"
+                  [units]="'hrs'"
+                  [title]="'5'"
+                  >
+                </circle-progress> 
+              </ion-col> 
+            </ion-row>      
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-fab vertical="bottom" horizontal="end" (click)="navigateToRecordHealthStats()">
-      <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
   </ion-grid>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="navigateToRecordHealthStats()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
