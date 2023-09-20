@@ -7,6 +7,7 @@ import { HomeService } from './home.service';
 import { UserStorage } from '../user/user.storage';
 import { ChallengeModalComponent } from '../challenge-add/challenge-modal/challenge-modal.component';
 import { ICreature } from '../user/creature.interface';
+import { Router } from '@angular/router';
 
 register();
 
@@ -26,7 +27,8 @@ export class HomePage {
     private navCtrl: NavController, 
     private homeService: HomeService, 
     private userStorage: UserStorage, 
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router
   ) {}
 
   ionViewWillEnter() {
@@ -65,5 +67,9 @@ export class HomePage {
   redirectToWaterIntake()
   {
     this.navCtrl.navigateForward('/water-intake'); 
+  }
+
+  navigateToRecordHealthStats() {
+    this.router.navigate(['/record-health-stats']);
   }
 }

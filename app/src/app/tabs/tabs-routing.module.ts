@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../leaderboard/leaderboard.module').then(m => m.LeaderboardPageModule)
       },
       {
+        path: 'creatures',
+        loadChildren: () => import('../creatures/creatures/creatures.module').then(m => m.CreaturesPageModule)
+      },
+      {
         path: 'notifications',
         loadChildren: () => import('../notifications/notifications.module').then(m => m.NotificationsPageModule)
       },
