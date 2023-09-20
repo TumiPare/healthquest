@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/home/home.service';
 import { UserStorage } from 'src/app/user/user.storage';
-import { ChallengeModalComponent } from 'src/app/challenge-add/challenge-modal/challenge-modal.component';
 import { ICreature } from 'src/app/user/creature.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creatures',
@@ -16,8 +14,10 @@ export class CreaturesPage implements OnInit {
   username: string = 'testuser';
   creatureItems: ICreature[] = [];
 
-  constructor(    private homeService: HomeService, 
-    private userStorage: UserStorage, ) { }
+  constructor(    
+    private homeService: HomeService, 
+    private userStorage: UserStorage, 
+    ) { }
 
   ngOnInit() {
   }
