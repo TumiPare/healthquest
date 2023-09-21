@@ -33,7 +33,7 @@ jobs:
           server: 34.27.203.247
           username: admin
           password: ilovehealth
-          server-dir: ./home/admin/healthquest/www/
+          server-dir: /home/admin/healthquest/www/
           local-dir: ./app/www/
 
           
