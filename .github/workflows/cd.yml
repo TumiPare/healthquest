@@ -33,16 +33,13 @@ jobs:
           server: 34.27.203.247
           username: admin
           password: ilovehealth
-          server-dir: ./home/tothemoontogether1/healthquest/www/
-          local-dir: ./app/www
-      - name: SSH into server and reload nginx server
-        run: |
-          sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "sudo systemctl reload nginx"
+          server-dir: ./home/admin/healthquest/www/
+          local-dir: ./app/www/
 
           
   deploy-back-end:
     name: Test & Build API
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     defaults:
         run:
           working-directory: ./api
@@ -58,7 +55,7 @@ jobs:
             distribution: 'temurin'
 
       - name: Build API
-        run: ./gradle1 build
+        run: ./gradlew.bat build
 
       - name: Upload JAR to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -66,13 +63,6 @@ jobs:
           server: 34.27.203.247
           username: admin
           password: ilovehealth
-          server-dir: /home/tothemoontogether1/healthquest/  # Ensure you use the correct absolute path on the server
-          local-dir: ./api/build/libs/  # Adjust the path to your built JAR file
-      
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
-
-      - name: SSH into server and reload nginx server
-        run: |
-          sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "cd /home/tothemoontogether1/healthquest/ &&  nohup java -jar healthquest-0.0.1-SNAPSHOT.jar &"
-  
+          server-dir: /home/admin/healthquest/  # Ensure you use the correct absolute path on the server
+          local-dir: ./api/build/libs/healthquest-0.0.1-SNAPSHOT.jar  # Adjust the path to your built JAR file
+          exclude: healthquest-0.0.1-SNAPSHOT-plain.jar
