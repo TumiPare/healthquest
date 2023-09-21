@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   imports: [
@@ -15,6 +16,18 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     FormsModule,
     ExploreContainerComponentModule,
     HomePageRoutingModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      animationDuration: 300,
+      titleFontSize: '24', // Customize title font size
+      subtitleColor: '#78C000', // Customize subtitle color
+      showSubtitle: false, // Hide subtitle if needed
+      showTitle: true,
+      unitsFontSize: "12", // Set units font size
+      showUnits: true, 
+    })
   ],
   declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
