@@ -38,7 +38,7 @@ jobs:
 
           
   deploy-back-end:
-    name: Test & Build API
+    name: Build and Upload API
     runs-on: windows-latest
     defaults:
         run:
