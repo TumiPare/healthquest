@@ -64,5 +64,5 @@ jobs:
           username: admin
           password: ilovehealth
           server-dir: /home/admin/healthquest/  # Ensure you use the correct absolute path on the server
-          local-dir: ./api/build/libs/healthquest-0.0.1-SNAPSHOT.jar  # Adjust the path to your built JAR file
+          local-dir: ./api/build/libs/ # Adjust the path to your built JAR file
           exclude: healthquest-0.0.1-SNAPSHOT-plain.jar
