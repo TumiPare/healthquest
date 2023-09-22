@@ -7,6 +7,8 @@ import { ToastService } from '../toast/toast.service';
 import { UserStorage } from '../user/user.storage';
 import { NearbyDoctorsService } from '../services/nearby-doctors.service';
 import { AuthService } from '../services/auth.service';
+import { ModalController } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
 
 register();
 
@@ -24,11 +26,15 @@ export class ProfilePage {
   userMayKnow: IUser[] = [];
   nearbyDoctors: any[] = [];
 
+  @ViewChild('friendsModal') friendsModal: any; // Reference to the ion-modal element
+
   constructor(private profileService: ProfileService, 
     private toastService: ToastService, 
     private userStorage: UserStorage,
     private nearbyDoctorsService: NearbyDoctorsService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    public modalController: ModalController
+    ) { }
 
   ionViewWillEnter() {           
     this.userDataSubscription = this.profileService.getUser(this.userStorage.user.username).subscribe((user) => {
@@ -89,6 +95,14 @@ export class ProfilePage {
 
   logout() {
     this.authService.logout();
+  }
+
+  openFriendModal() {
+    this.friendsModal.present();
+  }
+
+  dismissModal() {
+    this.friendsModal.dismiss();
   }
 
   ngOnDestroy() {
