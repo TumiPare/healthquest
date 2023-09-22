@@ -22,9 +22,6 @@
             autocomplete="off"
             ></ion-input>
             </ion-item>
-            <ion-text color="danger" *ngIf="loginForm.get('username')!.hasError('required')" class="ion-padding-start">
-              Username is required.
-            </ion-text>
 
             <ion-item class="ion-padding-top">
               <ion-input 
@@ -36,9 +33,6 @@
               autocomplete="off"
               ></ion-input>
             </ion-item>
-            <ion-text color="danger" *ngIf="loginForm.get('password')!.hasError('required')" class="ion-padding-start">
-              Password is required.
-            </ion-text>
 
             <div class="ion-margin-top ion-margin-start">
               <ion-button (click)="login()" color="primary" class="ion-margin-top"><strong> Login </strong></ion-button>
