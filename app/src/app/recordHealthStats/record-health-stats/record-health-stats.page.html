@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Close button -->
-      <ion-button routerLink="/tabs/home" routerLinkActive="active">
+      <ion-button routerLink="/home/tabs/home" routerLinkActive="active">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -12,25 +12,25 @@
 
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
-    <ion-item (click)="openActionModal('Hydration Action', 'hydration', 'Enter how much water you\'ve drunk (litres)')">
+    <ion-item (click)="openActionModal('Hydration', 'hydration', 'Enter how much water you\'ve drunk (litres)')">
       <ion-icon name="water-outline" class="ion-padding-end"></ion-icon> Water Intake
     </ion-item>
-    <ion-item (click)="openActionModal('Weigh In Action', 'weight', 'Enter how much you weigh (kg)')">
+    <ion-item (click)="openActionModal('Weigh In', 'weight', 'Enter how much you weigh (kg)')">
       <ion-icon src="assets/icon/weight.svg" class="ion-padding-end"></ion-icon> Weigh In
     </ion-item>
-    <ion-item (click)="openActionModal('Sleep Action', 'sleep', 'Enter how much you slept (hours)')">
+    <ion-item (click)="openActionModal('Sleep', 'sleep', 'Enter how much you slept (hours)')">
       <ion-icon src="assets/icon/sleep.svg" class="ion-padding-end"></ion-icon> Sleep
     </ion-item>
-    <ion-item (click)="openActionModal('Fruit or Veg Action', 'fruit&veg', 'Enter how many portions of fruit or vegetables you ate')">
+    <ion-item (click)="openActionModal('Fruit or Veg Portions', 'fruit&veg', 'Enter how many portions of fruit or vegetables you ate')">
       <ion-icon src="assets/icon/fruit.svg" class="ion-padding-end"></ion-icon> Portion of Fruit or Vegetables
     </ion-item>
-    <ion-item (click)="openActionModal('Hydration Action', 'healthyfood', 'Enter number of balanced meals consumed')">
+    <ion-item (click)="openActionModal('Balanced Meals', 'healthyfood', 'Enter number of balanced meals consumed')">
       <ion-icon src="assets/icon/meal.svg" class="ion-padding-end"></ion-icon> Ate Balanced Meal
     </ion-item>
-    <ion-item (click)="openActionModal('Hydration Action', 'sweets', 'Enter number of packets of sweets consumed')">
+    <ion-item (click)="openActionModal('Sweets', 'sweets', 'Enter number of packets of sweets consumed')">
       <ion-icon src="assets/icon/sweets.svg" class="ion-padding-end"></ion-icon> Ate Sweets
     </ion-item>
-    <ion-item (click)="openActionModal('Hydration Action', 'fastfood', 'Enter number of fast food meals consumed')">
+    <ion-item (click)="openActionModal('Fast Food', 'fastfood', 'Enter number of fast food meals consumed')">
       <ion-icon name="fast-food-outline" class="ion-padding-end"></ion-icon> Ate Fast Food
     </ion-item>
   </div>
