@@ -9,7 +9,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-            <h3> Welcome to HealthQuest ! </h3>
+            <h3 class="ion-padding-start"> Welcome to HealthQuest ! </h3>
 
             <form class="form" [formGroup]="signupForm" (ngSubmit)="signup()">
               <ion-item>
@@ -83,7 +83,7 @@
               <ion-text color="danger" *ngIf="signupForm.get('dob')!.hasError('required')" class="ion-padding-start">
                 Date of Birth is required.
               </ion-text>
-              <div>
+              <div class="ion-margin-top">
                 <ion-button (click)="signup()" color="primary" class="ion-margin-top ion-margin-end ion-margin-start"><strong> Register </strong></ion-button>
                 <ion-button (click)="login()" color="primary" size="default" fill="outline" class="ion-margin-top"><strong> Login </strong></ion-button>
               </div>
