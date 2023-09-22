@@ -27,7 +27,7 @@ export class SignupPage implements OnInit {
     private authService: AuthService, 
     private userStorage: UserStorage,
     private formBuilder: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
     ) { }
 
   ngOnInit() {
@@ -54,6 +54,10 @@ export class SignupPage implements OnInit {
     else{
       this.presentToast('Invalid details. Please check your inputs.');
     }
+  }
+
+  ionViewDidLeave() {
+    this.signupForm.reset({ updateOn: 'change' });
   }
 
   async presentToast(message: string) {
