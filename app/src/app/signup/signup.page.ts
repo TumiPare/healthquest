@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
   signupForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     weight: ['', [Validators.required, Validators.min(1)]],
     height: ['', [Validators.required, Validators.min(1)]],
@@ -41,7 +41,7 @@ export class SignupPage implements OnInit {
     if(this.signupForm.valid) {
     console.log(this.signupForm.value);
     this.signupSubscription = this.authService.signup(
-        this.signupForm.value.email, 
+        this.signupForm.value.username, 
         this.signupForm.value.password,
         this.signupForm.value.weight,
         this.signupForm.value.height,

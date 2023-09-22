@@ -1,31 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="card-container">
-    <ion-card>
+    <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-card-header>
-            <ion-card-title> Welcome to HealthQuest ! </ion-card-title>
-            <ion-card-subtitle>Login</ion-card-subtitle>
-          </ion-card-header>
+          <h3 class="ion-padding-start"> Welcome to HealthQuest ! </h3>
+          <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
 
-          <ion-card-content>
-            <ion-item>
-              <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" placeholder="Username"></ion-input>
+          <ion-item>
+            <ion-input 
+            type = "username"
+            label = "Username" 
+            labelPlacement="floating" 
+            placeholder="Username"
+            formControlName = "username"
+            autocomplete="off"
+            ></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-input [(ngModel)]="password" label="Password" labelPlacement="floating" placeholder="Password"></ion-input>
+            <ion-text color="danger" *ngIf="loginForm.get('username')!.hasError('required')" class="ion-padding-start">
+              Username is required.
+            </ion-text>
+
+            <ion-item class="ion-padding-top">
+              <ion-input 
+              type = "password"
+              label = "Password" 
+              labelPlacement="floating" 
+              placeholder="Password" 
+              formControlName = "password"
+              autocomplete="off"
+              ></ion-input>
             </ion-item>
-            <ion-button (click)="login()" color="primary"> Sign in </ion-button>
-            <ion-button (click)="signup()" color="secondary"> Register </ion-button>
-          </ion-card-content>
+            <ion-text color="danger" *ngIf="loginForm.get('password')!.hasError('required')" class="ion-padding-start">
+              Password is required.
+            </ion-text>
+
+            <div class="ion-margin-top ion-margin-start">
+              <ion-button (click)="login()" color="primary" class="ion-margin-top"><strong> Login </strong></ion-button>
+              <ion-button (click)="signup()" color="primary" fill="outline" class="ion-margin-top ion-margin-end ion-margin-start"><strong> Register </strong></ion-button>
+            </div>
+          </form>
         </ion-col>
       </ion-row>
-    </ion-card>
+    </ion-grid>
   </div>
 </ion-content>

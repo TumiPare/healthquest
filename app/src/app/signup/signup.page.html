@@ -14,19 +14,18 @@
             <form class="form" [formGroup]="signupForm" (ngSubmit)="signup()">
               <ion-item>
                 <ion-input 
-                type = "email"
-                label = "Email" 
+                label = "Username" 
                 labelPlacement="floating" 
                 placeholder="Username"
-                formControlName = "email"
+                formControlName = "username"
                 autocomplete="off"
                 ></ion-input>
               </ion-item>
-              <ion-text color="danger" *ngIf="signupForm.get('email')!.hasError('email')" class="ion-padding-start">
-                Invalid email address.
+              <ion-text color="danger" *ngIf="signupForm.get('username')!.hasError('username')" class="ion-padding-start">
+                Invalid username.
               </ion-text>
-              <ion-text color="danger" *ngIf="signupForm.get('email')!.hasError('required')" class="ion-padding-start">
-                Email is required.
+              <ion-text color="danger" *ngIf="signupForm.get('username')!.hasError('required')" class="ion-padding-start">
+                Username is required.
               </ion-text>
 
               <ion-item class="ion-padding-top">
@@ -80,6 +79,7 @@
               <ion-text color="danger" *ngIf="signupForm.get('dob')!.hasError('pattern')" class="ion-padding-start">
                 Invalid Date of Birth.
               </ion-text>
+
               <div class="ion-margin-top">
                 <ion-button (click)="signup()" color="primary" class="ion-margin-top ion-margin-end ion-margin-start"><strong> Register </strong></ion-button>
                 <ion-button (click)="login()" color="primary" size="default" fill="outline" class="ion-margin-top"><strong> Login </strong></ion-button>
