@@ -6,35 +6,90 @@
 
 <ion-content>
   <div class="card-container">
-    <ion-card>
+    <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-card-header>
-            <ion-card-title> Welcome to HealthQuest ! </ion-card-title>
-            <ion-card-subtitle>Sign up</ion-card-subtitle>
-          </ion-card-header>
+            <h3> Welcome to HealthQuest ! </h3>
 
-          <ion-card-content>
-            <ion-item>
-              <ion-input [(ngModel)]="username" label="Username" labelPlacement="floating" placeholder="Username"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input [(ngModel)]="password" label="Password" labelPlacement="floating" placeholder="Password" value="password"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input [(ngModel)]="weight" label="Weight (kg)" labelPlacement="floating" placeholder="Weight"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input [(ngModel)]="height" label="Height (cm)" labelPlacement="floating" placeholder="Height"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input [(ngModel)]="dob" label="Date of Birth (dd/mm/yyyy)" labelPlacement="floating" placeholder="dd/mm/yyyy"></ion-input>
-            </ion-item>
-            <ion-button (click)="signup()" color="primary"> Register </ion-button>
-            <ion-button (click)="login()" color="secondary"> Login </ion-button>
-          </ion-card-content>
+            <form class="form" [formGroup]="signupForm" (ngSubmit)="signup()">
+              <ion-item>
+                <ion-input 
+                type = "email"
+                label = "Email" 
+                labelPlacement="floating" 
+                placeholder="Username"
+                formControlName = "email"
+                autocomplete="off"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('email')!.hasError('email')" class="ion-padding-start">
+                Invalid email address.
+              </ion-text>
+              <ion-text color="danger" *ngIf="signupForm.get('email')!.hasError('required')" class="ion-padding-start">
+                Email is required.
+              </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-input 
+                type = "password"
+                label = "Password" 
+                labelPlacement="floating" 
+                placeholder="Password" 
+                formControlName = "password"
+                autocomplete="off"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('password')!.hasError('minlength')" class="ion-padding-start">
+                Password must be at least 8 characters
+              </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-input 
+                type = "number"
+                label="Weight (kg)" 
+                labelPlacement="floating" 
+                placeholder="Weight"
+                formControlName = "weight"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('weight')!.hasError('min')" class="ion-padding-start">
+                Invalid Weight
+              </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-input 
+                type = "number"
+                label="Height (cm)" 
+                labelPlacement="floating" 
+                placeholder="Height"
+                formControlName = "height"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('height')!.hasError('min')" class="ion-padding-start">
+                Invalid Height
+              </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-input 
+                label="Date of Birth (dd/mm/yyyy)" 
+                labelPlacement="floating"
+                placeholder="dd/mm/yyyy"
+                formControlName = "dob"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('dob')!.hasError('pattern')" class="ion-padding-start">
+                Invalid Date of Birth.
+              </ion-text>
+              <ion-text color="danger" *ngIf="signupForm.get('dob')!.hasError('required')" class="ion-padding-start">
+                Date of Birth is required.
+              </ion-text>
+              <div>
+                <ion-button (click)="signup()" color="primary" class="ion-margin-top ion-margin-end ion-margin-start"><strong> Register </strong></ion-button>
+                <ion-button (click)="login()" color="primary" size="default" fill="outline" class="ion-margin-top"><strong> Login </strong></ion-button>
+              </div>
+            </form>
         </ion-col>
       </ion-row>
-    </ion-card>
+    </ion-grid>
   </div>
 </ion-content>
