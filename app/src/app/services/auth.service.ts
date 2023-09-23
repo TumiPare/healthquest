@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:5000/auth/'
+  apiUrl = 'http://healthquest.ddns.net:5000/auth/'
   user: IUser | null = null;
 
   constructor(private http: HttpClient, private userStorage: UserStorage, private router: Router) { }
