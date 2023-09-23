@@ -35,6 +35,29 @@ jobs:
           password: ilovehealth
           server-dir: /home/admin/healthquest/www/
           local-dir: ./app/www/
+          
+  deploy-dash-front:
+    name: 🎉 Deploy Admin Dashboard
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+
+    - name: 🛠️ Build Ionic app
+      run: |
+        npm install -g @ionic/cli
+        npm install
+        ionic build --prod
+      working-directory: ./adminDash
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: 34.27.203.247
+        username: admin
+        password: ilovehealth
+        server-dir: /home/admin/healthquest/dash/
+        local-dir: ./adminDash/www/
 
           
   deploy-back-end:
