@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('ageChart') ageChart!: ElementRef;
   @ViewChild('genderChart') genderChart!: ElementRef;
   @ViewChild('nationalityChart') nationalityChart!: ElementRef;
-
+  selectedFilter = 'today';
   constructor() {}
 
   ngAfterViewInit() {
@@ -198,5 +198,15 @@ export class AppComponent implements AfterViewInit {
       options: {
         indexAxis: 'y',
       }});
+  }
+
+  filterViewsChart(filter: any)
+  {
+    console.log(filter.detail.value);
+  }
+
+  filterAdsChart(filter: any)
+  {
+    console.log(filter.detail.value);
   }
 }

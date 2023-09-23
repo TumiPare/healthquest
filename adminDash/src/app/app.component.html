@@ -14,6 +14,11 @@
           <ion-card>
             <ion-card-header>
               <ion-card-title>User Views</ion-card-title>
+              <ion-select (ionChange)="filterViewsChart($event)" value = "today">
+                <ion-select-option value="today">Today</ion-select-option>
+                <ion-select-option value="weekly">Weekly</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+              </ion-select>
             </ion-card-header>
             <ion-card-content>
               <div class="ion-justify-content-center">
@@ -26,6 +31,11 @@
           <ion-card>
             <ion-card-header>
               <ion-card-title>Advertisements</ion-card-title>
+              <ion-select (ionChange)="filterAdsChart($event)" value = "today">
+                <ion-select-option value="today">Today</ion-select-option>
+                <ion-select-option value="weekly">Weekly</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+              </ion-select>
             </ion-card-header>
             <ion-card-content>
               <div class="ion-justify-content-center">
@@ -46,12 +56,12 @@
                   </div>
             </ion-col>
             <ion-col size = "4">
-                <ion-card-header>
-                  <ion-card-title>Gender</ion-card-title>
-                </ion-card-header>
-                  <div class="ion-justify-content-end">
-                    <canvas #genderChart></canvas>
-                  </div>
+              <ion-card-header>
+                <ion-card-title>Gender</ion-card-title>
+              </ion-card-header>
+              <div class="ion-justify-content-center">
+                <canvas #genderChart></canvas>
+              </div>
             </ion-col>        
           </ion-row>
         </ion-card>
