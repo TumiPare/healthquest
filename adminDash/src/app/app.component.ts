@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit {
         {
           label: 'User Views',
           fill: false,
-          borderColor: 'blue', // Line color
+          borderColor: '#5260ff', // Line color
           data: views, // Replace with your actual data
         },
       ],
@@ -74,14 +74,14 @@ export class AppComponent implements AfterViewInit {
         {
           label: 'Ads Watched',
           data: adsWatched,
-          borderColor: 'blue',
-          backgroundColor: 'blue',
+          borderColor: '#3880ff',
+          backgroundColor: '#3880ff',
         },
         {
           label: 'Ads Skipped',
           data: adsSkipped,
-          borderColor: 'red',
-          backgroundColor: 'red',
+          borderColor: '#f04141',
+          backgroundColor: '#f04141',
         }
       ]
     };
@@ -118,8 +118,8 @@ export class AppComponent implements AfterViewInit {
         {
           label: 'Age',
           data: ageTotals,
-          borderColor: 'blue',
-          backgroundColor: 'blue',
+          borderColor: '#5260ff',
+          backgroundColor: '#3880ff',
         },
       ]
     };
@@ -140,6 +140,13 @@ export class AppComponent implements AfterViewInit {
             text: 'Total',
           },
         },
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Age Groups',
+          },
+        }
       },
     };
 
@@ -161,7 +168,7 @@ export class AppComponent implements AfterViewInit {
         {
           label: 'Gender',
           data: genderTotal,
-          backgroundColor: ['Red', 'Green', 'Blue'],
+          backgroundColor: ['#0cd1e8', '#2dd36f', '#4854e0'],
         }
       ]
     };
@@ -177,7 +184,13 @@ export class AppComponent implements AfterViewInit {
   {
     const nationalities =  ['USA', 'UK', 'Canada', 'Australia', 'India', 'China', 'Japan'];
     const nationalityTotal = [5, 15, 20, 18, 22, 13, 5];
-    const backgroundColors = nationalities.map(() => ("#" + Math.floor(Math.random()*16777215).toString(16)));
+    const backgroundColors = nationalities.map(() => {
+      const hue = Math.floor(Math.random() * 360); 
+      const saturation = 75; 
+      const lightness = 50; // Lightness value
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    });
+    
     console.log(backgroundColors);
 
     const data = {
@@ -197,6 +210,16 @@ export class AppComponent implements AfterViewInit {
       data: data,
       options: {
         indexAxis: 'y',
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Number of People',
+            },
+          },
+        }
+
       }});
   }
 
