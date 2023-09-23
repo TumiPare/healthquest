@@ -83,4 +83,9 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
+  goPremium() {
+    console.log(this.userStorage.user);
+    return this.http.post(environment.apiUrlLink + '/user/' + this.userStorage.user.username + '/upgrade', {});
+  }
+
 }

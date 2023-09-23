@@ -7,8 +7,10 @@ import { ToastService } from '../toast/toast.service';
 import { UserStorage } from '../user/user.storage';
 import { NearbyDoctorsService } from '../services/nearby-doctors.service';
 import { AuthService } from '../services/auth.service';
-import { ModalController } from '@ionic/angular';
+import { IonModal, ModalController } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { GoPremiumModalComponent } from './go-premium-modal/go-premium-modal.component';
 
 register();
 
@@ -22,6 +24,7 @@ export class ProfilePage {
   userDataSubscription: Subscription = new Subscription();
   userMayKnowSubscription: Subscription = new Subscription();
   nearbyDoctorsSubscription: Subscription = new Subscription();
+  goPremiumSubscription: Subscription = new Subscription();
   userData: IUser | null = null;
   userMayKnow: IUser[] = [];
   nearbyDoctors: any[] = [];
@@ -33,7 +36,8 @@ export class ProfilePage {
     private userStorage: UserStorage,
     private nearbyDoctorsService: NearbyDoctorsService,
     private authService: AuthService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private modalCtrl: ModalController
     ) { }
 
   ionViewWillEnter() {           
@@ -95,6 +99,14 @@ export class ProfilePage {
 
   openUSN() {
     window.open('https://www.usn.co.za/', '_blank')
+  }
+
+  async goPremiumModal() {
+    const modal = await this.modalCtrl.create({
+      component: GoPremiumModalComponent,
+    });
+
+    modal.present();
   }
 
   logout() {

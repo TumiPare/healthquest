@@ -57,26 +57,6 @@ export class HomePage implements OnInit {
     modal.present();
   }
 
-  redirectToStepsTracking()
-  {
-    this.navCtrl.navigateForward('/steps-tracking'); 
-  }
-
-  redirectToWeightEntry()
-  {
-    this.navCtrl.navigateForward('/weight-entry'); 
-  }
-
-  redirectToFoodIntake()
-  {
-    this.navCtrl.navigateForward('/food-intake'); 
-  }
-
-  redirectToWaterIntake()
-  {
-    this.navCtrl.navigateForward('/water-intake'); 
-  }
-
   navigateToRecordHealthStats() {
     this.router.navigate(['/record-health-stats']);
   }
