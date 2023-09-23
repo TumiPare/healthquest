@@ -7,8 +7,12 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   {
+    path: 'login',
+    loadChildren: () => import('./login/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full'
   }
 ];
