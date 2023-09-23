@@ -28,6 +28,19 @@
                 Username is required.
               </ion-text>
 
+              <ion-item>
+                <ion-input 
+                label = "Email" 
+                labelPlacement="floating" 
+                placeholder="Email"
+                formControlName = "email"
+                autocomplete="off"
+                ></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('email')!.hasError('email')" class="ion-padding-start">
+                Invalid email.
+              </ion-text>  
+
               <ion-item class="ion-padding-top">
                 <ion-input 
                 type = "password"
@@ -41,6 +54,117 @@
               <ion-text color="danger" *ngIf="signupForm.get('password')!.hasError('minlength')" class="ion-padding-start">
                 Password must be at least 8 characters
               </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-select #genderRegister 
+                    label="Gender"
+                    interface="popover"
+                    formControlName = "gender"
+                    aria-label="Gender"
+                    placeholder="Gender">
+                  <ion-select-option value="female">Female</ion-select-option>
+                  <ion-select-option value="male" >Male</ion-select-option>
+                  <ion-select-option value="other" >Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-text color="danger" *ngIf="signupForm.get('gender')!.hasError('required')" class="ion-padding-start">
+                Please select Gender
+              </ion-text>
+
+              <ion-item class="ion-padding-top">
+                <ion-select #nationalityRegister 
+                    label="Nationality"
+                    interface="popover"
+                    formControlName = "nationality"
+                    aria-label="Nationality"
+                    placeholder="Nationality">
+                    <ion-select-option value="Akan">Akan</ion-select-option>
+                    <ion-select-option value="Zulu">Zulu</ion-select-option>
+                    <ion-select-option value="Yoruba">Yoruba</ion-select-option>
+                    <ion-select-option value="Hausa">Hausa</ion-select-option>
+                    <ion-select-option value="Amhara">Amhara</ion-select-option>
+                    <ion-select-option value="Somali">Somali</ion-select-option>
+                    <ion-select-option value="Kikuyu">Kikuyu</ion-select-option>
+                    <ion-select-option value="Igbo">Igbo</ion-select-option>
+                    <ion-select-option value="Berber">Berber</ion-select-option>
+                    <ion-select-option value="Tuareg">Tuareg</ion-select-option>
+                    <ion-select-option value="Han Chinese">Han Chinese</ion-select-option>
+                    <ion-select-option value="Indian">Indian</ion-select-option>
+                    <ion-select-option value="Japanese">Japanese</ion-select-option>
+                    <ion-select-option value="Korean">Korean</ion-select-option>
+                    <ion-select-option value="Filipino">Filipino</ion-select-option>
+                    <ion-select-option value="Thai">Thai</ion-select-option>
+                    <ion-select-option value="Vietnamese">Vietnamese</ion-select-option>
+                    <ion-select-option value="Indonesian">Indonesian</ion-select-option>
+                    <ion-select-option value="Malaysian">Malaysian</ion-select-option>
+                    <ion-select-option value="Tibetan">Tibetan</ion-select-option>
+                    <ion-select-option value="German">German</ion-select-option>
+                    <ion-select-option value="French">French</ion-select-option>
+                    <ion-select-option value="Italian">Italian</ion-select-option>
+                    <ion-select-option value="Spanish">Spanish</ion-select-option>
+                    <ion-select-option value="English">English</ion-select-option>
+                    <ion-select-option value="Irish">Irish</ion-select-option>
+                    <ion-select-option value="Scottish">Scottish</ion-select-option>
+                    <ion-select-option value="Greek">Greek</ion-select-option>
+                    <ion-select-option value="Russian">Russian</ion-select-option>
+                    <ion-select-option value="Swedish">Swedish</ion-select-option>
+                    <ion-select-option value="Arab">Arab</ion-select-option>
+                    <ion-select-option value="Persian">Persian (Iranian)</ion-select-option>
+                    <ion-select-option value="Turkish">Turkish</ion-select-option>
+                    <ion-select-option value="Kurdish">Kurdish</ion-select-option>
+                    <ion-select-option value="Assyrian">Assyrian</ion-select-option>
+                    <ion-select-option value="Jewish">Jewish</ion-select-option>
+                    <ion-select-option value="Druze">Druze</ion-select-option>
+                    <ion-select-option value="Yazidi">Yazidi</ion-select-option>
+                    <ion-select-option value="Coptic">Coptic</ion-select-option>
+                    <ion-select-option value="Armenian">Armenian</ion-select-option>
+                    <ion-select-option value="Navajo">Navajo</ion-select-option>
+                    <ion-select-option value="Cherokee">Cherokee</ion-select-option>
+                    <ion-select-option value="Sioux">Sioux</ion-select-option>
+                    <ion-select-option value="Apache">Apache</ion-select-option>
+                    <ion-select-option value="Inuit">Inuit</ion-select-option>
+                    <ion-select-option value="Cree">Cree</ion-select-option>
+                    <ion-select-option value="Hopi">Hopi</ion-select-option>
+                    <ion-select-option value="Ojibwa">Ojibwa</ion-select-option>
+                    <ion-select-option value="Iroquois">Iroquois</ion-select-option>
+                    <ion-select-option value="Choctaw">Choctaw</ion-select-option>
+                    <ion-select-option value="Maori">Maori (New Zealand)</ion-select-option>
+                    <ion-select-option value="Aboriginal Australian">Aboriginal Australian</ion-select-option>
+                    <ion-select-option value="Innu">Innu (Canada)</ion-select-option>
+                    <ion-select-option value="Sami">Sami (Scandinavia)</ion-select-option>
+                    <ion-select-option value="Ainu">Ainu (Japan)</ion-select-option>
+                    <ion-select-option value="Maasai">Maasai (East Africa)</ion-select-option>
+                    <ion-select-option value="Māori">Māori (New Zealand)</ion-select-option>
+                    <ion-select-option value="Aborigines">Aborigines (Taiwan)</ion-select-option>
+                    <ion-select-option value="Polynesian">Polynesian (e.g., Tongan, Samoan, Hawaiian)</ion-select-option>
+                    <ion-select-option value="Micronesian">Micronesian (e.g., Chuukese, Palauan)</ion-select-option>
+                    <ion-select-option value="Melanesian">Melanesian (e.g., Fijian, Papua New Guinean)</ion-select-option>
+                    <ion-select-option value="Maltese">Maltese</ion-select-option>
+                    <ion-select-option value="Sicilian">Sicilian</ion-select-option>
+                    <ion-select-option value="Sardinian">Sardinian</ion-select-option>
+                    <ion-select-option value="Corsican">Corsican</ion-select-option>
+                    <ion-select-option value="Navajo">Navajo</ion-select-option>
+                    <ion-select-option value="Haitian">Haitian</ion-select-option>
+                    <ion-select-option value="Trinidadian and Tobagonian">Trinidadian and Tobagonian</ion-select-option>
+                    <ion-select-option value="Bahamian">Bahamian</ion-select-option>
+                    <ion-select-option value="Barbadian">Barbadian</ion-select-option>
+                    <ion-select-option value="Dominican">Dominican</ion-select-option>
+                    <ion-select-option value="Mexican">Mexican</ion-select-option>
+                    <ion-select-option value="Brazilian">Brazilian</ion-select-option>
+                    <ion-select-option value="Argentine">Argentine</ion-select-option>
+                    <ion-select-option value="Colombian">Colombian</ion-select-option>
+                    <ion-select-option value="Peruvian">Peruvian</ion-select-option>
+                    <ion-select-option value="Chilean">Chilean</ion-select-option>
+                    <ion-select-option value="Cuban">Cuban</ion-select-option>
+                    <ion-select-option value="Venezuelan">Venezuelan</ion-select-option>
+                    <ion-select-option value="Guatemalan">Guatemalan</ion-select-option>
+                    <ion-select-option value="Zimbabwean">Zimbabwean</ion-select-option>
+                    <ion-select-option value="International">International</ion-select-option>
+                </ion-select>
+              </ion-item>
+                <ion-text color="danger" *ngIf="signupForm.get('nationality')!.hasError('required')" class="ion-padding-start">
+                  Nationality required
+                </ion-text>
 
               <ion-item class="ion-padding-top">
                 <ion-input 
