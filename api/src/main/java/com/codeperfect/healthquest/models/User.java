@@ -21,6 +21,7 @@ public class User {
     String password;
     String profilePicUrl;
     String email;
+    String type;
     String dob;
     Double weight;
     Double height;

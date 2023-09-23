@@ -143,6 +143,16 @@ public class UserService {
         return new Message("typeCategoryError");
     }
 
+    public User upgradeUser(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+        user.setType("premium");
+        userRepository.save(user);
+
+        return user;
+
+    }
+
     @Scheduled(cron = "0 0 0 * * *")
     public void resetUsersDaily() {
 
