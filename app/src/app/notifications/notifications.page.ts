@@ -1,17 +1,4 @@
 import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-notifications',
-  templateUrl: 'notifications.page.html',
-  styleUrls: ['notifications.page.scss']
-})
-export class NotificationsPage {
-
-  constructor() { }
-
-}
-
-import { Component } from '@angular/core';
 import { NotificationsService } from './notifications.service';
 import { Subscription } from 'rxjs';
 import { INotification } from './notification.interface';

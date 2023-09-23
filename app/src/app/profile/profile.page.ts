@@ -1,58 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-
-register();
-
-@Component({
-  selector: 'app-profile',
-  templateUrl: 'profile.page.html',
-  styleUrls: ['profile.page.scss']
-})
-export class ProfilePage implements OnInit{
-  userInitialDataURL: string | null = "https://ionicframework.com/docs/img/demos/avatar.svg";
-
-  constructor() { }
-
-  ngOnInit() {           
-    let firstName = "John";
-    this.userInitialDataURL = this.getInitialDataURL(firstName.charAt(0));
-  }
-
-  getInitialDataURL(initial: string): string | null {
-    const canvas = document.createElement('canvas');
-    canvas.width = 48;
-    canvas.height = 48;
-    const context = canvas.getContext('2d');
-
-    if (!context) {
-      console.error('Could not get 2D context.');
-      return null;
-    }
-
-    context.fillStyle = '#ff9800'; // Customize the background color
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.font = '24px Arial'; // Customize the font size and family
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillStyle = '#ffffff'; // Customize the text color
-    context.fillText(initial, canvas.width / 2, canvas.height / 2);
-    return canvas.toDataURL();
-  }
-
-  toggleTheme(systemTheme: string) {
-    console.log(systemTheme);
-    document.body.setAttribute('HealthQuest-color-theme', systemTheme);
-  }
-}
-
-import { Component, OnInit } from '@angular/core';
-import { register } from 'swiper/element/bundle';
 import { ProfileService } from './profile.service';
 import { IUser } from './user.interface';
 import { Subscription } from 'rxjs';
 import { ToastService } from '../toast/toast.service';
 import { UserStorage } from '../user/user.storage';
 import { NearbyDoctorsService } from '../services/nearby-doctors.service';
+import { AuthService } from '../services/auth.service';
+import { ModalController } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
 
 register();
 
@@ -70,10 +26,15 @@ export class ProfilePage {
   userMayKnow: IUser[] = [];
   nearbyDoctors: any[] = [];
 
+  @ViewChild('friendsModal') friendsModal: any; // Reference to the ion-modal element
+
   constructor(private profileService: ProfileService, 
     private toastService: ToastService, 
     private userStorage: UserStorage,
-    private nearbyDoctorsService: NearbyDoctorsService) { }
+    private nearbyDoctorsService: NearbyDoctorsService,
+    private authService: AuthService,
+    public modalController: ModalController
+    ) { }
 
   ionViewWillEnter() {           
     this.userDataSubscription = this.profileService.getUser(this.userStorage.user.username).subscribe((user) => {
@@ -130,6 +91,18 @@ export class ProfilePage {
     this.profileService.friendRequest(this.userStorage.user.username, friendUsername).subscribe((message) => {
       this.toastService.presentToast(message.message);
     });
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  openFriendModal() {
+    this.friendsModal.present();
+  }
+
+  dismissModal() {
+    this.friendsModal.dismiss();
   }
 
   ngOnDestroy() {

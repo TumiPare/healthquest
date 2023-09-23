@@ -45,7 +45,28 @@ cd 2023-hackathon-codeperfect
 ```bash
 npm install
 ```
+<<<<<<< HEAD
 
+=======
+### Running Spring Backend
+
+1. Make sure to use Java 17
+
+2. From root navigate to api
+```bash
+cd api
+```
+
+3. Run backend on linux (Ensure permissions to gradlew)
+```bash
+./grdalew bootRun
+```
+
+4. Run backend on Windows
+```bash
+gradlew.bat
+```
+>>>>>>> dev
 ### Running an Ionic-Angular Project <a name="running"></a>
 1. Install Ionic CLI
 ```bash

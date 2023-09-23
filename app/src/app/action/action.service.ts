@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IAction } from './action.interface';
 import { IActionUpdates } from './action-updates.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActionService {
-  apiUrl = "http://healthquest.ddns.net:5000/action"
+  apiUrl = environment.apiUrlLink + "/action"
 
   constructor(private http: HttpClient) { }
 

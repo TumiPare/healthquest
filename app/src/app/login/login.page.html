@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="card-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3 class="ion-padding-start"> Welcome to HealthQuest ! </h3>
+          <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <ion-item>
+            <ion-input 
+            type = "username"
+            label = "Username" 
+            labelPlacement="floating" 
+            placeholder="Username"
+            formControlName = "username"
+            autocomplete="off"
+            ></ion-input>
+            </ion-item>
+
+            <ion-item class="ion-padding-top">
+              <ion-input 
+              type = "password"
+              label = "Password" 
+              labelPlacement="floating" 
+              placeholder="Password" 
+              formControlName = "password"
+              autocomplete="off"
+              ></ion-input>
+            </ion-item>
+
+            <div class="ion-margin-top ion-margin-start">
+              <ion-button (click)="login()" color="primary" class="ion-margin-top"><strong> Login </strong></ion-button>
+              <ion-button (click)="signup()" color="primary" fill="outline" class="ion-margin-top ion-margin-end ion-margin-start"><strong> Register </strong></ion-button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

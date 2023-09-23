@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 permissions:
   contents: read
@@ -13,7 +14,7 @@ jobs:
       uses: ./.github/workflows/ci.yml
       secrets: inherit
   deploy-front-end:
-      name: 🎉 Deploy
+      name: 🎉 Deploy frontend
       runs-on: ubuntu-latest
       steps:
       - name: 🚚 Get latest code
@@ -32,29 +33,29 @@ jobs:
           server: 34.27.203.247
           username: admin
           password: ilovehealth
-          server-dir: ./home/tothemoontogether1/healthquest/www/
-          local-dir: ./app/HealthQuest/www/
-      - name: SSH into server and reload nginx server
-        run: |
-          sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "sudo systemctl reload nginx"
+          server-dir: /home/admin/healthquest/www/
+          local-dir: ./app/www/
 
           
   deploy-back-end:
-    runs-on: ubuntu-latest
+    name: Build and Upload API
+    runs-on: windows-latest
+    defaults:
+        run:
+          working-directory: ./api
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v2
+      - name: Setup JDK 17 and Cache
+        uses: actions/setup-java@v3
         with:
-          java-version: '17'  # Use OpenJDK 17
+            java-version: '17'
+            distribution: 'temurin'
 
-      - name: Build Gradle project
-        run: |
-          chmod +x ./gradlew  # Make the Gradle wrapper script executable
-          ./gradlew build
-        working-directory: ./api  # Adjust the path to your backend project
+      - name: Build API
+        run: ./gradlew.bat build
 
       - name: Upload JAR to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -62,9 +63,6 @@ jobs:
           server: 34.27.203.247
           username: admin
           password: ilovehealth
-          server-dir: /home/tothemoontogether1/healthquest/  # Ensure you use the correct absolute path on the server
-          local-dir: ./api/build/libs/  # Adjust the path to your built JAR file
-      - name: SSH into server and reload nginx server
-        run: |
-          sshpass -p 'ilovehealth' ssh admin@34.27.203.247 "cd /home/tothemoontogether1/healthquest/ && nohup java -jar healthquest-0.0.1-SNAPSHOT.jar &"
-  
+          server-dir: /home/admin/healthquest/  # Ensure you use the correct absolute path on the server
+          local-dir: ./api/build/libs/ # Adjust the path to your built JAR file
+          exclude: healthquest-0.0.1-SNAPSHOT-plain.jar

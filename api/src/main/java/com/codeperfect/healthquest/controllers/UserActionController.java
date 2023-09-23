@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codeperfect.healthquest.interfaces.UserActionUpdates;
+import com.codeperfect.healthquest.interfaces.UserStats;
 import com.codeperfect.healthquest.models.UserAction;
 import com.codeperfect.healthquest.services.UserActionService;
 
@@ -33,5 +34,10 @@ public class UserActionController {
     @PostMapping
     public UserActionUpdates saveAction(@RequestBody UserAction action) {
         return userActionService.saveAction(action);
+    }
+
+    @GetMapping("/{username}/stats")
+    public UserStats getUserStats(@PathVariable(value = "username") String username) {
+        return userActionService.getUserStats(username);
     }
 }
