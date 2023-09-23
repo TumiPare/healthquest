@@ -11,28 +11,8 @@ export class DashboardService {
     private http: HttpClient
   ) { }
 
-  getUserViewsData()
+  getData()
   {
     return this.http.get(this.apiUrl+'/analytics');
-  }
-
-  getAdsData()
-  {
-
-  }
-
-  getAgeData()
-  {
-
-  }
-
-  getGenderData()
-  {
-
-  }
-
-  getNationalityData()
-  {
-
   }
 }

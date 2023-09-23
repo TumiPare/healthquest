@@ -23,16 +23,29 @@ export class DashboardPage implements AfterViewInit {
   ) {}
   ngOnInit()
   {
-    this.dashboardService.getUserViewsData().subscribe((data: any) => {
-      console.log(data);
-    });
+
   }
+  viewData: any = null;
+  adsData: any = null;
+  ageData: any = null;
+  genderData: any = null;
+  nationalityData: any = null;
+
   ngAfterViewInit() {
-    this.populateUserViewsChart();
-    this.populateAdsChart();
-    this.populateAgeChart();
-    this.populateGenderChart();
-    this.populateNationalityChart();
+    this.dashboardService.getData().subscribe((data: any) => {
+      console.log(data);
+      this.viewData = data.userViews;
+      this.adsData = data.ads;
+      this.ageData = data.demographicByAge;
+      this.genderData = data.demographicByGender;
+      this.nationalityData = data.demographicByNationality;
+
+      this.populateUserViewsChart();
+      this.populateAdsChart();
+      this.populateAgeChart();
+      this.populateGenderChart();
+      this.populateNationalityChart();
+    });
   }
 
   populateUserViewsChart() {
@@ -74,9 +87,10 @@ export class DashboardPage implements AfterViewInit {
 
   populateAdsChart()
   {
-    const labels =  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    const adsWatched = [5, 15, 20, 18, 22, 13, 5];
-    const adsSkipped = [5, 10, 15, 12, 18, 10, 3];
+    const labels =  ['Today'];
+
+    const adsWatched =  this.adsData[0].value;
+    const adsSkipped =  this.adsData[3].value;
 
     const data = {
       labels: labels,
@@ -169,8 +183,8 @@ export class DashboardPage implements AfterViewInit {
 
   populateGenderChart()
   {
-    const labels = ['Male', 'Female', 'Other'];
-    const genderTotal = [50, 30, 20]
+    const labels =  this.genderData.map((item: any) => item.group);
+    const genderTotal =  this.genderData.map((item: any) => item.value);
     
     const data = {
       labels: labels,
@@ -192,11 +206,11 @@ export class DashboardPage implements AfterViewInit {
 
   populateNationalityChart()
   {
-    const nationalities =  ['USA', 'UK', 'Canada', 'Australia', 'India', 'China', 'Japan'];
-    const nationalityTotal = [5, 15, 20, 18, 22, 13, 5];
+    const nationalities =  this.nationalityData.map((item: any) => item.group);
+    const nationalityTotal = this.nationalityData.map((item: any) => item.value);
     const colors = ['#1D3557', '#457B9D', '#A0B9C9', '#A4CAD3', '#A8D8DB'];
 
-    const backgroundColors = nationalities.map((_, index) => {
+    const backgroundColors = nationalities.map((_: any, index: number) => {
       const colorIndex = index % colors.length;
       return colors[colorIndex];
     });
