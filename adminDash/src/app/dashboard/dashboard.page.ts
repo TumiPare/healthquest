@@ -38,7 +38,7 @@ export class DashboardPage implements AfterViewInit {
         {
           label: 'User Views',
           fill: false,
-          borderColor: '#5260ff', // Line color
+          borderColor: '#457b9d', // Line color
           data: views, // Replace with your actual data
         },
       ],
@@ -77,14 +77,14 @@ export class DashboardPage implements AfterViewInit {
         {
           label: 'Ads Watched',
           data: adsWatched,
-          borderColor: '#3880ff',
-          backgroundColor: '#3880ff',
+          borderColor: '#457b9d',
+          backgroundColor: '#457b9d',
         },
         {
           label: 'Ads Skipped',
           data: adsSkipped,
-          borderColor: '#f04141',
-          backgroundColor: '#f04141',
+          borderColor: '#e63946',
+          backgroundColor: '#e63946',
         }
       ]
     };
@@ -121,8 +121,8 @@ export class DashboardPage implements AfterViewInit {
         {
           label: 'Age',
           data: ageTotals,
-          borderColor: '#5260ff',
-          backgroundColor: '#3880ff',
+          borderColor: '#457b9d',
+          backgroundColor: '#457b9d',
         },
       ]
     };
@@ -171,7 +171,7 @@ export class DashboardPage implements AfterViewInit {
         {
           label: 'Gender',
           data: genderTotal,
-          backgroundColor: ['#0cd1e8', '#2dd36f', '#4854e0'],
+          backgroundColor: ['#457b9d', '#1d3557', '#e63946'],
         }
       ]
     };
@@ -187,15 +187,13 @@ export class DashboardPage implements AfterViewInit {
   {
     const nationalities =  ['USA', 'UK', 'Canada', 'Australia', 'India', 'China', 'Japan'];
     const nationalityTotal = [5, 15, 20, 18, 22, 13, 5];
-    const backgroundColors = nationalities.map(() => {
-      const hue = Math.floor(Math.random() * 360); 
-      const saturation = 75; 
-      const lightness = 50; // Lightness value
-      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    const colors = ['#1D3557', '#457B9D', '#A0B9C9', '#A4CAD3', '#A8D8DB'];
+
+    const backgroundColors = nationalities.map((_, index) => {
+      const colorIndex = index % colors.length;
+      return colors[colorIndex];
     });
     
-    console.log(backgroundColors);
-
     const data = {
       labels: nationalities,
       datasets: [
