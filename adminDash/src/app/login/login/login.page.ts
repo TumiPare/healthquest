@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +18,32 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {}
     
   login() {
     if(this.loginForm.valid) {
-      this.router.navigateByUrl('/dashboard');
+      this.auth.login(this.loginForm.value.token).subscribe((res: any) => {
+        console.log("Response: ", res);
+        if(res)
+        {
+          this.auth.user = res;
+          console.log("User: ", this.auth.user);
+          this.router.navigateByUrl('/dashboard');
+        }
+        else{
+          this.presentToast('Invalid token. Please check your token.');
+        }
+        }, (err: any) => {
+          this.presentToast('Invalid token. Please check your token.');
+        }
+      );
     }
     else{
-      this.presentToast('Invalid details. Please check your inputs.');
+      this.presentToast('Invalid details. Please check your token.');
     }
   }
 

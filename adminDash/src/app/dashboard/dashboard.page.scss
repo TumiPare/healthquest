@@ -7,3 +7,15 @@ h3 {
     padding-right: 4px;
     padding-bottom: 2px;
  }
+
+.heartIcon
+{
+   margin-right: 16px;
+}
+/* Center the "Dashboard" text horizontally */
+.HealthQuest-title {
+  text-align: center;
+  flex: 1; /* Expand to fill the available space */
+  display: flex;
+  align-items: center;
+}

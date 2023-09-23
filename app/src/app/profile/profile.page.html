@@ -113,6 +113,25 @@
         </ion-label>
       </ion-item>
     </ion-list>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h2>How would you rate our app?</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-icon name="star" [class.active]="userRating >= 1" (click)="rate(1)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 2" (click)="rate(2)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 3" (click)="rate(3)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 4" (click)="rate(4)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 5" (click)="rate(5)" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button (click)="submitRating()" class="ion-margin-bottom ion-margin-top">Submit Rating</ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <!-- Friend List Modal -->

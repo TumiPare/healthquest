@@ -5,6 +5,7 @@ import { IUser } from '../profile/user.interface';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, tap } from 'rxjs';
+import { IAdViewed } from '../ad/ad-viewed.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,18 @@ export class AuthService {
 
   goPremium() {
     return this.http.post(environment.apiUrlLink + '/user/' + this.userStorage.user.username + '/upgrade', {});
+  }
+
+  postAdTime(adid: string, status: string) {
+
+    const adViewed: IAdViewed = {
+      username: this.userStorage.user.username,
+      adId: adid,
+      status: status,
+      timestamp: new Date()
+    }
+
+    return this.http.post(environment.apiUrlLink + '/ad', {});
   }
 
 }
