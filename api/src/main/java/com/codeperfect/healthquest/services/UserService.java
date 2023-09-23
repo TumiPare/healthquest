@@ -1,8 +1,8 @@
 package com.codeperfect.healthquest.services;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.LeaderboardItem;
 import com.codeperfect.healthquest.interfaces.Message;
 import com.codeperfect.healthquest.models.User;
+import com.codeperfect.healthquest.models.UserViewed;
 import com.codeperfect.healthquest.repositories.UserRepository;
 
 @Service
@@ -23,9 +24,13 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    UserViewedService userViewedService;
+
+    @Autowired
     NotificationService notificationService;
 
     public User findUser(String username) {
+        userViewedService.saveUserViewed(new UserViewed(username, new Date()));
         return userRepository.findUserByUsername(username);
     }
 
@@ -141,6 +146,16 @@ public class UserService {
         }
 
         return new Message("typeCategoryError");
+    }
+
+    public User upgradeUser(String username) {
+
+        User user = userRepository.findUserByUsername(username);
+        user.setType("premium");
+        userRepository.save(user);
+
+        return user;
+
     }
 
     @Scheduled(cron = "0 0 0 * * *")

@@ -9,6 +9,7 @@ import { ChallengeModalComponent } from '../challenge-add/challenge-modal/challe
 import { ICreature } from '../user/creature.interface';
 import { Router } from '@angular/router';
 import { IUser } from '../profile/user.interface';
+import { IUserStats } from '../user/user-stats.interface';
 
 register();
 
@@ -19,10 +20,10 @@ register();
 })
 export class HomePage implements OnInit {
   challengeSubscription: Subscription = new Subscription();
-  creatureSubscription: Subscription = new Subscription();
+  userStatsSubscription: Subscription = new Subscription();
   username: string = 'testuser';
   challengeItems: IChallenge[] = [];
-  creatureItems: ICreature[] = [];
+  userStats!: IUserStats;
   user: IUser | null = null;
 
   constructor(
@@ -43,8 +44,8 @@ export class HomePage implements OnInit {
       this.challengeItems = challenges;
     });
 
-    this.creatureSubscription = this.homeService.getUserCreatures(this.userStorage.user.username).subscribe((creatures) => {
-      this.creatureItems = creatures;
+    this.userStatsSubscription = this.homeService.getUserStats(this.userStorage.user.username).subscribe((stats) => {
+      this.userStats = stats;
     });
   }
 
@@ -54,26 +55,6 @@ export class HomePage implements OnInit {
     });
 
     modal.present();
-  }
-
-  redirectToStepsTracking()
-  {
-    this.navCtrl.navigateForward('/steps-tracking'); 
-  }
-
-  redirectToWeightEntry()
-  {
-    this.navCtrl.navigateForward('/weight-entry'); 
-  }
-
-  redirectToFoodIntake()
-  {
-    this.navCtrl.navigateForward('/food-intake'); 
-  }
-
-  redirectToWaterIntake()
-  {
-    this.navCtrl.navigateForward('/water-intake'); 
   }
 
   navigateToRecordHealthStats() {

@@ -20,9 +20,13 @@ public class User {
 
     String password;
     String profilePicUrl;
+    String email;
+    String type;
     String dob;
     Double weight;
     Double height;
+    String gender;
+    String nationality;
     List<String> friends;
     List<Challenge> challenges;
     List<Creature> creatures;

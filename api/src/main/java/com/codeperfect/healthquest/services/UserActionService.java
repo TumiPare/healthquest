@@ -1,7 +1,9 @@
 package com.codeperfect.healthquest.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,26 +183,38 @@ public class UserActionService {
     public UserStats getUserStats(String username) {
         return new UserStats(
             getUserStat(username, "steps"), 
-            userService.findUser(username).getWeight(), 
             getUserStat(username, "hydration"), 
-            new UserStat(username, "food", 2500.0), 
+            new UserStat("food", 2500.0), 
             getUserStat(username, "sleep")
         );
     }
 
     private UserStat getUserStat(String username, String category) {
-        MatchOperation filterUserActions = Aggregation.match(new Criteria("username").is(username).and("category").is(category));
         GroupOperation averageValue = Aggregation.group("category", "username").avg("value").as("avgValue");
+        
+        Calendar startDate = new GregorianCalendar();
+        startDate.set(Calendar.HOUR_OF_DAY, 0);
+        startDate.set(Calendar.MINUTE, 0);
+        startDate.set(Calendar.SECOND, 0);
+        startDate.set(Calendar.MILLISECOND, 0);
+        
+        Calendar endDate = new GregorianCalendar();
+        endDate.setTime(startDate.getTime());
+        endDate.add(Calendar.DATE, 1);
+        MatchOperation filterUserViewed = Aggregation.match(
+            new Criteria("username").is(username)
+            .and("category").is(category)
+            .and("timestamp").gte(startDate.getTime()).lt(endDate.getTime())
+        );
+
         ProjectionOperation projectToMatchModel = Aggregation.project()
-            .andExpression("username").as("username")
             .andExpression("category").as("category")
             .andExpression("avgValue").as("value");
 
-        Aggregation aggregation = Aggregation.newAggregation(filterUserActions, averageValue, projectToMatchModel);
+        Aggregation aggregation = Aggregation.newAggregation(filterUserViewed, averageValue, projectToMatchModel);
 
         AggregationResults<UserStat> result = mongoTemplate.aggregate(aggregation, "user-action", UserStat.class);
         
-        System.out.println(result.getRawResults());
         return result.getUniqueMappedResult();
     }
 

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/home/home.service';
 import { UserStorage } from 'src/app/user/user.storage';
 import { ICreature } from 'src/app/user/creature.interface';
+import { CreaturesService } from '../creatures.service';
 
 @Component({
   selector: 'app-creatures',
@@ -15,15 +16,14 @@ export class CreaturesPage implements OnInit {
   creatureItems: ICreature[] = [];
 
   constructor(    
-    private homeService: HomeService, 
+    private creaturesService: CreaturesService, 
     private userStorage: UserStorage, 
     ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ionViewWillEnter() {
-    this.creatureSubscription = this.homeService.getUserCreatures(this.userStorage.user.username).subscribe((creatures) => {
+    this.creatureSubscription = this.creaturesService.getUserCreatures(this.userStorage.user.username).subscribe((creatures) => {
       this.creatureItems = creatures;
     });
   }

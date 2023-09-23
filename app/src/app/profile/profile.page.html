@@ -35,7 +35,22 @@
       <ion-col class="ion-text-center">
         <ion-button expand="block" size="small" class="people-list" shape="round">Add friends</ion-button>
       </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button (click)="goPremiumModal()" color="warning" expand="block" size="small" class="people-list" shape="round">Go Premium</ion-button>
+      </ion-col>
     </ion-row>
+
+    <ion-card 
+    button  
+    color="warning" 
+    *ngIf="userData?.type != 'premium'"
+    (click)="openUSN()">
+      <img alt="USN" src="https://cdn.shopify.com/s/files/1/2424/0281/files/USN_LOGO_ReflexBlue.png?height=628&pad_color=ffffff&v=1667397413&width=1200">
+      <ion-card-header>
+        <ion-card-title>USN Advertisement</ion-card-title>
+        <ion-card-subtitle>Click me to 20% off on all USN products</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
 
     <!-- Settings Section-->
     <h5 class="title">Settings</h5>
@@ -60,6 +75,8 @@
         <ion-label>Logout</ion-label>
       </ion-item>
     </ion-list>
+
+    
 
     <h5 class="title" *ngIf="userMayKnow.length > 0">People you may know</h5>
     <swiper-container

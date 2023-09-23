@@ -7,10 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserStats {
     
-    UserStat avgSteps;
-    Double weightStat;
-    UserStat avgWater;
-    UserStat avgCalories;
-    UserStat avgSleep;
+    UserStat steps;
+    UserStat water;
+    UserStat calories;
+    UserStat sleep;
 
 }

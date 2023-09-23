@@ -10,9 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ChallengeModalComponent } from './challenge-add/challenge-modal/challenge-modal.component';
 import { ActionModalComponent } from './action/action-modal/action-modal.component';
+import { GoPremiumModalComponent } from './profile/go-premium-modal/go-premium-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, ChallengeModalComponent, ActionModalComponent],
+  declarations: [AppComponent, ChallengeModalComponent, ActionModalComponent, GoPremiumModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
