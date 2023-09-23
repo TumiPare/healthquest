@@ -63,7 +63,7 @@ public class UserController {
         return userService.addChallenge(username, challenge);
     }
 
-    @PostMapping("/{username}/updgrade")
+    @PostMapping("/{username}/upgrade")
     public User upgradeUser(@PathVariable(value = "username") String username) {
         return userService.upgradeUser(username);
     }
