@@ -21,8 +21,10 @@ export class GoPremiumModalComponent {
   }
 
   confirm() {
-    this.authService.goPremium().subscribe((resp) => {
+    this.authService.goPremium().subscribe((resp: any) => {
       this.userStorage.user = resp;
+      this.authService.typeUser.next(this.userStorage.user.type);
+      console.log(this.userStorage.user);
       this.modalCtrl.dismiss();
     });
   }

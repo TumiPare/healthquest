@@ -28,6 +28,7 @@ export class ProfilePage {
   userData: IUser | null = null;
   userMayKnow: IUser[] = [];
   nearbyDoctors: any[] = [];
+  userType: string = "";
 
   @ViewChild('friendsModal') friendsModal: any; // Reference to the ion-modal element
 
@@ -54,6 +55,10 @@ export class ProfilePage {
       }
     });
 
+    //this.userType = this.authService.typeUser.value;
+
+    console.log('willenter' + this.userType);
+
     this.userMayKnowSubscription = this.profileService.getUserMayKnow(this.userStorage.user.username).subscribe((userMayKnow) => {
       this.userMayKnow = userMayKnow;
     });
@@ -63,6 +68,10 @@ export class ProfilePage {
     this.nearbyDoctorsSubscription = (await this.nearbyDoctorsService.getNearbyDoctors()).subscribe((doctors: any) => {
       console.log(doctors.features[0]);
       this.nearbyDoctors = doctors.features;
+    });
+
+    this.authService.typeUser.subscribe((type) => {
+      this.userType = type;
     });
   }
 
