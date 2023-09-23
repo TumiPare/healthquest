@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { IChallenge } from '../user/challenge.interface';
 import { HttpClient } from '@angular/common/http';
 import { IMessage } from '../message.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
-  apiUrl = "http://healthquest.ddns.net:5000/user/"
+  apiUrl = environment.apiUrlLink + "/user/"
 
   constructor(private http: HttpClient) { }
 

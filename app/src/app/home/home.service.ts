@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICreature } from '../user/creature.interface';
 import { IChallenge } from '../user/challenge.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  apiUrl = 'http://healthquest.ddns.net:5000/user/';
+  apiUrl = environment.apiUrlLink + '/user/';
 
   constructor(private http: HttpClient) { }
 

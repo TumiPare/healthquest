@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { UserStorage } from '../user/user.storage';
 import { IUser } from '../profile/user.interface';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://healthquest.ddns.net:5000/auth/'
+  apiUrl = environment.apiUrlLink + '/auth/'
   user: IUser | null = null;
 
   constructor(private http: HttpClient, private userStorage: UserStorage, private router: Router) { }

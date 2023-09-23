@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { INotification } from './notification.interface';
 import { IFriendRequest } from './friend-request.interface';
 import { IMessage } from '../message.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
-  apiUrl = 'http://healthquest.ddns.net:5000/';
+  apiUrl = environment.apiUrlLink + '/';
 
   constructor(private http: HttpClient) { }
 
