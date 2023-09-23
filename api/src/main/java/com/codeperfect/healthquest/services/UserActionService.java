@@ -181,7 +181,6 @@ public class UserActionService {
     public UserStats getUserStats(String username) {
         return new UserStats(
             getUserStat(username, "steps"), 
-            userService.findUser(username).getWeight(), 
             getUserStat(username, "hydration"), 
             new UserStat("food", 2500.0), 
             getUserStat(username, "sleep")
