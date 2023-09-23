@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DashboardService {
-  apiUrl = 'http://healthquest.ddns.net:5000'
+  apiUrl = 'http://localhost:5000'
 
   constructor(
     private http: HttpClient
@@ -13,7 +13,7 @@ export class DashboardService {
 
   getUserViewsData()
   {
-    return this.http.post(this.apiUrl+'/token/verify', "");
+    return this.http.get(this.apiUrl+'/analytics');
   }
 
   getAdsData()

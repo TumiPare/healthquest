@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit  } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AuthService } from '../services/auth.service';
+import { DashboardService } from './dashboard.service';
 Chart.register(...registerables);
 
 @Component({
@@ -17,9 +18,15 @@ export class DashboardPage implements AfterViewInit {
   @ViewChild('nationalityChart') nationalityChart!: ElementRef;
   selectedFilter = 'today';
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private dashboardService: DashboardService
   ) {}
-
+  ngOnInit()
+  {
+    this.dashboardService.getUserViewsData().subscribe((data: any) => {
+      console.log(data);
+    });
+  }
   ngAfterViewInit() {
     this.populateUserViewsChart();
     this.populateAdsChart();
