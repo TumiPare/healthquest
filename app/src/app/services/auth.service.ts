@@ -14,7 +14,15 @@ export class AuthService {
 
   constructor(private http: HttpClient, private userStorage: UserStorage, private router: Router) { }
 
-  signup(username: string, password: string, weight: number, height: number, dob: string) {
+  signup(
+    username: string, 
+    email: string,
+    password: string, 
+    gender: string,
+    weight: number, 
+    height: number,
+    nationality: string, 
+    dob: string) {
     
     const newUser: IUser = {
       username: username,
@@ -23,6 +31,9 @@ export class AuthService {
       dob: dob,
       weight: weight,
       height: height,
+      email: email,
+      gender: gender,
+      nationality: nationality,
       challenges: [],
       creatures: [
         {
@@ -49,6 +60,10 @@ export class AuthService {
       friends: [],
       points: 0
     };
+
+
+    console.log(nationality);
+    console.log(newUser);
     
     return this.http.post(this.apiUrl+'signup', newUser);
   }
