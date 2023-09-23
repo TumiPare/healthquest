@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @PostMapping("/{username}/updgrade")
-    public Message upgradeUser(@PathVariable(value = "username") String username) {
+    public User upgradeUser(@PathVariable(value = "username") String username) {
         return userService.upgradeUser(username);
     }
 
