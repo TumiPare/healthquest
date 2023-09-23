@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { ProfileService } from './profile.service';
 import { IUser } from './user.interface';
@@ -29,6 +29,7 @@ export class ProfilePage {
   userMayKnow: IUser[] = [];
   nearbyDoctors: any[] = [];
   userType: string = "";
+  userRating = 0;
 
   @ViewChild('friendsModal') friendsModal: any; // Reference to the ion-modal element
 
@@ -110,6 +111,16 @@ export class ProfilePage {
     window.open('https://www.usn.co.za/', '_blank')
   }
 
+  rate(rating: number) {
+    this.userRating = rating;
+    console.log(this.userRating);
+  }
+
+  submitRating()
+  {
+    console.log(this.userRating);
+  }
+
   async goPremiumModal() {
     const modal = await this.modalCtrl.create({
       component: GoPremiumModalComponent,
@@ -117,7 +128,7 @@ export class ProfilePage {
 
     modal.present();
   }
-
+  
   logout() {
     this.authService.logout();
   }
