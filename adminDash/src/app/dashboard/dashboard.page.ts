@@ -49,8 +49,18 @@ export class DashboardPage implements AfterViewInit {
   }
 
   populateUserViewsChart() {
-    const labels =  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    const views = [100, 150, 200, 180, 220, 130, 50];
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const labels = [];
+    const views = [];
+
+    for (let i = 0; i < this.viewData.length; i++) {
+      labels[i] = monthNames[parseInt(this.viewData[i].type) - 1];
+      views[i] = this.viewData[i].value;
+    }
 
     const data = {
       labels: labels, // Replace with your actual labels
