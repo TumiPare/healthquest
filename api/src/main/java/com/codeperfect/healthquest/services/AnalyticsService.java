@@ -44,7 +44,7 @@ public class AnalyticsService {
         // ProjectionOperation projectForAges = Aggregation.project("dob")
         //     .and(DateOperators.Year.yearOf("dob")).as("yearOfBirth");
 
-        // GroupOperation groupByAge = Aggregation.group("yearOfBirth").count().as("count");
+        // // GroupOperation groupByAge = Aggregation.group("yearOfBirth").count().as("count");
 
         // projectToMatchModel = Aggregation.project()
         //     .andExpression("_id").as("group")
@@ -54,7 +54,7 @@ public class AnalyticsService {
 
         // AggregationResults<DemographicData> resultsAge = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
         
-        // System.out.println(resultsNationality.getRawResults());
+        // System.out.println(resultsAge.getRawResults());
         // analytics.setDemographicByAge(resultsAge.getMappedResults());
 
         // Add Gender Analytics
@@ -72,10 +72,11 @@ public class AnalyticsService {
         analytics.setDemographicByGender(resultsGender.getMappedResults());
 
         // Add Ad Analytics
-        GroupOperation groupByStatus = Aggregation.group("status").count().as("count");
+        GroupOperation groupByStatus = Aggregation.group("status", "timestamp").count().as("count");
         
         projectToMatchModel = Aggregation.project()
-            .andExpression("_id").as("type")
+            .andExpression("status").as("type")
+            .andExpression("timestamp").as("date")
             .andExpression("count").as("value");
         
         aggregation = Aggregation.newAggregation(groupByStatus, projectToMatchModel);
