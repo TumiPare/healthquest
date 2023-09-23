@@ -1,11 +1,15 @@
 package com.codeperfect.healthquest.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.DateOperators;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.interfaces.AnalyticData;
@@ -34,23 +38,23 @@ public class AnalyticsService {
 
         AggregationResults<DemographicData> resultsNationality = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
         
-        System.out.println(resultsNationality.getRawResults());
         analytics.setDemographicByNationality(resultsNationality.getMappedResults());
 
         // Add Age Analytics
-        // ProjectionOperation projectForAges = Aggregation.project()
-        //     .andExpression("dob").as("age");
+        ProjectionOperation projectForAges = Aggregation.project("dob")
+            .and(DateOperators.Year.yearOf("dob")).as("yearOfBirth");
 
-        // GroupOperation groupByAge = Aggregation.group("username").count().as("count");
+        GroupOperation groupByAge = Aggregation.group("yearOfBirth").count().as("count");
 
-        // projectToMatchModel = Aggregation.project()
-        //     .andExpression("username").as("group")
-        //     .andExpression("count").as("value");
+        projectToMatchModel = Aggregation.project()
+            .andExpression("_id").as("group")
+            .andExpression("count").as("value");
 
-        // aggregation = Aggregation.newAggregation(groupByAge, projectToMatchModel);
+        aggregation = Aggregation.newAggregation(projectForAges, projectToMatchModel);
 
-        // AggregationResults<DemographicData> resultsAge = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
+        AggregationResults<DemographicData> resultsAge = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
         
+        System.out.println(resultsNationality.getRawResults());
         // analytics.setDemographicByAge(resultsAge.getMappedResults());
 
         // Add Gender Analytics
@@ -81,13 +85,16 @@ public class AnalyticsService {
         analytics.setAds(resultsAd.getMappedResults());
 
         // Add User Views Analytics
-        GroupOperation groupByDate = Aggregation.group("date").count().as("count");
+        ProjectionOperation projectForMonth = Aggregation.project("date")
+            .and(DateOperators.Month.monthOf("date")).as("month");
+
+        GroupOperation groupByDate = Aggregation.group("month").count().as("count");
         
         projectToMatchModel = Aggregation.project()
             .andExpression("_id").as("type")
             .andExpression("count").as("value");
         
-        aggregation = Aggregation.newAggregation(groupByDate, projectToMatchModel);
+        aggregation = Aggregation.newAggregation(projectForMonth, groupByDate, projectToMatchModel);
 
         AggregationResults<AnalyticData> resultsViews = mongoTemplate.aggregate(aggregation, "user-viewed", AnalyticData.class);
 

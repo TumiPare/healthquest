@@ -9,7 +9,5 @@ public class AnalyticData {
     
     String type;
     Integer value;
-    Date startDate;
-    Date endDate;
 
 }
