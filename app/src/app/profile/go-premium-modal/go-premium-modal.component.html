@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Go Premium</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" color="primary">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h1>R250</h1>
+  <ion-item>
+    <ion-label position="stacked">Enter your card</ion-label>
+    <ion-input type="text" placeholder="Your card number"></ion-input>
+  </ion-item>
+</ion-content>

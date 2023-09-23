@@ -8,8 +8,13 @@
   <div class="card-container">
     <ion-grid>
       <ion-row>
-        <ion-col>
-            <h3 class="ion-padding-start"> Welcome to HealthQuest ! </h3>
+        <ion-col size="4" offset="4" class="ion-text-center ion-padding-top">
+          <img src="assets/icon/heart.svg" alt="HealthQuest Logo" class="logo">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center ion-margin-top">
+          <h3 class="ion-padding-start"> Welcome to HealthQuest ! </h3>
 
             <form class="form" [formGroup]="signupForm" (ngSubmit)="signup()">
               <ion-item>

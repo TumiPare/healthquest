@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Advertisement</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" color="primary">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card 
+  button  
+  color="warning" 
+  (click)="openUSN()">
+    <img alt="USN" src="https://cdn.shopify.com/s/files/1/2424/0281/files/USN_LOGO_ReflexBlue.png?height=628&pad_color=ffffff&v=1667397413&width=1200">
+    <ion-card-header>
+      <ion-card-title>USN Advertisement</ion-card-title>
+      <ion-card-subtitle>Click me to 20% off on all USN products</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

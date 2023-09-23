@@ -35,12 +35,21 @@
       <ion-col class="ion-text-center">
         <ion-button expand="block" size="small" class="people-list" shape="round">Add friends</ion-button>
       </ion-col>
+      <ion-col class="ion-text-center" *ngIf="userType != 'premium'">
+        <ion-button 
+        (click)="goPremiumModal()" 
+        color="warning" 
+        expand="block" 
+        size="small" 
+        class="people-list" 
+        shape="round">Go Premium</ion-button>
+      </ion-col>
     </ion-row>
 
     <ion-card 
     button  
     color="warning" 
-    *ngIf="userData?.type != 'premium'"
+    *ngIf="userType != 'premium'"
     (click)="openUSN()">
       <img alt="USN" src="https://cdn.shopify.com/s/files/1/2424/0281/files/USN_LOGO_ReflexBlue.png?height=628&pad_color=ffffff&v=1667397413&width=1200">
       <ion-card-header>

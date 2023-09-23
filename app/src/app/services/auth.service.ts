@@ -4,6 +4,7 @@ import { UserStorage } from '../user/user.storage';
 import { IUser } from '../profile/user.interface';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   apiUrl = environment.apiUrlLink + '/auth/'
   user: IUser | null = null;
+  typeUser = new BehaviorSubject<string>('standard');
 
   constructor(private http: HttpClient, private userStorage: UserStorage, private router: Router) { }
 
@@ -66,7 +68,10 @@ export class AuthService {
     console.log(nationality);
     console.log(newUser);
     
-    return this.http.post(this.apiUrl+'signup', newUser);
+    return this.http.post(this.apiUrl+'signup', newUser).pipe(tap
+      ((resp: any) => {
+        this.typeUser.next(resp.type);
+      }));
   }
 
   login(username: string, password: string) {
@@ -75,12 +80,19 @@ export class AuthService {
       password: password
     }
 
-    return this.http.post(this.apiUrl+'signin', loginUser);
+    return this.http.post(this.apiUrl+'signin', loginUser).pipe(tap
+      ((resp: any) => {
+        this.typeUser.next(resp.type);
+      }));
   }
 
   logout() {
     this.userStorage.user = null;
     this.router.navigate(['']);
+  }
+
+  goPremium() {
+    return this.http.post(environment.apiUrlLink + '/user/' + this.userStorage.user.username + '/upgrade', {});
   }
 
 }
