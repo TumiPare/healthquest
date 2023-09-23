@@ -4,8 +4,8 @@ export interface IUserStat {
 }
 
 export interface IUserStats {
-    avgSteps: IUserStat,
-    avgWater: IUserStat,
-    avgCalories: IUserStat,
-    avgSleep: IUserStat
+    steps: IUserStat,
+    water: IUserStat,
+    calories: IUserStat,
+    sleep: IUserStat
 }
