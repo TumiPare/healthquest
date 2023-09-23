@@ -58,7 +58,8 @@ export class AuthService {
         }
       ],
       friends: [],
-      points: 0
+      points: 0,
+      type: 'standard'
     };
 
 
