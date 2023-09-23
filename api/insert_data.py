@@ -2,7 +2,7 @@ import pymongo
 from faker import Faker
 import random
 import string
-import datetime
+from datetime import datetime
 import csv
 
 # Replace these variables with your MongoDB connection details
@@ -24,7 +24,7 @@ def generate_random_password():
 
 usernames = []
 users = []
-def generate_random_user():
+def generate_random_user(number):
     username = ""
     while True:
         username = fake.user_name()
@@ -34,9 +34,10 @@ def generate_random_user():
             break
     user = {
         "_id": username,  # Generate a random legitimate username
+        "number": number,
+        "type": "standard",
         "password": generate_random_password(),
         "profilePicUrl": "https://ionicframework.com/docs/img/demos/avatar.svg",
-        "dob": fake.date_time_this_decade().strftime('%c'),  # Format the date of birth
         "weight": random.uniform(50, 100),  # Generate a random weight between 50 and 100
         "height": random.randint(150, 200),  # Generate a random height between 150 and 200
         "friends": ["testuser","andreas"],  # Generate random friends
@@ -88,13 +89,13 @@ with open(csv_file_path, mode='r', newline='') as file:
     # Skip the header row
     next(reader)
     prev = 0
-    username = generate_random_user()
+    username = ""
     # Iterate over the rows and print the data
     for row in reader: 
 
         ID, timestamp, Status, AdId, UserID = row
         if UserID != prev:
-            username = generate_random_user()
+            username = generate_random_user(UserID)
         prev = UserID 
         ad = {
             "adId": AdId,
@@ -103,6 +104,39 @@ with open(csv_file_path, mode='r', newline='') as file:
             "status" : Status,
         }
         ads.append(ad)
+
+def formatDate(date_string):
+    # Extract year, month, and day components from the input string
+    year = date_string[:4]
+    month = date_string[4:6]
+    day = date_string[6:]
+
+    # Construct the desired date and time string
+    return {"$date": f"{year}-{month}-{day}T00:00:00Z"}
+
+
+print("adding gender,Nationality, dob")
+with open("dummyUser.csv", mode='r', newline='') as file:
+    # Create a CSV reader
+    reader = csv.reader(file)
+    
+    # Skip the header row
+    next(reader)
+
+    for row in reader: 
+        ID,Name,Surname, Gender, Nationality, DOB = row
+
+        found_user = None
+        for user in users:
+            if user["number"] == ID:
+                found_user = user
+                break
+        found_user["gender"] = Gender
+        found_user["nationality"] = Nationality
+        found_user["dob"] = formatDate(DOB)
+    for user in users:
+        user.pop("number")
+
 
 print("starting to add to the database")
 # Connect to MongoDB
