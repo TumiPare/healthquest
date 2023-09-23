@@ -7,7 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserStat {
     
-    String username;
     String category;
     Double value;
 

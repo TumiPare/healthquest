@@ -183,16 +183,15 @@ public class UserActionService {
             getUserStat(username, "steps"), 
             userService.findUser(username).getWeight(), 
             getUserStat(username, "hydration"), 
-            new UserStat(username, "food", 2500.0), 
+            new UserStat("food", 2500.0), 
             getUserStat(username, "sleep")
         );
     }
 
     private UserStat getUserStat(String username, String category) {
-        MatchOperation filterUserActions = Aggregation.match(new Criteria("username").is(username).and("category").is(category));
         GroupOperation averageValue = Aggregation.group("category", "username").avg("value").as("avgValue");
+        MatchOperation filterUserActions = Aggregation.match(new Criteria("username").is(username).and("category").is(category));
         ProjectionOperation projectToMatchModel = Aggregation.project()
-            .andExpression("username").as("username")
             .andExpression("category").as("category")
             .andExpression("avgValue").as("value");
 

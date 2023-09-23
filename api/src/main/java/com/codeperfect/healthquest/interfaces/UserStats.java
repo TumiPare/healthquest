@@ -8,7 +8,6 @@ import lombok.Data;
 public class UserStats {
     
     UserStat avgSteps;
-    Double weightStat;
     UserStat avgWater;
     UserStat avgCalories;
     UserStat avgSleep;

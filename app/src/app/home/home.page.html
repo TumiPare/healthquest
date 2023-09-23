@@ -48,7 +48,7 @@
           </ion-card-header>
 
           <ion-card-content>
-             <ion-text class="big">3500</ion-text> /5000
+             <ion-text class="big">{{ userStats?.avgSteps?.value?.toFixed(2) ?? 0 }}</ion-text> /5000
             <ion-progress-bar [value]="0.6"></ion-progress-bar>
           </ion-card-content>
         </ion-card>
@@ -63,7 +63,7 @@
           </ion-card-header>
 
           <ion-card-content>
-           <ion-text class="big">{{ user?.weight }}</ion-text> kg
+           <ion-text class="big">{{ user?.weight?.toFixed(1) ?? 0 }}</ion-text> kg
           </ion-card-content>
         </ion-card>
 
@@ -73,7 +73,7 @@
           </ion-card-header>
 
           <ion-card-content>
-          <ion-text class="big">800</ion-text> cal
+          <ion-text class="big"> {{ userStats?.avgCalories?.value?.toFixed(0) ?? 0 }} </ion-text> cal
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -85,7 +85,7 @@
 
           <ion-card-content>
             <div class="water-icon ion-padding-bottom"><ion-icon src="assets/icon/waterDrop.svg" style="font-size:64px;"></ion-icon></div>
-            <ion-text class="ion-padding-top big">1.5</ion-text> liters
+            <ion-text class="ion-padding-top big">{{ userStats?.avgWater?.value?.toFixed(1) ?? 0 }}</ion-text> liters
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -98,12 +98,12 @@
             <ion-row>
               <ion-col size="6">
                 <ion-card-title class="ion-padding-bottom">Sleep</ion-card-title>
-                <ion-text class="big">5</ion-text> /9 hours
+                <ion-text class="big">{{ userStats?.avgSleep?.value?.toFixed(1) ?? 0 }}</ion-text> /9 hours
               </ion-col>
     
               <ion-col size="6" class="ion-text-center">
                 <circle-progress
-                  [percent]="(5 / 9) * 100"
+                  [percent]="(userStats?.avgSleep?.value ?? 0 / 9) * 100"
                   [radius]="50"
                   [outerStrokeWidth]="8"
                   [innerStrokeWidth]="4"
@@ -115,7 +115,7 @@
                   [animationDuration]="300"
                   [showSubtitle]="false"
                   [units]="'hrs'"
-                  [title]="'5'"
+                  [title]="userStats?.avgSleep?.value?.toFixed(1) ?? '0'"
                   >
                 </circle-progress> 
               </ion-col> 
