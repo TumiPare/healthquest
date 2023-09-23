@@ -5,12 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.interfaces.Challenge;
 import com.codeperfect.healthquest.interfaces.Change;
 import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.UserActionUpdates;
+import com.codeperfect.healthquest.interfaces.UserStat;
+import com.codeperfect.healthquest.interfaces.UserStats;
 import com.codeperfect.healthquest.models.Notification;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.models.UserAction;
@@ -27,6 +40,9 @@ public class UserActionService {
 
     @Autowired
     NotificationService notificationService;
+    
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<UserAction> findUserActions(String username) {
         return userActionRepository.findAllByUsername(username);
@@ -71,6 +87,9 @@ public class UserActionService {
             changes.add(new Change("Congratulations!", "We all need sleep, so make sure you get an decent amount!", points));
 
         } else if (userAction.getCategory().equals("weight")) {
+
+            user.setWeight(userAction.getValue());
+            userService.saveUser(user);
 
             double newDist = this.calcBMIDistance(user.getHeight(), userAction.getValue());
             if (newDist == 0) {
@@ -157,6 +176,32 @@ public class UserActionService {
         userActionRepository.save(userAction);
 
         return new UserActionUpdates(user, changes);
+    }
+
+    public UserStats getUserStats(String username) {
+        return new UserStats(
+            getUserStat(username, "steps"), 
+            userService.findUser(username).getWeight(), 
+            getUserStat(username, "hydration"), 
+            new UserStat(username, "food", 2500.0), 
+            getUserStat(username, "sleep")
+        );
+    }
+
+    private UserStat getUserStat(String username, String category) {
+        MatchOperation filterUserActions = Aggregation.match(new Criteria("username").is(username).and("category").is(category));
+        GroupOperation averageValue = Aggregation.group("category", "username").avg("value").as("avgValue");
+        ProjectionOperation projectToMatchModel = Aggregation.project()
+            .andExpression("username").as("username")
+            .andExpression("category").as("category")
+            .andExpression("avgValue").as("value");
+
+        Aggregation aggregation = Aggregation.newAggregation(filterUserActions, averageValue, projectToMatchModel);
+
+        AggregationResults<UserStat> result = mongoTemplate.aggregate(aggregation, "user-action", UserStat.class);
+        
+        System.out.println(result.getRawResults());
+        return result.getUniqueMappedResult();
     }
 
     private double calcBMIDistance(double height, double weight) {
