@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:5000'
+  apiUrl = 'http://healthquest.ddns.net:5000'
 
   user: any = null;
 
