@@ -15,4 +15,5 @@ export interface IUser {
     creatures: ICreature[];
     friends: string[];
     points: number;
+    type: string;
 }

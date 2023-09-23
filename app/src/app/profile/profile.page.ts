@@ -93,6 +93,10 @@ export class ProfilePage {
     });
   }
 
+  openUSN() {
+    window.open('https://www.usn.co.za/', '_blank')
+  }
+
   logout() {
     this.authService.logout();
   }
