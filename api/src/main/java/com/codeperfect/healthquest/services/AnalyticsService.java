@@ -41,20 +41,20 @@ public class AnalyticsService {
         analytics.setDemographicByNationality(resultsNationality.getMappedResults());
 
         // Add Age Analytics
-        ProjectionOperation projectForAges = Aggregation.project("dob")
-            .and(DateOperators.Year.yearOf("dob")).as("yearOfBirth");
+        // ProjectionOperation projectForAges = Aggregation.project("dob")
+        //     .and(DateOperators.Year.yearOf("dob")).as("yearOfBirth");
 
-        GroupOperation groupByAge = Aggregation.group("yearOfBirth").count().as("count");
+        // GroupOperation groupByAge = Aggregation.group("yearOfBirth").count().as("count");
 
-        projectToMatchModel = Aggregation.project()
-            .andExpression("_id").as("group")
-            .andExpression("count").as("value");
+        // projectToMatchModel = Aggregation.project()
+        //     .andExpression("_id").as("group")
+        //     .andExpression("count").as("value");
 
-        aggregation = Aggregation.newAggregation(projectForAges, projectToMatchModel);
+        // aggregation = Aggregation.newAggregation(projectForAges, projectToMatchModel);
 
-        AggregationResults<DemographicData> resultsAge = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
+        // AggregationResults<DemographicData> resultsAge = mongoTemplate.aggregate(aggregation, "user", DemographicData.class);
         
-        System.out.println(resultsNationality.getRawResults());
+        // System.out.println(resultsNationality.getRawResults());
         // analytics.setDemographicByAge(resultsAge.getMappedResults());
 
         // Add Gender Analytics
