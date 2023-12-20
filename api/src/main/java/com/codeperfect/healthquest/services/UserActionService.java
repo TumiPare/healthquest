@@ -1,16 +1,31 @@
 package com.codeperfect.healthquest.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import com.codeperfect.healthquest.interfaces.Challenge;
 import com.codeperfect.healthquest.interfaces.Change;
 import com.codeperfect.healthquest.interfaces.Creature;
 import com.codeperfect.healthquest.interfaces.UserActionUpdates;
+import com.codeperfect.healthquest.interfaces.UserStat;
+import com.codeperfect.healthquest.interfaces.UserStats;
 import com.codeperfect.healthquest.models.Notification;
 import com.codeperfect.healthquest.models.User;
 import com.codeperfect.healthquest.models.UserAction;
@@ -27,6 +42,9 @@ public class UserActionService {
 
     @Autowired
     NotificationService notificationService;
+    
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<UserAction> findUserActions(String username) {
         return userActionRepository.findAllByUsername(username);
@@ -71,6 +89,9 @@ public class UserActionService {
             changes.add(new Change("Congratulations!", "We all need sleep, so make sure you get an decent amount!", points));
 
         } else if (userAction.getCategory().equals("weight")) {
+
+            user.setWeight(userAction.getValue());
+            userService.saveUser(user);
 
             double newDist = this.calcBMIDistance(user.getHeight(), userAction.getValue());
             if (newDist == 0) {
@@ -125,12 +146,29 @@ public class UserActionService {
         // Update creatures
         Creature creature = user.getCreatureByCategory(userAction.getCategory());
         if (creature != null) {
-            creature.setHealth((int) (creature.getHealth() + userAction.getValue() * 0.2));
+            int increase;
+            if (creature.getCategory().equals("hydration")) {
+                increase = (int) (10 * userAction.getValue());
+            } else if (creature.getCategory().equals("food")) {
+                increase = (int) (25 * userAction.getValue());
+            } else if (creature.getCategory().equals("sleep")) {
+                increase = (int) (10 * userAction.getValue());
+            } else {
+                increase = (int) (0.01 * userAction.getValue());
+            }
+
+            creature.setHealth((int) (creature.getHealth() + increase));
+
+            if (creature.getHealth() > 100) {
+                creature.setHealth(100);
+            }
 
             if (userAction.getValue() > 0) {
+                points += 5;
                 changes.add(new Change("Mood Boost!",  creature.getName() + "'s' mood improved!", 5));
             } else if (userAction.getValue() < 0) {
-                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", 5));
+                points += -5;
+                changes.add(new Change("Mood Decease",  creature.getName() + "'s didn't like you doing that.", -5));
             }
         }
 
@@ -140,6 +178,44 @@ public class UserActionService {
         userActionRepository.save(userAction);
 
         return new UserActionUpdates(user, changes);
+    }
+
+    public UserStats getUserStats(String username) {
+        return new UserStats(
+            getUserStat(username, "steps"), 
+            getUserStat(username, "hydration"), 
+            new UserStat("food", 2500.0), 
+            getUserStat(username, "sleep")
+        );
+    }
+
+    private UserStat getUserStat(String username, String category) {
+        GroupOperation averageValue = Aggregation.group("category", "username").avg("value").as("avgValue");
+        
+        Calendar startDate = new GregorianCalendar();
+        startDate.set(Calendar.HOUR_OF_DAY, 0);
+        startDate.set(Calendar.MINUTE, 0);
+        startDate.set(Calendar.SECOND, 0);
+        startDate.set(Calendar.MILLISECOND, 0);
+        
+        Calendar endDate = new GregorianCalendar();
+        endDate.setTime(startDate.getTime());
+        endDate.add(Calendar.DATE, 1);
+        MatchOperation filterUserViewed = Aggregation.match(
+            new Criteria("username").is(username)
+            .and("category").is(category)
+            .and("timestamp").gte(startDate.getTime()).lt(endDate.getTime())
+        );
+
+        ProjectionOperation projectToMatchModel = Aggregation.project()
+            .andExpression("category").as("category")
+            .andExpression("avgValue").as("value");
+
+        Aggregation aggregation = Aggregation.newAggregation(filterUserViewed, averageValue, projectToMatchModel);
+
+        AggregationResults<UserStat> result = mongoTemplate.aggregate(aggregation, "user-action", UserStat.class);
+        
+        return result.getUniqueMappedResult();
     }
 
     private double calcBMIDistance(double height, double weight) {

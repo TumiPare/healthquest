@@ -24,7 +24,7 @@
     </ion-text>
   
     <ion-row class="profile-head">
-      <ion-col class="ion-text-center" size="6">
+      <ion-col class="ion-text-center" size="6" (click) = "openFriendModal()">
         <div><strong><ion-text color="primary">{{ userData?.friends?.length ?? 0 }}</ion-text></strong></div>
         <ion-text>Friends</ion-text>
       </ion-col>
@@ -35,7 +35,28 @@
       <ion-col class="ion-text-center">
         <ion-button expand="block" size="small" class="people-list" shape="round">Add friends</ion-button>
       </ion-col>
+      <ion-col class="ion-text-center" *ngIf="userType != 'premium'">
+        <ion-button 
+        (click)="goPremiumModal()" 
+        color="warning" 
+        expand="block" 
+        size="small" 
+        class="people-list" 
+        shape="round">Go Premium</ion-button>
+      </ion-col>
     </ion-row>
+
+    <ion-card 
+    button  
+    color="warning" 
+    *ngIf="userType != 'premium'"
+    (click)="openUSN()">
+      <img alt="USN" src="https://cdn.shopify.com/s/files/1/2424/0281/files/USN_LOGO_ReflexBlue.png?height=628&pad_color=ffffff&v=1667397413&width=1200">
+      <ion-card-header>
+        <ion-card-title>USN Advertisement</ion-card-title>
+        <ion-card-subtitle>Click me to 20% off on all USN products</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
 
     <!-- Settings Section-->
     <h5 class="title">Settings</h5>
@@ -55,11 +76,13 @@
           <ion-select-option value="dark" >Dark</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item button>
+      <ion-item button (click)="logout()">
         <ion-icon name="log-out-outline" class="ion-padding-end"></ion-icon>
         <ion-label>Logout</ion-label>
       </ion-item>
     </ion-list>
+
+    
 
     <h5 class="title" *ngIf="userMayKnow.length > 0">People you may know</h5>
     <swiper-container
@@ -90,5 +113,47 @@
         </ion-label>
       </ion-item>
     </ion-list>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h2>How would you rate our app?</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-icon name="star" [class.active]="userRating >= 1" (click)="rate(1)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 2" (click)="rate(2)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 3" (click)="rate(3)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 4" (click)="rate(4)" size="large"></ion-icon>
+        <ion-icon name="star" [class.active]="userRating >= 5" (click)="rate(5)" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button (click)="submitRating()" class="ion-margin-bottom ion-margin-top">Submit Rating</ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
+  <!-- Friend List Modal -->
+  <ion-modal #friendsModal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="dismissModal()">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>Friends</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ion-item *ngFor="let friend of userData?.friends">
+            <ion-label>{{ friend }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

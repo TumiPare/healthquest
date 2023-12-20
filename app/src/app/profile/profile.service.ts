@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from './user.interface';
 import { IMessage } from '../message.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  apiUrl = 'http://healthquest.ddns.net:5000/';
+  apiUrl = environment.apiUrlLink + '/';
 
   constructor(private http: HttpClient) { }
 

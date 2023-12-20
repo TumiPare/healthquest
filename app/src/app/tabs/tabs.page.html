@@ -1,7 +1,7 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" href="/tabs/home">
+    <ion-tab-button (click)="showAd()" tab="home" href="/tabs/home">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
@@ -11,9 +11,9 @@
       <ion-label>Leaderboard</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="navigateToRecordHealthStats()">
-      <ion-icon aria-hidden="true" name="add-circle"></ion-icon>
-      <ion-label>Add</ion-label>
+    <ion-tab-button (click)="showAd()" tab="creatures" href="/tabs/creatures">
+      <ion-icon aria-hidden="true" src="assets/icon/creatures.svg"></ion-icon>
+      <ion-label>Creatures</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="notifications" href="/tabs/notifications">
@@ -21,7 +21,7 @@
       <ion-label>Notifications</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="profile" href="/tabs/profile">
+    <ion-tab-button (click)="showAd()" tab="profile" href="/tabs/profile">
       <ion-icon aria-hidden="true" name="person"></ion-icon>
       <ion-label>Profile</ion-label>
     </ion-tab-button>

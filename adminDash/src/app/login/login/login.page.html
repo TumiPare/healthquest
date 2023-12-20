@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+    <ion-grid>
+      <ion-row class="ion-text-center ion-padding-top">
+        <ion-col size = "3" offset = "4.5">
+          <ion-img src="assets/icon/statsIllustration.svg"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center ion-padding-top">
+        <ion-col size = "4" offset = "4" class="ion-padding-top">
+          <h3 class="ion-padding-start"> HealthQuest Dashboard </h3>
+          <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <ion-input 
+            type = "password"
+            label = "Token" 
+            label-placement="floating"            
+            placeholder="Token"
+            formControlName = "token"
+            autocomplete="off"
+            fill="outline"
+            ></ion-input>
+
+            <div class="ion-margin-top ion-margin-start">
+              <ion-button (click)="login()" color="primary" class="ion-margin-top"><strong> Login </strong></ion-button>
+            </div>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

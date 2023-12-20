@@ -1,7 +1,6 @@
 package com.codeperfect.healthquest.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -19,10 +18,15 @@ public class User {
     @Id
     String username;
 
+    String password;
     String profilePicUrl;
+    String email;
+    String type;
     String dob;
     Double weight;
     Double height;
+    String gender;
+    String nationality;
     List<String> friends;
     List<Challenge> challenges;
     List<Creature> creatures;
@@ -44,7 +48,8 @@ public class User {
     public Creature getCreatureByCategory(String category) {
 
         for (Creature creature : creatures) {
-            if (creature.getCategory().equals(category)) {
+            if (creature.getCategory().equals(category) || (creature.getCategory().equals("food") && 
+                (category.equals("fastfood") || category.equals("sweets") || category.equals("healthyfood") || category.equals("fruit&veg")))) {
                 return creature;
             }
         }
@@ -128,6 +133,29 @@ public class User {
         for (Challenge challengeItem : challenges) {
             if (challengeItem.getType().equals(type)) {
                 challengeItem.setProgress(0);
+            }
+        }
+
+    }
+
+    public void lowerCreatureHealth() {
+
+        for (Creature creature : creatures) {
+            int decrease;
+            if (creature.getCategory().equals("hydration")) {
+                decrease = 5;
+            } else if (creature.getCategory().equals("food")) {
+                decrease = 2;
+            } else if (creature.getCategory().equals("sleep")) {
+                decrease = 2;
+            } else {
+                decrease = 20;
+            }
+
+            creature.setHealth(creature.getHealth() - decrease);
+
+            if (creature.getHealth() < 0) {
+                creature.setHealth(0);
             }
         }
 

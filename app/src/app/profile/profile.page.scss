@@ -31,3 +31,13 @@
   {
     border-bottom: 1px solid #e0e0e0;
   }
+
+  // Active star color
+  ion-icon.active {
+    color: #3880ff;
+  }
+  
+  // Inactive star color
+  ion-icon {
+    color: gray;
+  }
